@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="Beige">#871E35</color>
+    <color name="Gredient">#FFF8E7</color>
+    <color name="Greadient2">#FFEAEE</color>
+    <color name="pink">#F3E9EB</color>
+    <color name="light_gray">#F2F5F7</color>
+    <color name="col_vesa">#F3E9EB</color>
+
 </resources>
