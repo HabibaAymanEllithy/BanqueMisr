@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -31,7 +32,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 
 @Composable
@@ -151,25 +151,25 @@ fun HomeScreen(navController: NavController) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
-                ImageWithText(
+                ImageWithTextHome(
                     modifier = Modifier,
-                    imageIcon = R.drawable.ic_launcher_foreground,  // image of transfer
+                    imageIcon = R.drawable.icon_transfare,  // image of transfer
                     text = stringResource(id = R.string.str_transfer)
                 )
 
-                ImageWithText(
+                ImageWithTextHome(
                     modifier = Modifier,
                     imageIcon = R.drawable.ic_launcher_foreground, // image of transaction
                     text = stringResource(id = R.string.str_transaction)
                 )
 
-                ImageWithText(
+                ImageWithTextHome(
                     modifier = Modifier,
                     imageIcon = R.drawable.ic_launcher_foreground, // image of cards
                     text = stringResource(id = R.string.str_cards)
                 )
 
-                ImageWithText(
+                ImageWithTextHome(
                     modifier = Modifier,
                     imageIcon = R.drawable.ic_launcher_foreground, // image of account
                     text = stringResource(id = R.string.str_account)
@@ -224,7 +224,7 @@ fun GreetingPreview() {
 }
 
 @Composable
-fun ImageWithText(modifier: Modifier, imageIcon: Int, text: String) {
+fun ImageWithTextHome(modifier: Modifier, imageIcon: Int, text: String) {
     Column() {
 
         Card(
