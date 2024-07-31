@@ -1,4 +1,4 @@
-package com.example.banquemisr.screens
+package com.example.banquemisr.ui.screens.homeScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,7 +31,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 
 @Composable
@@ -213,14 +212,13 @@ fun HomeScreen(navController: NavController) {
         CardTransactions()
 
 
-
     }
 }
 
 @Preview(showBackground = true, device = "id:pixel_6a")
 @Composable
 fun GreetingPreview() {
-   HomeScreen(navController = NavController(LocalContext.current))
+    HomeScreen(navController = NavController(LocalContext.current))
 }
 
 @Composable
