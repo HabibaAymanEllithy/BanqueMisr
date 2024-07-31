@@ -305,6 +305,8 @@ Spacer(modifier = Modifier.padding(12.dp))
     }
 }
 
+
+
 @Preview(showBackground = true, device = "id:pixel_6a")
 @Composable
 fun TransferScreenPreview() {
