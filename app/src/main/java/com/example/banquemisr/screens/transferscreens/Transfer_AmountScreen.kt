@@ -3,6 +3,7 @@ package com.example.banquemisr.screens.transferscreens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,7 +29,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -48,24 +47,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.example.banquemisr.R
-import com.example.banquemisr.ui.theme.MyTopBar
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -75,6 +69,7 @@ fun TransferScreen(navController: NavController) {
         startY = 2000f,
         endY = 0f
     )
+
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     Scaffold(
         modifier = Modifier
@@ -121,6 +116,8 @@ fun TransferScreen(navController: NavController) {
 
 @Composable
 fun ScrollContent(navController: NavController) {
+
+    var state by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -179,7 +176,7 @@ fun ScrollContent(navController: NavController) {
 
         Row(
             horizontalArrangement = Arrangement.spacedBy(80.dp),
-            modifier = Modifier.padding(start = 40.dp, top = 20.dp)
+            modifier = Modifier.padding(start = 25.dp, top = 20.dp)
         ) {
             Text(color = colorResource(id = R.color.col_Text_gray)
                 ,text = "Amount")
@@ -199,7 +196,7 @@ fun ScrollContent(navController: NavController) {
         ) {
 
             Text(
-                color = Color.DarkGray, fontSize = 16.sp, text = "Choose Currecy"
+                color = colorResource(id = R.color.col_Text_gray), fontSize = 16.sp, text = "Choose Currecy"
             )
 
             ElevatedCard(
@@ -222,22 +219,22 @@ fun ScrollContent(navController: NavController) {
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         modifier = Modifier.padding(top = 8.dp), color = Color.Gray,
-                        fontSize = 14.sp, text = "Rate guaranteed (2h)"
+                        fontSize = 16.sp, text = "Rate guaranteed (2h)"
                     )
                     Spacer(modifier = Modifier.height(10.dp))
 
                     Text(
-                        modifier = Modifier.padding(top = 10.dp), color = Color.DarkGray,
+                        modifier = Modifier.padding(top = 10.dp), color = colorResource(id = R.color.col_Text_gray),
                         fontSize = 16.sp, text = "You Send"
                     )
 
-                    Row(horizontalArrangement = Arrangement.spacedBy(70.dp)) {
-                        com.example.banquemisr.ui.theme.ExposedDropdownMenuBox()
-                        OutlinedTextField(value = "",
-                            onValueChange = {}, modifier = Modifier
+                    Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
+                        com.example.banquemisr.functionsusable.ExposedDropdownMenuBox()
+                        OutlinedTextField(value = state,
+                            onValueChange = {state=it}, modifier = Modifier
                                 .height(60.dp)
                                 .width(200.dp)
-                                .padding(top = 13.dp, end = 8.dp))
+                                .padding(top = 13.dp, end = 12.dp))
                     }
 
                     Divider(
@@ -247,66 +244,65 @@ fun ScrollContent(navController: NavController) {
                     )
 
                     Text(
-                        modifier = Modifier.padding(top = 10.dp), color = Color.DarkGray,
+                        modifier = Modifier.padding(top = 10.dp), color = colorResource(id = R.color.col_Text_gray),
                         fontSize = 16.sp, text = "Recipient Gets"
                     )
 
-                    Row(horizontalArrangement = Arrangement.spacedBy(70.dp)) {
-                        com.example.banquemisr.ui.theme.ExposedDropdownMenuBox()
-                        OutlinedTextField(value = "",
-                            onValueChange = {}, modifier = Modifier
-                                .height(50.dp)
-                                .width(150.dp)
-                                .padding(top = 13.dp, end = 8.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
+                        com.example.banquemisr.functionsusable.ExposedDropdownMenuBox()
+                        OutlinedTextField(value = state,
+                            onValueChange = {state=it}, modifier = Modifier
+                                .height(60.dp)
+                                .width(200.dp)
+                                .padding(top = 13.dp, end = 12.dp))
                     }
 
                 }
 
             }
-Spacer(modifier = Modifier.padding(8.dp))
-            Row (horizontalArrangement = Arrangement.spacedBy(100.dp)
+            Spacer(modifier = Modifier.padding(8.dp))
+            Row (horizontalArrangement = Arrangement.spacedBy(80.dp)
                 ,modifier = Modifier
                     .padding(start = 10.dp, top = 20.dp, end = 10.dp)
                     .fillMaxWidth())
             {
                 Text(
                     text = "Recipient information"
-                , fontSize = 16.sp
-                        , color = Color.Black)
-                Row {
+                    , fontSize = 16.sp
+                    , color = Color.Black)
+                Row(modifier = Modifier.clickable {
+
+                }) {
                     Image(painter =painterResource(id = R.drawable.icon_favorite_stare)
                         , contentDescription =null
-                    , modifier = Modifier
+                        , modifier = Modifier
                             .padding(end = 5.dp)
                             .size(20.dp))
 
                     Text(
                         text = "Favourite"
-                    , fontSize = 16.sp
-                    , color = colorResource(id = R.color.Beige))
+                        , fontSize = 16.sp
+                        , color = colorResource(id = R.color.Beige))
 
                     Image(painter = painterResource(id = R.drawable.icon_wrightside)
                         , contentDescription = null
-                    ,modifier = Modifier.size(20.dp))
+                        ,modifier = Modifier.size(20.dp))
                 }
             }
-
+Spacer(modifier = Modifier.padding(12.dp))
             Column {
                 TextFields(string1 = "Recipient Name", string2 = "Enter Recipient Name")
+                Spacer(modifier = Modifier.padding(8.dp))
                 TextFields(string1 = "Recipient Account", string2 = "Enter Recipient Account")
-
+Spacer(modifier = Modifier.padding(10.dp))
                 Button_use()
             }
 
         }
+
     }
 }
 
-@Preview(showBackground = true, device = "id:pixel_6a")
-@Composable
-fun TransferScreenPreview() {
-    TransferScreen(navController = rememberNavController())
-}
 
 
 @Composable
@@ -338,33 +334,33 @@ fun CircleWithNumWithText(modifier: Modifier, bordercolor: Color, text: String, 
 
 @Composable
 fun TextFields(string1: String, string2: String, modifier: Modifier = Modifier) {
-        var state by remember { mutableStateOf("") }
-        Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.Start) {
-            Text(
-                text = string1,
-                modifier = modifier.padding(horizontal = 16.dp),
-                fontSize = 16.sp,
-                color = Color.Gray,
-                fontWeight = FontWeight.W400,
-
-                )
-            OutlinedTextField(
-                value = state,
-                onValueChange = { state = it },
-                placeholder = { Text(text = string2, color = Color.Gray) },
-
-
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 12.dp, vertical = 10.dp)
-                    .background(color = Color.White, shape = RoundedCornerShape(9.dp)),
-                shape = RoundedCornerShape(9.dp)
-
+    var state by remember { mutableStateOf("") }
+    Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.Start) {
+        Text(
+            text = string1,
+            modifier = modifier.padding(horizontal = 16.dp),
+            fontSize = 16.sp,
+            color = colorResource(id = R.color.col_Text_gray),
+            fontWeight = FontWeight.W400,
 
             )
-        }
+        OutlinedTextField(
+            value = state,
+            onValueChange = { state = it },
+            placeholder = { Text(text = string2, color = Color.Gray) },
+
+
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp, vertical = 10.dp)
+                .background(color = Color.White, shape = RoundedCornerShape(9.dp)),
+            shape = RoundedCornerShape(9.dp)
+
+
+        )
     }
+}
 
 @Composable
 fun Button_use(){
@@ -374,17 +370,23 @@ fun Button_use(){
         ,colors = ButtonDefaults.filledTonalButtonColors(
             containerColor = colorResource(id = R.color.Beige))
         ,modifier = Modifier
+            .height(70.dp)
             .fillMaxWidth()
-            .sizeIn(20.dp)
-            .padding(start = 20.dp, end = 20.dp, top = 70.dp)
+            .padding(horizontal = 12.dp, vertical = 10.dp)
     ) {
         Text(
-            text = "Login",
-            fontSize = 25.sp,
+            text = "Continue",
+            fontSize = 21.sp,
             color = Color.White,
             modifier = Modifier
-                .padding(bottom = 10.dp, top = 10.dp)
                 .align(alignment = Alignment.CenterVertically)
         )
     }
+}
+
+@Preview
+@Composable
+fun PreviewTransferScreen() {
+    val navController = rememberNavController()
+    TransferScreen(navController)
 }
