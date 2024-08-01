@@ -20,47 +20,6 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
-    val sheetState = rememberModalBottomSheetState()
-    val scope = rememberCoroutineScope()
-    var showBottomSheet by remember { mutableStateOf(false) }
-
-    Scaffold(
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                text = { Text("Show bottom sheet") },
-                icon = { Icon(Icons.Filled.Add, contentDescription = "") },
-                onClick = {
-                    showBottomSheet = true
-                }
-            )
-        }
-    ) { contentPadding ->
-        // Screen content
-
-        if (showBottomSheet) {
-            ModalBottomSheet(
-                onDismissRequest = {
-                    showBottomSheet = false
-                },
-                sheetState = sheetState
-            ) {
-                FavouriteListModalBottomSheetContent(
-                    onDismiss = {
-                        scope.launch { sheetState.hide() }.invokeOnCompletion {
-                            if (!sheetState.isVisible) {
-                                showBottomSheet = false
-                            }
-                        }
-                    }
-                )
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
 fun FavouriteListModalBottomSheetContent(onDismiss: () -> Unit) {
     Column(
         modifier = Modifier.padding(16.dp),
@@ -100,6 +59,7 @@ fun FavouriteItem(name: String, account: String) {
     Card(
         modifier = Modifier
             .height(88.dp)
+            .background(colorResource(id = R.color.card_color_list))
             .fillMaxWidth()
             .padding(8.dp)
     ) {
@@ -141,5 +101,5 @@ fun FavouriteItem(name: String, account: String) {
 @Preview
 @Composable
 fun MainScreenPreview() {
-    MainScreen()
+    FavouriteListModalBottomSheetContent(onDismiss = {})
 }

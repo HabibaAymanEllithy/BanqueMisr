@@ -4,44 +4,18 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -59,23 +33,23 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import kotlinx.coroutines.CoroutineScope
 
-
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun TransferScreen(navController: NavController) {
-    var background = Brush.verticalGradient(
+    val background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
         startY = 2000f,
         endY = 0f
     )
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
     Scaffold(
         modifier = Modifier
             .background(background)
             .nestedScroll(scrollBehavior.nestedScrollConnection),
-
         topBar = {
             CenterAlignedTopAppBar(
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -93,14 +67,14 @@ fun TransferScreen(navController: NavController) {
                     IconButton(onClick = { navController.navigate("home") }) {
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowLeft,
-                            contentDescription = "Localized description"
+                            contentDescription = "Back"
                         )
                     }
                 },
             )
         },
-    )
-    { innerPadding ->
+
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -110,33 +84,33 @@ fun TransferScreen(navController: NavController) {
         ) {
             ScrollContent(navController)
         }
-
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
-fun ScrollContent(navController: NavController) {
+fun ScrollContent(
+    navController: NavController,
+) {
+    var amountState by remember { mutableStateOf("") }
+    var recipientNameState by remember { mutableStateOf("") }
+    var recipientAccountState by remember { mutableStateOf("") }
 
-    var state by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-
     ) {
-
         Row(
             horizontalArrangement = Arrangement.Center, modifier = Modifier
                 .padding(top = 10.dp)
                 .fillMaxWidth()
         ) {
-
             CircleWithNumWithText(
-                modifier = Modifier
-                    .align(Alignment.CenterVertically),
-                colorResource(id = R.color.Beige),
-                "01",
-                colorResource(id = R.color.Beige)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                borderColor = colorResource(id = R.color.Beige),
+                text = "01",
+                textColor = colorResource(id = R.color.Beige)
             )
             Box(
                 modifier = Modifier
@@ -148,11 +122,10 @@ fun ScrollContent(navController: NavController) {
             )
 
             CircleWithNumWithText(
-                modifier = Modifier
-                    .align(Alignment.CenterVertically),
-                Color.Gray,
-                "02",
-                Color.Gray
+                modifier = Modifier.align(Alignment.CenterVertically),
+                borderColor = Color.Gray,
+                text = "02",
+                textColor = Color.Gray
             )
 
             Box(
@@ -160,17 +133,15 @@ fun ScrollContent(navController: NavController) {
                     .padding(start = 5.dp, end = 5.dp)
                     .width(100.dp)
                     .height(2.dp)
-                    .background(color = Color.Gray)
+                    .background(Color.Gray)
                     .align(Alignment.CenterVertically)
             )
 
             CircleWithNumWithText(
-                modifier = Modifier
-                    .align(Alignment.CenterVertically),
-                Color.Gray,
-                "03",
-                Color.Gray
-
+                modifier = Modifier.align(Alignment.CenterVertically),
+                borderColor = Color.Gray,
+                text = "03",
+                textColor = Color.Gray
             )
         }
 
@@ -178,63 +149,76 @@ fun ScrollContent(navController: NavController) {
             horizontalArrangement = Arrangement.spacedBy(80.dp),
             modifier = Modifier.padding(start = 25.dp, top = 20.dp)
         ) {
-            Text(color = colorResource(id = R.color.col_Text_gray)
-                ,text = "Amount")
-            Text(color = colorResource(id = R.color.col_Text_gray)
-                ,text = "Confirmation")
-            Text(color = colorResource(id =R.color.col_Text_gray)
-                ,text = "Payment")
+            Text(
+                color = colorResource(id = R.color.col_Text_gray),
+                text = "Amount"
+            )
+            Text(
+                color = colorResource(id = R.color.col_Text_gray),
+                text = "Confirmation"
+            )
+            Text(
+                color = colorResource(id = R.color.col_Text_gray),
+                text = "Payment"
+            )
         }
 
         Text(
-            fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier
-                .padding(start = 16.dp, top = 20.dp), text = "How much are you sending ?"
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(start = 16.dp, top = 20.dp),
+            text = "How much are you sending?"
         )
 
         Column(
             modifier = Modifier.padding(start = 16.dp, top = 20.dp, end = 8.dp)
         ) {
-
             Text(
-                color = colorResource(id = R.color.col_Text_gray), fontSize = 16.sp, text = "Choose Currecy"
+                color = colorResource(id = R.color.col_Text_gray),
+                fontSize = 16.sp,
+                text = "Choose Currency"
             )
 
             ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 6.dp
-                ), colors = CardDefaults.elevatedCardColors(
-                    containerColor = Color.White
-                ), modifier = Modifier
+                elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+                colors = CardDefaults.elevatedCardColors(containerColor = Color.White),
+                modifier = Modifier
                     .padding(top = 20.dp, end = 10.dp)
                     .fillMaxWidth()
             ) {
-
                 Column(modifier = Modifier.padding(start = 8.dp, top = 10.dp)) {
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         color = Color.Black,
                         fontSize = 24.sp,
-                        text = "1 USD = 48.4220 EGP", modifier = Modifier
+                        text = "1 USD = 48.4220 EGP"
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        modifier = Modifier.padding(top = 8.dp), color = Color.Gray,
-                        fontSize = 16.sp, text = "Rate guaranteed (2h)"
+                        modifier = Modifier.padding(top = 8.dp),
+                        color = Color.Gray,
+                        fontSize = 16.sp,
+                        text = "Rate guaranteed (2h)"
                     )
                     Spacer(modifier = Modifier.height(10.dp))
 
                     Text(
-                        modifier = Modifier.padding(top = 10.dp), color = colorResource(id = R.color.col_Text_gray),
-                        fontSize = 16.sp, text = "You Send"
+                        modifier = Modifier.padding(top = 10.dp),
+                        color = colorResource(id = R.color.col_Text_gray),
+                        fontSize = 16.sp,
+                        text = "You Send"
                     )
 
                     Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
                         com.example.banquemisr.functionsusable.ExposedDropdownMenuBox()
-                        OutlinedTextField(value = state,
-                            onValueChange = {state=it}, modifier = Modifier
+                        OutlinedTextField(
+                            value = amountState,
+                            onValueChange = { amountState = it },
+                            modifier = Modifier
                                 .height(60.dp)
                                 .width(200.dp)
-                                .padding(top = 13.dp, end = 12.dp))
+                                .padding(top = 13.dp, end = 12.dp)
+                        )
                     }
 
                     Divider(
@@ -244,101 +228,133 @@ fun ScrollContent(navController: NavController) {
                     )
 
                     Text(
-                        modifier = Modifier.padding(top = 10.dp), color = colorResource(id = R.color.col_Text_gray),
-                        fontSize = 16.sp, text = "Recipient Gets"
+                        modifier = Modifier.padding(top = 10.dp),
+                        color = colorResource(id = R.color.col_Text_gray),
+                        fontSize = 16.sp,
+                        text = "Recipient Gets"
                     )
 
                     Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
                         com.example.banquemisr.functionsusable.ExposedDropdownMenuBox()
-                        OutlinedTextField(value = state,
-                            onValueChange = {state=it}, modifier = Modifier
+                        OutlinedTextField(
+                            value = amountState,
+                            onValueChange = { amountState = it },
+                            modifier = Modifier
                                 .height(60.dp)
                                 .width(200.dp)
-                                .padding(top = 13.dp, end = 12.dp))
+                                .padding(top = 13.dp, end = 12.dp)
+                        )
                     }
-
                 }
-
             }
+
             Spacer(modifier = Modifier.padding(8.dp))
-            Row (horizontalArrangement = Arrangement.spacedBy(80.dp)
-                ,modifier = Modifier
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(60.dp),
+                modifier = Modifier
                     .padding(start = 10.dp, top = 20.dp, end = 10.dp)
-                    .fillMaxWidth())
-            {
+                    .fillMaxWidth()
+            ) {
                 Text(
-                    text = "Recipient information"
-                    , fontSize = 16.sp
-                    , color = Color.Black)
+                    text = "Recipient information",
+                    fontSize = 16.sp,
+                    color = colorResource(id = R.color.col_Text_gray)
+                )
                 Row(modifier = Modifier.clickable {
-
-                }) {
-                    Image(painter =painterResource(id = R.drawable.icon_favorite_stare)
-                        , contentDescription =null
-                        , modifier = Modifier
-                            .padding(end = 5.dp)
-                            .size(20.dp))
-
+                }    ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.icon_favorite_stare),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp)
+                    )
                     Text(
-                        text = "Favourite"
-                        , fontSize = 16.sp
-                        , color = colorResource(id = R.color.Beige))
-
-                    Image(painter = painterResource(id = R.drawable.icon_wrightside)
-                        , contentDescription = null
-                        ,modifier = Modifier.size(20.dp))
+                        modifier = Modifier
+                            .padding(start = 10.dp),
+                        text = "favorites",
+                        fontSize = 18.sp,
+                        color = colorResource(id = R.color.Beige)
+                    )
+                    Image(modifier = Modifier.size(20.dp)
+                        ,painter = painterResource(id = R.drawable.icon_wrightside)
+                        , contentDescription = null)
                 }
             }
-Spacer(modifier = Modifier.padding(12.dp))
-            Column {
-                TextFields(string1 = "Recipient Name", string2 = "Enter Recipient Name")
-                Spacer(modifier = Modifier.padding(8.dp))
-                TextFields(string1 = "Recipient Account", string2 = "Enter Recipient Account")
-Spacer(modifier = Modifier.padding(10.dp))
-                Button_use()
+
+            Spacer(modifier = Modifier.padding(4.dp))
+
+
+             TextFields(string1 = "Recipient Name", string2 = "Enter recipient name")
+
+
+Spacer(modifier = Modifier.padding(8.dp))
+
+            TextFields(string1 = "Recipient Account ", string2 = "Enter Recipient Account Number ")
+
+Spacer(modifier = Modifier.padding(20.dp))
+
+            FilledTonalButton(
+                onClick = { },
+                shape = RoundedCornerShape(10.dp)
+                ,colors = ButtonDefaults.filledTonalButtonColors(
+                    containerColor = colorResource(id = R.color.Beige))
+                ,modifier = Modifier
+                    .fillMaxWidth()
+                    .height(75.dp)
+                    .padding(horizontal = 12.dp, vertical = 10.dp)
+            ) {
+                Text(
+                    text = "Continue",
+                    fontSize = 20.sp,
+                    modifier = Modifier
+                        .align(alignment = Alignment.CenterVertically)
+                )
             }
 
+                }
+            }
         }
-
-    }
-}
 
 
 
 @Composable
-fun CircleWithNumWithText(modifier: Modifier, bordercolor: Color, text: String, textcolor: Color) {
-    Row {
-        Column(
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(35.dp)
-                    .border(color = bordercolor, shape = CircleShape, width = 2.dp)
-                    .background(Color.White, shape = CircleShape)
-                    .clip(CircleShape)
-            ) {
-                Text(
-                    text = text, color = textcolor, modifier = Modifier
-                        .padding(all = 2.dp)
-                        .align(Alignment.Center)
-                )
-            }
-        }
+fun CircleWithNumWithText(
+    modifier: Modifier = Modifier,
+    borderColor: Color,
+    text: String,
+    textColor: Color
+) {
+    Box(
+        modifier = modifier
+            .size(40.dp)
+            .clip(CircleShape)
+            .border(
+                width = 2.dp,
+                color = borderColor,
+                shape = CircleShape
+            )
+            .background(Color.White),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = text,
+            color = textColor,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
-
-
 
 
 @Composable
 fun TextFields(string1: String, string2: String, modifier: Modifier = Modifier) {
     var state by remember { mutableStateOf("") }
-    Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.Start) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(),verticalArrangement = Arrangement.Center
+        , horizontalAlignment = Alignment.Start) {
         Text(
             text = string1,
-            modifier = modifier.padding(horizontal = 16.dp),
+            modifier = modifier.padding(horizontal = 12.dp),
             fontSize = 16.sp,
             color = colorResource(id = R.color.col_Text_gray),
             fontWeight = FontWeight.W400,
@@ -348,7 +364,6 @@ fun TextFields(string1: String, string2: String, modifier: Modifier = Modifier) 
             value = state,
             onValueChange = { state = it },
             placeholder = { Text(text = string2, color = Color.Gray) },
-
 
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             modifier = modifier
@@ -362,31 +377,8 @@ fun TextFields(string1: String, string2: String, modifier: Modifier = Modifier) 
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-fun Button_use(){
-    FilledTonalButton(
-        onClick = { },
-        shape = RoundedCornerShape(10.dp)
-        ,colors = ButtonDefaults.filledTonalButtonColors(
-            containerColor = colorResource(id = R.color.Beige))
-        ,modifier = Modifier
-            .height(70.dp)
-            .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 10.dp)
-    ) {
-        Text(
-            text = "Continue",
-            fontSize = 21.sp,
-            color = Color.White,
-            modifier = Modifier
-                .align(alignment = Alignment.CenterVertically)
-        )
-    }
-}
-
-@Preview
-@Composable
-fun PreviewTransferScreen() {
-    val navController = rememberNavController()
-    TransferScreen(navController)
+fun TransferScreenPreview() {
+    TransferScreen(navController = rememberNavController())
 }

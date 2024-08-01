@@ -15,5 +15,5 @@
     <color name="light_gray">#F2F5F7</color>
     <color name="col_vesa">#F3E9EB</color>
     <color name="col_Text_gray">#3C3A37</color>
-
+    <color name="card_color_list">#F3E9EB</color>
 </resources>
