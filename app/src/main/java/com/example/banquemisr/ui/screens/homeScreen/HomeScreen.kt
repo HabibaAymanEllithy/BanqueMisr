@@ -223,10 +223,10 @@ fun GreetingPreview() {
 
 @Composable
 fun ImageWithText(modifier: Modifier, imageIcon: Int, text: String) {
-    Column() {
+    Column {
 
         Card(
-            modifier = Modifier
+            modifier = modifier
                 .size(60.dp),
             colors = CardDefaults.cardColors(colorResource(id = R.color.light_gray))
         )
