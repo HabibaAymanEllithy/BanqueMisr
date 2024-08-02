@@ -68,7 +68,7 @@ fun bottomSheet(selectedCountry: MutableState<String>) {
                 ) {
                 Text(
                     text = if(selectedCountry.value.isNotEmpty()) selectedCountry.value else "Select a Country",
-                    color = colorResource(id = R.color.Gray_G70),
+                    color = if (selectedCountry.value.isNotEmpty()) Color.Black else colorResource(id = R.color.Gray_G70),
                     fontSize = 16.sp,
                     modifier = Modifier.weight(1f),
                     textAlign = TextAlign.Start
@@ -115,7 +115,7 @@ fun CountryList(onCountrySelected: (String) -> Unit) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.us), // Replace with actual icons
+                    painter = painterResource(id = R.drawable.united_states), // Replace with actual icons
                     contentDescription = null,
                     modifier = Modifier
                         .size(24.dp)

@@ -274,7 +274,7 @@ fun DatePickerButton(mDate: MutableState<String>) {
             ) {
             Text(
                 text = if (mDate.value.isNotEmpty()) mDate.value else "DD/MM/YYYY",
-                color = colorResource(id = R.color.Gray_G70),
+                color = if (mDate.value.isNotEmpty()) Color.Black else colorResource(id = R.color.Gray_G70),
                 fontSize = 16.sp,
                 modifier = Modifier.weight(1f),
                 textAlign = TextAlign.Start
