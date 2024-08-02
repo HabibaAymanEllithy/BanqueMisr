@@ -68,6 +68,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.navigation.AppRoutes.SIGNIN_ROUTE
+import com.example.banquemisr.navigation.AppRoutes.SIGN_UP_ROUTE
 
 import java.util.Calendar
 import java.util.Date
@@ -184,7 +186,7 @@ fun SignUp2(
             DatePickerButton(mDate)
             Spacer(modifier = Modifier.height(40.dp))
             Button(
-                onClick = { },
+                onClick = {navController.navigate("$SIGNIN_ROUTE")  },
                 modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),

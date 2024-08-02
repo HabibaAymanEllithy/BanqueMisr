@@ -7,6 +7,7 @@ import com.example.banquemisr.navigation.AppRoutes.SIGN_UP_ROUTE
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -98,8 +99,8 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
             )
         },
     ) { innerPadding ->
-        SignIn(innerPadding, navController, email, password)
-        preferencesHelper.saveCredentials(email.value, password.value)
+        SignIn(innerPadding, navController, email, password,preferencesHelper)
+
     }
 }
 
@@ -111,6 +112,7 @@ fun SignIn(
     navController: NavController,
     email: MutableState<String>,
     password: MutableState<String>,
+    preferencesHelper: PreferencesHelper,
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
@@ -155,7 +157,7 @@ fun SignIn(
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
-                onClick = { },
+                onClick = { preferencesHelper.saveCredentials(email.value, password.value) },
                 modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),
@@ -182,7 +184,8 @@ fun SignIn(
                     fontSize = 16.sp,
                     color = colorResource(id = R.color.Gray_G70)
                 )
-                TextButton(onClick = { navController.navigate("$SIGN_UP_ROUTE") }) {
+                TextButton(onClick = { preferencesHelper.clearCredentials()
+                    navController.navigate("$SIGN_UP_ROUTE") }) {
                     Text(
                         text = "Sign Up",
                         fontSize = 16.sp,
@@ -192,6 +195,7 @@ fun SignIn(
 
                 }
             }
+
 
 
 
@@ -215,6 +219,9 @@ fun TextFields(string1: String, string2: String, icon: Int, state: MutableState<
             fontWeight = FontWeight.W400,
 
             )
+        var eyeClicked by remember {
+            mutableStateOf(false)
+        }
         OutlinedTextField(
             value = state.value,
             onValueChange = { state.value = it },
@@ -224,10 +231,10 @@ fun TextFields(string1: String, string2: String, icon: Int, state: MutableState<
                     imageVector = ImageVector.vectorResource(id = icon),
                     contentDescription = null,
                     modifier
-                        .align(Alignment.End)
+                        .align(Alignment.End).clickable { eyeClicked = !eyeClicked }
 
                 )
-            },visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
+            },visualTransformation = if (isPassword&&!eyeClicked) PasswordVisualTransformation() else VisualTransformation.None,
 
             keyboardOptions =keyboard,
             modifier = modifier
