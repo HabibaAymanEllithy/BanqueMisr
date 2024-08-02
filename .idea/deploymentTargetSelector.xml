@@ -4,31 +4,24 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-<<<<<<< HEAD
         <DropdownSelection timestamp="2024-08-02T12:55:40.030106100Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\hsams\.android\avd\Pixel_6a_API_34.avd" />
-=======
-        <DropdownSelection timestamp="2024-07-31T13:32:33.461167600Z">
-          <Target type="DEFAULT_BOOT">
-            <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Mohamed\.android\avd\Pixel_3a_API_34_extension_level_7_x86_64.avd" />
->>>>>>> master
             </handle>
           </Target>
         </DropdownSelection>
         <DialogSelection />
-<<<<<<< HEAD
       </SelectionState>
-<<<<<<< Updated upstream
       <SelectionState runConfigName="TransferScreenPreview">
         <option name="selectionMode" value="DROPDOWN" />
-=======
->>>>>>> master
       </SelectionState>
-=======
->>>>>>> Stashed changes
+      <SelectionState runConfigName="TransparentListPreview">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="SelectCurrencyScreenPreview">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
