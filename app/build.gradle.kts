@@ -32,6 +32,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -58,6 +59,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation("androidx.core:core-splashscreen:1.0.0")
@@ -71,4 +73,8 @@ dependencies {
     implementation(kotlin("script-runtime"))
     // bottom navigation
     implementation("androidx.compose.material:material:1.6.8")
+
+    implementation ("androidx.compose.ui:ui:1.1.0-beta03")
+    implementation ("androidx.compose.material:material:1.1.0-beta03")
 }
+

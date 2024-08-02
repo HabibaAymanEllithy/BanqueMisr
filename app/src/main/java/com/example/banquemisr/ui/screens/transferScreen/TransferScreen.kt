@@ -1,20 +1,20 @@
-package com.example.banquemisr.ui.screens.transferScreen
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+
+package com.example.banquemisr.ui.screens.transferScreen
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -26,24 +26,36 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.banquemisr.R
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
-fun TransferScreen(navController: NavController) {
+fun TransActionScreen(navController: NavController) {
+
+
+    val background = Brush.verticalGradient(
+        listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
+        startY = 2000f,
+        endY = 0f
+    )
+
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier
+            .background(background)
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CenterAlignedTopAppBar(
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -52,7 +64,7 @@ fun TransferScreen(navController: NavController) {
                 ),
                 title = {
                     Text(
-                        "Transfer",
+                        "Transactions",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -61,14 +73,25 @@ fun TransferScreen(navController: NavController) {
                     IconButton(onClick = { navController.navigate("home") }) {
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowLeft,
-                            contentDescription = "Localized description"
+                            contentDescription = "Back"
                         )
                     }
                 },
-
-                scrollBehavior = scrollBehavior,
             )
         },
+
+        )
+
+    { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(background)
+                .verticalScroll(rememberScrollState())
+                .padding(innerPadding)
+        ) {
+TransActionScreenScrol()
+        }
     )
     { _ ->
 
@@ -76,7 +99,18 @@ fun TransferScreen(navController: NavController) {
     }
 }
 
+
 @Composable
+fun TransActionScreenScrol(){
+    Column {
+        Row(horizontalArrangement = Arrangement.Center
+            ,modifier = Modifier
+            .fillMaxWidth()) {
+            Text(fontWeight = FontWeight.Bold
+                ,fontSize = 20.sp
+                ,modifier = Modifier
+                .align(Alignment.CenterVertically)
+                ,text = "Your Last Transactions")
 fun ScrollContent(navController: NavController) {
 
     var background = Brush.verticalGradient(
@@ -106,36 +140,40 @@ fun ScrollContent(navController: NavController) {
             )
         }
 
+
     }
-
 }
 
 
-@Preview(showBackground = true)
+
+
+
+
+
+
+
+
+
+
 @Composable
-fun TransferScreenPreview() {
-    TransferScreen(navController = NavController(LocalContext.current))
+fun ListTransaction(){
+    Card(){
+        Row {
 
-}
+            Column {
 
+            }
 
-@Composable
-fun CircleWithNum(bordercolor: Color, text: String, textcolor: Color) {
-    Row {
-        Box(
-            modifier = Modifier
-                .size(30.dp)
-                .border(color = bordercolor, shape = CircleShape, width = 2.dp)
-                .background(Color.White, shape = CircleShape)
-                .clip(CircleShape)
-        ) {
-            Text(
-                text = text, color = textcolor, modifier = Modifier
-                    .padding(all = 2.dp)
-                    .align(Alignment.Center)
-            )
+            Column {
+
+            }
         }
     }
+}
 
 
+@Preview (showBackground = true)
+@Composable
+fun TransferScreenPreview() {
+    TransActionScreen(navController = NavController(LocalContext.current))
 }
