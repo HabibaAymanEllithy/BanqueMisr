@@ -3,6 +3,7 @@ package com.example.banquemisr.addCard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.navigation.AppRoutes.SIGN_UP_COMPLETE_ROUTE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,13 +58,30 @@ fun SelectCurrencyScreen(navController: NavController, modifier: Modifier = Modi
                             textAlign = TextAlign.Center,
                             fontWeight = FontWeight.W500
                         )
+
+                    }
+
+                }
+                        ,actions = {
+                    Box(
+                        modifier = Modifier
+                            .padding(end = 16.dp)
+                            .clickable { navController.popBackStack() },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Cancel",
+                            fontSize = 16.sp,
+                            color = Color.Gray,
+                            fontWeight = FontWeight.W500
+                        )
                     }
                 }
             )
         }
     ) { innerPadding ->
         TransparentList(
-            items = listOf("USD", "EUR", "JPY", "GBP", "AUD"),
+            items = listOf("United States", "United Kingdom", "Egypt"),
             selectedItem = selectedCurrency,
             innerPadding = innerPadding
         )
@@ -81,10 +100,12 @@ fun TransparentList(
         startY = 2000f,
         endY = 0f
     )
+
     Column(modifier = modifier
         .padding(innerPadding)
         .background(background)
         .fillMaxSize()) {
+        Spacer(modifier = Modifier.height(20.dp))
         items.forEach { item ->
             Column {
                 ListItem(
@@ -94,9 +115,33 @@ fun TransparentList(
                         selectedItem.value = it
                     }
                 )
-                Divider(color = Color.LightGray.copy(alpha = 0.5f), thickness = 1.dp, modifier = modifier.padding(horizontal = 20.dp)) // Transparent divider
+                 // Transparent divider
 
             }
+
+        }
+        Spacer(modifier = Modifier.height(500.dp))
+        Button(
+            onClick = {
+            },
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp)
+                .size(55.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(id = R.color.Beige)
+            ),
+            shape = RoundedCornerShape(9.dp),
+            enabled = selectedItem.value.isNotEmpty()
+        ) {
+            Text(
+                text = "Get Started",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.W500,
+                color = Color.White
+
+            )
+
         }
     }
 }
@@ -116,19 +161,21 @@ fun ListItem(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
+     Row {
 
-        Text(
-            text = item,
-            fontSize = 16.sp,
-            color = Color.DarkGray
-        )
-        Icon(
-            painter = painterResource(id = R.drawable.united_states), // Replace with actual icons
-            contentDescription = null,
-            modifier = Modifier
-                .size(24.dp)
-                .padding(end = 8.dp).ali
-        )
+         Icon(
+             painter = painterResource(id = R.drawable.united_states), // Replace with actual icons
+             contentDescription = null,
+             modifier = Modifier
+                 .size(24.dp)
+                 .padding(end = 8.dp)
+         )
+         Text(
+             text = item,
+             fontSize = 16.sp,
+             color = Color.Gray
+         )
+     }
         if (isSelected) {
             Icon(
                 imageVector = Icons.Filled.Check,
@@ -139,6 +186,8 @@ fun ListItem(
         }
 
     }
+    Spacer(modifier = Modifier.height(5.dp))
+    Divider(color = Color.LightGray.copy(alpha = 0.5f), thickness = 1.dp, modifier = Modifier.padding(horizontal = 20.dp))
 }
 
 @Preview
