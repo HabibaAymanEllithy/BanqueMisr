@@ -115,7 +115,7 @@ fun CountryList(onCountrySelected: (String) -> Unit) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.united_states), // Replace with actual icons
+                    painter = painterResource(id = R.drawable.baseline_language_24), // Replace with actual icons
                     contentDescription = null,
                     modifier = Modifier
                         .size(24.dp)

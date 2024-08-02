@@ -3,8 +3,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,121 +19,106 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.banquemisr.R
 
 
-data class ImageWithText(val painter: Painter, val text: String)
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropdownMenuBox() {
-    val context = LocalContext.current
-    val country = listOf(
-        ImageWithText(painter = painterResource(id = R.drawable.eye), text = "USD"),
-        ImageWithText(painter = painterResource(id =R.drawable.email ), text = "EGP")
-    )
-    var expanded by remember { mutableStateOf(false) }
-    var selectedItem by remember { mutableStateOf(country[0]) }
+fun AddTextFields(string1: String, string2: String, state: MutableState<String>, modifier: Modifier = Modifier) {
+    var isExpanded by remember {
+        mutableStateOf(false)
+    }
 
-    Box(
-        modifier = Modifier
-            .height(70.dp)
-            .width(170.dp)
-            .padding(20.dp)
+
+
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.Start,
+        modifier = modifier
     ) {
+        Text(
+            text = string1,
+            modifier = Modifier.padding(horizontal = 32.dp),
+            fontSize = 16.sp,
+            color = colorResource(id = R.color.Gray_G700),
+            fontWeight = FontWeight.W400,
+        )
+
         ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded }
+            expanded = isExpanded,
+            onExpandedChange = { isExpanded = it }
         ) {
-            BasicTextField(
-                value = selectedItem.text,
+            OutlinedTextField(
+                value = state.value,
                 onValueChange = {},
                 readOnly = true,
-                textStyle = androidx.compose.ui.text.TextStyle(
-                    fontSize = 20.sp,
-                    color = colorResource(id = R.color.Beige)
-                ),
-                decorationBox = { innerTextField ->
-                    Row(
-                        modifier = Modifier
-                            .padding(horizontal = 5.dp, vertical = 5.dp)
-                            .menuAnchor()
-                            .clickable { expanded = !expanded }
-                    ) {
-                        Image(
-                            painter = selectedItem.painter,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(40.dp)
-                                .padding(end = 8.dp)
-                        )
-                        Row (modifier = Modifier.width(50.dp)){
-                            innerTextField()
-                        }
-
-                        ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded,)
-                    }
+                placeholder = {
+                    Text(
+                        text = string2,
+                        color = colorResource(id = R.color.Gray_G70)
+                    )
+                },
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded)
                 },
                 modifier = Modifier
                     .menuAnchor()
+                    .fillMaxWidth()
+                    .padding(horizontal = 32.dp)
+                    .background(color = Color.White)
             )
 
             ExposedDropdownMenu(
-                modifier = Modifier.background(Color.White),
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
+                expanded = isExpanded,
+                onDismissRequest = { isExpanded = false }
             ) {
-                country.forEach { item ->
-                    DropdownMenuItem(
-                        text = { ImageWithTextRow(item.painter, item.text) },
-                        onClick = {
-                            selectedItem = item
-                            expanded = false
-                        }
-                    )
-                }
+                DropdownMenuItem(
+                    text = { Text("US") },
+                    onClick = {
+                        state.value = "US"
+                        isExpanded = false
+                    },
+                    modifier = modifier.background(color = Color.White)
+                )
+                DropdownMenuItem(
+                    text = { Text("UK") },
+                    onClick = {
+                        state.value = "UK"
+                        isExpanded = false
+                    },
+                    modifier = modifier.background(color = Color.White)
+                )
+                DropdownMenuItem(
+                    text = { Text("Egypt") },
+                    onClick = {
+                        state.value = "Egypt"
+                        isExpanded = false
+
+                    },
+                    modifier = modifier.background(color = Color.White)
+                )
             }
         }
     }
 }
-
-@Preview
-@Composable
-fun PreviewExposedDropdownMenuBox() {
-    DropdownMenuBox()
-}
-
-@Composable
-fun ImageWithTextRow(painter: Painter, text: String) {
-    Row {
-        Image(
-            painter = painter,
-            modifier = Modifier
-                .size(30.dp)
-                .padding(end = 8.dp),
-            contentDescription = null
-        )
-        Text(
-            text = text,
-            fontSize = 25.sp,
-            color = colorResource(id = R.color.Beige),
-            modifier = Modifier.padding(start = 1.dp))
-
-}}

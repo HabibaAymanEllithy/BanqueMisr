@@ -43,6 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -65,8 +66,11 @@ import com.example.banquemisr.navigation.AppRoutes.SIGN_UP_COMPLETE_ROUTE
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
-    var email = remember { mutableStateOf<String>("") }
-    var password = remember { mutableStateOf<String>("") }
+    val context= LocalContext.current
+    val preferencesHelper = PreferencesHelper(context)
+    var email = remember { mutableStateOf<String>(preferencesHelper.getEmail() ?: "") }
+    var password = remember { mutableStateOf<String>(preferencesHelper.getPassword() ?: "") }
+
 
     Scaffold(
 
@@ -94,7 +98,8 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
             )
         },
     ) { innerPadding ->
-        SignIn(innerPadding, navController,email,password)
+        SignIn(innerPadding, navController, email, password)
+        preferencesHelper.saveCredentials(email.value, password.value)
     }
 }
 
@@ -187,6 +192,8 @@ fun SignIn(
 
                 }
             }
+
+
 
         }
     }

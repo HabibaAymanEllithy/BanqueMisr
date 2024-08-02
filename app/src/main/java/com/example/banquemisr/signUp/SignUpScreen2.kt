@@ -2,7 +2,7 @@
 
 package com.example.banquemisr.signUp
 
-import DropdownMenuBox
+
 import android.app.DatePickerDialog
 import android.widget.DatePicker
 import androidx.compose.foundation.background
@@ -78,6 +78,7 @@ import java.util.Date
 fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
     var country = remember { mutableStateOf<String>("") }
     var mDate = remember { mutableStateOf<String>("") }
+
     Scaffold(
 
         topBar = {
@@ -88,7 +89,7 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
 
                     ),
                 navigationIcon = {
-                    IconButton(onClick = {  navController.popBackStack() }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Localized description"
@@ -116,7 +117,7 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
             )
         },
     ) { innerPadding ->
-        SignUp2(innerPadding, navController,country,mDate)
+        SignUp2(innerPadding, navController, country, mDate)
     }
 }
 
@@ -183,7 +184,7 @@ fun SignUp2(
             DatePickerButton(mDate)
             Spacer(modifier = Modifier.height(40.dp))
             Button(
-                onClick = {  },
+                onClick = { },
                 modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),
@@ -208,86 +209,6 @@ fun SignUp2(
 
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AddTextFields(string1: String, string2: String, state: MutableState<String>, modifier: Modifier = Modifier) {
-    var isExpanded by remember {
-        mutableStateOf(false)
-    }
-
-
-
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.Start,
-        modifier = modifier
-    ) {
-        Text(
-            text = string1,
-            modifier = Modifier.padding(horizontal = 32.dp),
-            fontSize = 16.sp,
-            color = colorResource(id = R.color.Gray_G700),
-            fontWeight = FontWeight.W400,
-        )
-
-        ExposedDropdownMenuBox(
-            expanded = isExpanded,
-            onExpandedChange = { isExpanded = it }
-        ) {
-            OutlinedTextField(
-                value = state.value,
-                onValueChange = {},
-                readOnly = true,
-                placeholder = {
-                    Text(
-                        text = string2,
-                        color = colorResource(id = R.color.Gray_G70)
-                    )
-                },
-                trailingIcon = {
-                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded)
-                },
-                modifier = Modifier
-                    .menuAnchor()
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp)
-                    .background(color = Color.White)
-            )
-
-            ExposedDropdownMenu(
-                expanded = isExpanded,
-                onDismissRequest = { isExpanded = false }
-            ) {
-                DropdownMenuItem(
-                    text = { Text("US") },
-                    onClick = {
-                        state.value = "US"
-                        isExpanded = false
-                    },
-                    modifier = modifier.background(color = Color.White)
-                )
-                DropdownMenuItem(
-                    text = { Text("UK") },
-                    onClick = {
-                        state.value = "UK"
-                        isExpanded = false
-                    },
-                    modifier = modifier.background(color = Color.White)
-                )
-                DropdownMenuItem(
-                    text = { Text("Egypt") },
-                    onClick = {
-                        state.value = "Egypt"
-                        isExpanded = false
-
-                    },
-                    modifier = modifier.background(color = Color.White)
-                )
-            }
-        }
-    }
-}
-
 
 @Composable
 fun DatePickerButton(mDate: MutableState<String>) {
@@ -308,8 +229,6 @@ fun DatePickerButton(mDate: MutableState<String>) {
     mDay = mCalendar.get(Calendar.DAY_OF_MONTH)
 
     mCalendar.time = Date()
-
-
 
 
     val mDatePickerDialog = DatePickerDialog(
@@ -352,7 +271,7 @@ fun DatePickerButton(mDate: MutableState<String>) {
 
             ) {
             Text(
-                text = if(mDate.value.isNotEmpty()) mDate.value else "DD/MM/YYYY",
+                text = if (mDate.value.isNotEmpty()) mDate.value else "DD/MM/YYYY",
                 color = colorResource(id = R.color.Gray_G70),
                 fontSize = 16.sp,
                 modifier = Modifier.weight(1f),
@@ -371,10 +290,6 @@ fun DatePickerButton(mDate: MutableState<String>) {
 }
 
 
-@Composable
-fun BottomSheet(){
-
-}
 
 
 @Preview(device = "id:pixel_6a")
