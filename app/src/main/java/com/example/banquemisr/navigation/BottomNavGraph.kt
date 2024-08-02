@@ -5,12 +5,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.screens.CardsScreen
 import com.example.banquemisr.screens.MenueScreen
 import com.example.banquemisr.screens.TransActionScreen
-import com.example.banquemisr.uiview.homeScreen.HomeScreen
-import com.example.banquemisr.uiview.transferScreen.TransferAmountScreen
+import com.example.banquemisr.ui.screens.homeScreen.HomeScreen
+import com.example.banquemisr.ui.screens.transferScreen.TransferAmountScreen
 import com.example.banquemisr.R
 
 
