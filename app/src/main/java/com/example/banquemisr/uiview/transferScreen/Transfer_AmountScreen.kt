@@ -1,5 +1,6 @@
-package com.example.banquemisr.screens.transferscreens
+package com.example.banquemisr.uiview.transferScreen
 
+import FavouriteListModalBottomSheetContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -33,11 +34,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import kotlinx.coroutines.CoroutineScope
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
-fun TransferScreen(navController: NavController) {
+fun TransferAmountScreen(navController: NavController) {
+
+
     val background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
         startY = 2000f,
@@ -45,6 +47,7 @@ fun TransferScreen(navController: NavController) {
     )
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
 
     Scaffold(
         modifier = Modifier
@@ -74,7 +77,9 @@ fun TransferScreen(navController: NavController) {
             )
         },
 
-    ) { innerPadding ->
+    )
+
+    { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -92,11 +97,20 @@ fun TransferScreen(navController: NavController) {
 fun ScrollContent(
     navController: NavController,
 ) {
+    val sheetstate = rememberModalBottomSheetState()
+    var isSheetOpen by remember { mutableStateOf(false) }
     var amountState by remember { mutableStateOf("") }
-    var recipientNameState by remember { mutableStateOf("") }
-    var recipientAccountState by remember { mutableStateOf("") }
 
+if (isSheetOpen) {
 
+    ModalBottomSheet(
+        onDismissRequest = { isSheetOpen = !isSheetOpen },
+        sheetState = sheetstate,
+        dragHandle = { },
+    ) {
+        FavouriteListModalBottomSheetContent(onDismiss = { isSheetOpen = !isSheetOpen })
+    }
+}
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -171,7 +185,7 @@ fun ScrollContent(
         )
 
         Column(
-            modifier = Modifier.padding(start = 16.dp, top = 20.dp, end = 8.dp)
+            modifier = Modifier.padding(start = 16.dp, top = 20.dp, end = 8.dp, bottom = 50.dp)
         ) {
             Text(
                 color = colorResource(id = R.color.col_Text_gray),
@@ -217,9 +231,10 @@ fun ScrollContent(
                             modifier = Modifier
                                 .height(60.dp)
                                 .width(200.dp)
-                                .padding(top = 13.dp, end = 12.dp)
+                                .padding(top = 0.dp, end = 12.dp)
                         )
                     }
+
 
                     Divider(
                         modifier = Modifier
@@ -242,7 +257,7 @@ fun ScrollContent(
                             modifier = Modifier
                                 .height(60.dp)
                                 .width(200.dp)
-                                .padding(top = 13.dp, end = 12.dp)
+                                .padding(top = 0.dp, end = 12.dp)
                         )
                     }
                 }
@@ -262,6 +277,7 @@ fun ScrollContent(
                     color = colorResource(id = R.color.col_Text_gray)
                 )
                 Row(modifier = Modifier.clickable {
+                    isSheetOpen=true
                 }    ) {
                     Image(
                         painter = painterResource(id = R.drawable.icon_favorite_stare),
@@ -270,7 +286,7 @@ fun ScrollContent(
                     )
                     Text(
                         modifier = Modifier
-                            .padding(start = 10.dp),
+                            .padding(start = 5.dp),
                         text = "favorites",
                         fontSize = 18.sp,
                         color = colorResource(id = R.color.Beige)
@@ -281,7 +297,7 @@ fun ScrollContent(
                 }
             }
 
-            Spacer(modifier = Modifier.padding(4.dp))
+            Spacer(modifier = Modifier.padding(8.dp))
 
 
              TextFields(string1 = "Recipient Name", string2 = "Enter recipient name")
@@ -301,9 +317,10 @@ Spacer(modifier = Modifier.padding(20.dp))
                 ,modifier = Modifier
                     .fillMaxWidth()
                     .height(75.dp)
-                    .padding(horizontal = 12.dp, vertical = 10.dp)
+                    .padding(start = 12.dp, end = 12.dp, top = 5.dp, bottom = 15.dp)
             ) {
                 Text(
+                    color = Color.White,
                     text = "Continue",
                     fontSize = 20.sp,
                     modifier = Modifier
@@ -371,8 +388,6 @@ fun TextFields(string1: String, string2: String, modifier: Modifier = Modifier) 
                 .padding(horizontal = 12.dp, vertical = 10.dp)
                 .background(color = Color.White, shape = RoundedCornerShape(9.dp)),
             shape = RoundedCornerShape(9.dp)
-
-
         )
     }
 }
@@ -380,5 +395,5 @@ fun TextFields(string1: String, string2: String, modifier: Modifier = Modifier) 
 @Preview(showBackground = true)
 @Composable
 fun TransferScreenPreview() {
-    TransferScreen(navController = rememberNavController())
+    TransferAmountScreen(navController = rememberNavController())
 }

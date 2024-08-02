@@ -32,6 +32,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -75,4 +76,7 @@ dependencies {
 
     // bottom navigation
     implementation("androidx.compose.material:material:1.6.8")
+
+    implementation ("androidx.compose.ui:ui:1.1.0-beta03")
+    implementation ("androidx.compose.material:material:1.1.0-beta03")
 }
