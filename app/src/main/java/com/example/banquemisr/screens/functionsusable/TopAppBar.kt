@@ -1,4 +1,4 @@
-package com.example.banquemisr.functionsusable
+package com.example.banquemisr.screens.functionsusable
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft

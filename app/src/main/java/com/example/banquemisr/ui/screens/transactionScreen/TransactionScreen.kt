@@ -83,7 +83,7 @@ fun TransActionScreen(navController: NavController) {
             )
         },
 
-    )
+        )
 
     { innerPadding ->
         Column(
@@ -93,32 +93,33 @@ fun TransActionScreen(navController: NavController) {
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ) {
-            TransActionScreenScrol()
+
         }
 
-        { _ ->
-            ScrollContent(navController)
-        }
+
     }
 
 
     @Composable
-    fun TransActionScreenScrol(){
+    fun TransActionScreenScrol() {
         Column {
-            Row(horizontalArrangement = Arrangement.Center
-                ,modifier = Modifier
-                    .fillMaxWidth()) {
-                Text(fontWeight = FontWeight.Bold
-                    ,fontSize = 20.sp
-                    ,modifier = Modifier
-                        .align(Alignment.CenterVertically)
-                    ,text = "Your Last Transactions")
-                
+            Row(
+                horizontalArrangement = Arrangement.Center, modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Text(
+                    fontWeight = FontWeight.Bold, fontSize = 20.sp, modifier = Modifier
+                        .align(Alignment.CenterVertically), text = "Your Last Transactions"
+                )
+
                 @Composable
                 fun ScrollContent(navController: NavController) {
 
                     var background = Brush.verticalGradient(
-                        listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
+                        listOf(
+                            colorResource(id = R.color.Greadient2),
+                            colorResource(id = R.color.Gredient)
+                        ),
                         startY = 2000f,
                         endY = 0f
                     )
@@ -131,11 +132,7 @@ fun TransActionScreen(navController: NavController) {
                     ) {
                         Row() {
 
-                            CircleWithNum(
-                                colorResource(id = R.color.Beige),
-                                "01",
-                                colorResource(id = R.color.Beige)
-                            )
+
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -149,19 +146,9 @@ fun TransActionScreen(navController: NavController) {
                 }
 
 
-
-
-
-
-
-
-
-
-
-
                 @Composable
-                fun ListTransaction(){
-                    Card(){
+                fun ListTransaction() {
+                    Card() {
                         Row {
 
                             Column {
@@ -174,10 +161,12 @@ fun TransActionScreen(navController: NavController) {
                         }
                     }
                 }
-
-
-                @Preview (showBackground = true)
-                @Composable
-                fun TransferScreenPreview() {
-                    TransActionScreen(navController = NavController(LocalContext.current))
-                }
+            }
+        }
+    }
+}
+@Preview(showBackground = true)
+@Composable
+fun TransferScreenPreview() {
+    TransActionScreen(navController = NavController(LocalContext.current))
+}

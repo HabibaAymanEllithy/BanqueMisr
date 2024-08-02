@@ -1,4 +1,4 @@
-package com.example.banquemisr.functionsusable
+package com.example.banquemisr.screens.functionsusable
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text

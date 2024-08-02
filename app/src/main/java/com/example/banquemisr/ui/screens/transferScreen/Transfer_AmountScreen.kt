@@ -5,7 +5,17 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,8 +25,26 @@ import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,6 +62,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.screens.functionsusable.ExposedDropdownMenuBox
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
@@ -77,7 +106,7 @@ fun TransferAmountScreen(navController: NavController) {
             )
         },
 
-    )
+        )
 
     { innerPadding ->
         Column(
@@ -101,16 +130,16 @@ fun ScrollContent(
     var isSheetOpen by remember { mutableStateOf(false) }
     var amountState by remember { mutableStateOf("") }
 
-if (isSheetOpen) {
+    if (isSheetOpen) {
 
-    ModalBottomSheet(
-        onDismissRequest = { isSheetOpen = !isSheetOpen },
-        sheetState = sheetstate,
-        dragHandle = { },
-    ) {
-        FavouriteListModalBottomSheetContent(onDismiss = { isSheetOpen = !isSheetOpen })
+        ModalBottomSheet(
+            onDismissRequest = { isSheetOpen = !isSheetOpen },
+            sheetState = sheetstate,
+            dragHandle = { },
+        ) {
+            FavouriteListModalBottomSheetContent(onDismiss = { isSheetOpen = !isSheetOpen })
+        }
     }
-}
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -224,7 +253,7 @@ if (isSheetOpen) {
                     )
 
                     Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
-                        com.example.banquemisr.functionsusable.ExposedDropdownMenuBox()
+                        ExposedDropdownMenuBox()
                         OutlinedTextField(
                             value = amountState,
                             onValueChange = { amountState = it },
@@ -250,7 +279,7 @@ if (isSheetOpen) {
                     )
 
                     Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
-                        com.example.banquemisr.functionsusable.ExposedDropdownMenuBox()
+                        ExposedDropdownMenuBox()
                         OutlinedTextField(
                             value = amountState,
                             onValueChange = { amountState = it },
@@ -277,8 +306,8 @@ if (isSheetOpen) {
                     color = colorResource(id = R.color.col_Text_gray)
                 )
                 Row(modifier = Modifier.clickable {
-                    isSheetOpen=true
-                }    ) {
+                    isSheetOpen = true
+                }) {
                     Image(
                         painter = painterResource(id = R.drawable.icon_favorite_stare),
                         contentDescription = null,
@@ -291,30 +320,31 @@ if (isSheetOpen) {
                         fontSize = 18.sp,
                         color = colorResource(id = R.color.Beige)
                     )
-                    Image(modifier = Modifier.size(20.dp)
-                        ,painter = painterResource(id = R.drawable.icon_wrightside)
-                        , contentDescription = null)
+                    Image(
+                        modifier = Modifier.size(20.dp),
+                        painter = painterResource(id = R.drawable.icon_wrightside),
+                        contentDescription = null
+                    )
                 }
             }
 
             Spacer(modifier = Modifier.padding(8.dp))
 
 
-             TextFields(string1 = "Recipient Name", string2 = "Enter recipient name")
+            TextFields(string1 = "Recipient Name", string2 = "Enter recipient name")
 
 
-Spacer(modifier = Modifier.padding(8.dp))
+            Spacer(modifier = Modifier.padding(8.dp))
 
             TextFields(string1 = "Recipient Account ", string2 = "Enter Recipient Account Number ")
 
-Spacer(modifier = Modifier.padding(20.dp))
+            Spacer(modifier = Modifier.padding(20.dp))
 
             FilledTonalButton(
                 onClick = { },
-                shape = RoundedCornerShape(10.dp)
-                ,colors = ButtonDefaults.filledTonalButtonColors(
-                    containerColor = colorResource(id = R.color.Beige))
-                ,modifier = Modifier
+                shape = RoundedCornerShape(10.dp), colors = ButtonDefaults.filledTonalButtonColors(
+                    containerColor = colorResource(id = R.color.Beige)
+                ), modifier = Modifier
                     .fillMaxWidth()
                     .height(75.dp)
                     .padding(start = 12.dp, end = 12.dp, top = 5.dp, bottom = 15.dp)
@@ -328,10 +358,9 @@ Spacer(modifier = Modifier.padding(20.dp))
                 )
             }
 
-                }
-            }
         }
-
+    }
+}
 
 
 @Composable
@@ -367,8 +396,10 @@ fun TextFields(string1: String, string2: String, modifier: Modifier = Modifier) 
     var state by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
-            .fillMaxWidth(),verticalArrangement = Arrangement.Center
-        , horizontalAlignment = Alignment.Start) {
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.Start
+    ) {
         Text(
             text = string1,
             modifier = modifier.padding(horizontal = 12.dp),

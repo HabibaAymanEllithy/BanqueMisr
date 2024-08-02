@@ -1,4 +1,4 @@
-package com.example.banquemisr.signIn
+package com.example.banquemisr.screens.signIn
 
 import android.content.Context
 import android.content.SharedPreferences

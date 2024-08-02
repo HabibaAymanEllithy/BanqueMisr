@@ -1,4 +1,4 @@
-package com.example.banquemisr.navigation
+package com.example.banquemisr.screens.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -6,10 +6,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-import com.example.banquemisr.signIn.SignInScreen
-import com.example.banquemisr.signUp.SignUpScreen
-import com.example.banquemisr.signUp.SignUpScreen2
-import com.example.banquemisr.splash.SplashScreen
+import com.example.banquemisr.screens.signIn.SignInScreen
+import com.example.banquemisr.screens.signUp.SignUpScreen
+import com.example.banquemisr.screens.signUp.SignUpScreen2
+import com.example.banquemisr.screens.splash.SplashScreen
 
 object AppRoutes {
     const val SIGN_UP_ROUTE = "signUp"

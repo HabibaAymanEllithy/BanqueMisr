@@ -1,4 +1,10 @@
-package com.example.banquemisr.signUp
+package com.example.banquemisr.screens.signIn
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
+import com.example.banquemisr.screens.navigation.AppRoutes.SIGN_UP_ROUTE
+
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,7 +22,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,20 +30,21 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextFieldDefaults
+
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -50,20 +56,20 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.navigation.AppRoutes.SIGNIN_ROUTE
-
-import com.example.banquemisr.navigation.AppRoutes.SIGN_UP_COMPLETE_ROUTE
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen(navController: NavController,modifier: Modifier=Modifier) {
-    var email = remember { mutableStateOf<String>("") }
-    var password = remember { mutableStateOf<String>("") }
-    var name = remember { mutableStateOf<String>("") }
+fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
+    val context= LocalContext.current
+    val preferencesHelper = PreferencesHelper(context)
+    var email = remember { mutableStateOf<String>(preferencesHelper.getEmail() ?: "") }
+    var password = remember { mutableStateOf<String>(preferencesHelper.getPassword() ?: "") }
+
+
     Scaffold(
 
         topBar = {
@@ -80,7 +86,7 @@ fun SignUpScreen(navController: NavController,modifier: Modifier=Modifier) {
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            "Sign Up",
+                            "Sign In",
                             fontSize = 20.sp,
                             textAlign = TextAlign.Center,
                             fontWeight = FontWeight.W500
@@ -90,17 +96,23 @@ fun SignUpScreen(navController: NavController,modifier: Modifier=Modifier) {
             )
         },
     ) { innerPadding ->
-        SignUp(innerPadding,navController,email,password,name)
+        SignIn(innerPadding, navController, email, password,preferencesHelper)
+
     }
 }
 
 
 @Composable
 
-fun SignUp(innerPadding: PaddingValues, navController: NavController, email: MutableState<String>,
-           password: MutableState<String>,name: MutableState<String> ,modifier: Modifier = Modifier) {
+fun SignIn(
+    innerPadding: PaddingValues,
+    navController: NavController,
+    email: MutableState<String>,
+    password: MutableState<String>,
+    preferencesHelper: PreferencesHelper,
+    modifier: Modifier = Modifier
+) {
     val scrollState = rememberScrollState()
-    var showDialog by remember { mutableStateOf(false) }
     var background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
         startY = 2000f,
@@ -112,8 +124,7 @@ fun SignUp(innerPadding: PaddingValues, navController: NavController, email: Mut
             .fillMaxSize()
 
             .background(background)
-            .verticalScroll(scrollState)
-            .padding(innerPadding)
+            .verticalScroll(scrollState).padding(innerPadding)
     ) {
         Spacer(modifier = Modifier.height(30.dp))
 
@@ -132,40 +143,18 @@ fun SignUp(innerPadding: PaddingValues, navController: NavController, email: Mut
         }
         Spacer(modifier = Modifier.height(60.dp))
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            TextFields(
-                string1 = "Full name",
-                string2 = "Enter your Full name",
-                R.drawable.person,
-                name,KeyboardOptions(keyboardType = KeyboardType.Text),false
-            )
-            TextFields(string1 = "Email", string2 = "Enter your email", R.drawable.email,email,KeyboardOptions(keyboardType = KeyboardType.Email),false)
-            TextFields(string1 = "Password", string2 = "Enter your password", R.drawable.eye,password,KeyboardOptions(keyboardType = KeyboardType.Password),true)
-            var isPasswordValid=isPasswordValid(password = password)
 
-            if (showDialog) {
-                AlertDialog(
-                    onDismissRequest = { showDialog = false },
-                    title = { Text(text = "Invalid Password") },
-                    text = {
-                        Text(
-                            text = "Password must be at least 6 characters long, " +
-                                    "contain at least one uppercase letter, one lowercase letter, and one special character."
-                        )
-                    },
-                    confirmButton = {
-                        TextButton(onClick = { showDialog = false }) {
-                            Text("OK")
-                        }
-                    }
-                )
-            }
+
+
+            TextFields(string1 = "Email", string2 = "Enter your email", R.drawable.email,email,KeyboardOptions(keyboardType = KeyboardType.Email),false)
+            TextFields(
+                string1 = "Password",
+                string2 = "Enter your password",
+                R.drawable.eye,password,KeyboardOptions(keyboardType = KeyboardType.Password),true
+            )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
-                onClick = { if (isPasswordValid) {
-                    navController.navigate("$SIGN_UP_COMPLETE_ROUTE")
-                } else {
-                    showDialog = true
-                }},
+                onClick = { preferencesHelper.saveCredentials(email.value, password.value) },
                 modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),
@@ -173,10 +162,11 @@ fun SignUp(innerPadding: PaddingValues, navController: NavController, email: Mut
                     containerColor = colorResource(id = R.color.Beige)
                 ),
                 shape = RoundedCornerShape(9.dp),
-                enabled = email.value.isNotEmpty() && password.value.isNotEmpty()&&name.value.isNotEmpty()
+                enabled = email.value.isNotEmpty() && password.value.isNotEmpty()
+
             ) {
                 Text(
-                    text = "Sign Up",
+                    text = "Sign In",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.W500
                 )
@@ -187,13 +177,14 @@ fun SignUp(innerPadding: PaddingValues, navController: NavController, email: Mut
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Already have an account?",
+                    text = "Don't have an account?",
                     fontSize = 16.sp,
                     color = colorResource(id = R.color.Gray_G70)
                 )
-                TextButton(onClick = {navController.navigate("$SIGNIN_ROUTE") }) {
+                TextButton(onClick = { preferencesHelper.clearCredentials()
+                    navController.navigate("$SIGN_UP_ROUTE") }) {
                     Text(
-                        text = "Sign in",
+                        text = "Sign Up",
                         fontSize = 16.sp,
                         color = colorResource(id = R.color.Beige),
                         textDecoration = TextDecoration.Underline
@@ -202,6 +193,9 @@ fun SignUp(innerPadding: PaddingValues, navController: NavController, email: Mut
                 }
             }
 
+
+
+
         }
     }
 
@@ -209,10 +203,9 @@ fun SignUp(innerPadding: PaddingValues, navController: NavController, email: Mut
 }
 
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TextFields(string1: String, string2: String, icon: Int, state: MutableState<String>,keyboard:KeyboardOptions,isPassword:Boolean,modifier: Modifier = Modifier) {
+fun TextFields(string1: String, string2: String, icon: Int, state: MutableState<String>,keyboard:KeyboardOptions,isPassword:Boolean, modifier: Modifier = Modifier) {
 
     Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.Start) {
         Text(
@@ -235,13 +228,12 @@ fun TextFields(string1: String, string2: String, icon: Int, state: MutableState<
                     imageVector = ImageVector.vectorResource(id = icon),
                     contentDescription = null,
                     modifier
-                        .align(Alignment.End)
-                        .clickable { eyeClicked = !eyeClicked }
+                        .align(Alignment.End).clickable { eyeClicked = !eyeClicked }
 
                 )
-            }, visualTransformation = if (isPassword&&!eyeClicked) PasswordVisualTransformation() else VisualTransformation.None,
+            },visualTransformation = if (isPassword&&!eyeClicked) PasswordVisualTransformation() else VisualTransformation.None,
 
-            keyboardOptions = keyboard,
+            keyboardOptions =keyboard,
             modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp, vertical = 10.dp)
@@ -252,15 +244,10 @@ fun TextFields(string1: String, string2: String, icon: Int, state: MutableState<
         )
     }
 }
-@Composable
-fun isPasswordValid(password: MutableState<String>): Boolean {
-    val passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W_]).{6,}$".toRegex()
-    return passwordRegex.matches(password.value)
-}
 
 
-@Preview(device = "id:pixel_6a")
+@Preview
 @Composable
-fun OverAll() {
-    SignUpScreen(rememberNavController())
+fun OverAll5() {
+    SignInScreen(rememberNavController())
 }

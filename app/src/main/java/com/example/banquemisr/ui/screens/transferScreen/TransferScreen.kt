@@ -1,13 +1,13 @@
-
-
 package com.example.banquemisr.ui.screens.transferScreen
-import androidx.compose.foundation.layout.Box
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -29,11 +29,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.banquemisr.R
@@ -90,90 +89,76 @@ fun TransActionScreen(navController: NavController) {
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ) {
-TransActionScreenScrol()
+//TransActionScreenScrol()
         }
-    )
-    { _ ->
 
-        ScrollContent(navController)
     }
-}
 
 
-@Composable
-fun TransActionScreenScrol(){
-    Column {
-        Row(horizontalArrangement = Arrangement.Center
-            ,modifier = Modifier
-            .fillMaxWidth()) {
-            Text(fontWeight = FontWeight.Bold
-                ,fontSize = 20.sp
-                ,modifier = Modifier
-                .align(Alignment.CenterVertically)
-                ,text = "Your Last Transactions")
-fun ScrollContent(navController: NavController) {
-
-    var background = Brush.verticalGradient(
-        listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
-        startY = 2000f,
-        endY = 0f
-    )
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(background)
-            .verticalScroll(rememberScrollState())
-    ) {
-        Row() {
-
-            CircleWithNum(
-                colorResource(id = R.color.Beige),
-                "01",
-                colorResource(id = R.color.Beige)
-            )
-            Box(
-                modifier = Modifier
+    @Composable
+    fun TransActionScreenScrol() {
+        Column {
+            Row(
+                horizontalArrangement = Arrangement.Center, modifier = Modifier
                     .fillMaxWidth()
-                    .height(1.dp)
-                    .background(color = Color.Red)
-            )
-        }
+            ) {
+                Text(
+                    fontWeight = FontWeight.Bold, fontSize = 20.sp, modifier = Modifier
+                        .align(Alignment.CenterVertically), text = "Your Last Transactions"
+                )
+
+                @Composable
+                fun ScrollContent(navController: NavController) {
+
+                    var background = Brush.verticalGradient(
+                        listOf(
+                            colorResource(id = R.color.Greadient2),
+                            colorResource(id = R.color.Gredient)
+                        ),
+                        startY = 2000f,
+                        endY = 0f
+                    )
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(background)
+                            .verticalScroll(rememberScrollState())
+                    ) {
+                        Row() {
 
 
-    }
-}
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(1.dp)
+                                    .background(color = Color.Red)
+                            )
+                        }
 
 
+                    }
+                }
 
 
+                @Composable
+                fun ListTransaction() {
+                    Card() {
+                        Row {
 
+                            Column {
 
+                            }
 
+                            Column {
 
+                            }
+                        }
+                    }
+                }
 
-
-
-
-@Composable
-fun ListTransaction(){
-    Card(){
-        Row {
-
-            Column {
 
             }
-
-            Column {
-
-            }
         }
     }
-}
-
-
-@Preview (showBackground = true)
-@Composable
-fun TransferScreenPreview() {
-    TransActionScreen(navController = NavController(LocalContext.current))
 }

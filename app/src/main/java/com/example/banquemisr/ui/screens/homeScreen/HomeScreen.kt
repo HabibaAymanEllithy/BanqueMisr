@@ -1,5 +1,6 @@
 package com.example.banquemisr.ui.screens.homeScreen
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,7 +24,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,12 +31,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.banquemisr.R
-import com.example.banquemisr.functionsusable.TextFormaterUSA
-
-
-import java.util.*
+import com.example.banquemisr.screens.functionsusable.TextFormaterUSA
 
 @Composable
 fun HomeScreen() {
@@ -222,7 +218,7 @@ fun HomeScreen() {
             }
         }
 
-    CardTransactions()
+        //CardTransactions()
 
 
     }
@@ -231,7 +227,7 @@ fun HomeScreen() {
 @Preview(showBackground = true, device = "id:pixel_6a")
 @Composable
 fun GreetingPreview() {
-   HomeScreen()
+    HomeScreen()
 }
 
 @Composable
@@ -240,98 +236,100 @@ fun ImageWithTextHome(modifier: Modifier, imageIcon: Int, text: String) {
 
         Card(
             modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-    HomeScreen()
-}
-
-@Composable
-fun ImageWithText(modifier: Modifier, imageIcon: Int, text: String) {
-    Column {
-
-        Card(
-            modifier = modifier
-                .size(60.dp),
-            colors = CardDefaults.cardColors(colorResource(id =R.color.Gray_G10))
-        )
-        {
-            Image(
-                alignment = Alignment.Center, painter = painterResource(id = imageIcon),
-                contentDescription = "",
-                modifier = Modifier
-                    .size(50.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .padding(8.dp)
-
-            )
+                .align(Alignment.CenterHorizontally)){
+            HomeScreen ()
         }
-        Text(
-            modifier = Modifier
-                .padding(top = 10.dp)
-                .align(Alignment.CenterHorizontally),text = text)
     }
-}
 
-@Composable
-fun CardTransactions() {
-    Card(
-        colors = CardDefaults.elevatedCardColors(
-            containerColor = Color.White
-        ), modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp)
-    ) {
-        Row {
-            Box(modifier = Modifier.size(100.dp))
+    @Composable
+    fun ImageWithText(modifier: Modifier, imageIcon: Int, text: String) {
+        Column {
+
+            Card(
+                modifier = modifier
+                    .size(60.dp),
+                colors = CardDefaults.cardColors(colorResource(id = R.color.Gray_G10))
+            )
             {
                 Image(
+                    alignment = Alignment.Center, painter = painterResource(id = imageIcon),
+                    contentDescription = "",
                     modifier = Modifier
-                        .size(180.dp)
-                        .padding(top = 0f.dp, bottom = 0f.dp),
-                    painter = painterResource(id = R.drawable.icon_vesa), // image vesa
-                    contentDescription = null
-                )
+                        .size(50.dp)
+                        .align(Alignment.CenterHorizontally)
+                        .padding(8.dp)
 
-            }
-
-            Column(modifier = Modifier.align(Alignment.CenterVertically)) {
-                Text(
-                    text = "Name",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 14.sp,
-                    color = Color.Black
-                )
-                Text(
-                    text = "Visa . Master Card . 12344",
-                    fontSize = 12.sp,
-                    color = Color.Black,
-                    fontWeight = FontWeight.Normal,
-                    modifier = Modifier
-                )
-
-                Text(
-                    text = "Today 11:00 - Received",
-                    fontSize = 12.sp,
-                    color = Color.Gray,
-                    modifier = Modifier
                 )
             }
-            Row(
+            Text(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.End
-            ) {
-                Text(
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 16.sp,
-                    color = colorResource(id = R.color.Beige), modifier = Modifier
-                        .align(Alignment.Top), text = "$1000"
-                )
+                    .padding(top = 10.dp)
+                    .align(Alignment.CenterHorizontally), text = text
+            )
+        }
+    }
+
+    @Composable
+    fun CardTransactions() {
+        Card(
+            colors = CardDefaults.elevatedCardColors(
+                containerColor = Color.White
+            ), modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp)
+        ) {
+            Row {
+                Box(modifier = Modifier.size(100.dp))
+                {
+                    Image(
+                        modifier = Modifier
+                            .size(180.dp)
+                            .padding(top = 0f.dp, bottom = 0f.dp),
+                        painter = painterResource(id = R.drawable.icon_vesa), // image vesa
+                        contentDescription = null
+                    )
+
+                }
+
+                Column(modifier = Modifier.align(Alignment.CenterVertically)) {
+                    Text(
+                        text = "Name",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
+                        color = Color.Black
+                    )
+                    Text(
+                        text = "Visa . Master Card . 12344",
+                        fontSize = 12.sp,
+                        color = Color.Black,
+                        fontWeight = FontWeight.Normal,
+                        modifier = Modifier
+                    )
+
+                    Text(
+                        text = "Today 11:00 - Received",
+                        fontSize = 12.sp,
+                        color = Color.Gray,
+                        modifier = Modifier
+                    )
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Text(
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 16.sp,
+                        color = colorResource(id = R.color.Beige), modifier = Modifier
+                            .align(Alignment.Top), text = "$1000"
+                    )
+                }
             }
         }
     }
-}
 
 
 }

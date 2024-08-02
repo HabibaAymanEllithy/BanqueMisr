@@ -49,8 +49,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.functionsusable.TextFormaterEGP
-import com.example.banquemisr.functionsusable.TextFormaterUSA
+import com.example.banquemisr.screens.functionsusable.TextFormaterEGP
+import com.example.banquemisr.screens.functionsusable.TextFormaterUSA
 
 
 @OptIn(ExperimentalMaterial3Api::class)
