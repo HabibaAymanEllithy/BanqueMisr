@@ -21,11 +21,14 @@
         <DialogSelection />
 <<<<<<< HEAD
       </SelectionState>
+<<<<<<< Updated upstream
       <SelectionState runConfigName="TransferScreenPreview">
         <option name="selectionMode" value="DROPDOWN" />
 =======
 >>>>>>> master
       </SelectionState>
+=======
+>>>>>>> Stashed changes
     </selectionStates>
   </component>
 </project>
