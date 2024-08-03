@@ -18,6 +18,10 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -218,7 +222,7 @@ fun HomeScreen() {
             }
         }
 
-        //CardTransactions()
+        CardTransactions()
 
 
     }
@@ -233,18 +237,6 @@ fun GreetingPreview() {
 @Composable
 fun ImageWithTextHome(modifier: Modifier, imageIcon: Int, text: String) {
     Column() {
-
-        Card(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)){
-            HomeScreen ()
-        }
-    }
-
-    @Composable
-    fun ImageWithText(modifier: Modifier, imageIcon: Int, text: String) {
-        Column {
-
             Card(
                 modifier = modifier
                     .size(60.dp),
@@ -271,6 +263,9 @@ fun ImageWithTextHome(modifier: Modifier, imageIcon: Int, text: String) {
 
     @Composable
     fun CardTransactions() {
+        var toName by remember { mutableStateOf("Name") }
+        var balanceTransfer by remember { mutableStateOf("1000") }
+
         Card(
             colors = CardDefaults.elevatedCardColors(
                 containerColor = Color.White
@@ -293,10 +288,10 @@ fun ImageWithTextHome(modifier: Modifier, imageIcon: Int, text: String) {
 
                 Column(modifier = Modifier.align(Alignment.CenterVertically)) {
                     Text(
-                        text = "Name",
+                        text = toName,
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp,
-                        color = Color.Black
+                        color = colorResource(id = R.color.Gray_G900)
                     )
                     Text(
                         text = "Visa . Master Card . 12344",
@@ -324,12 +319,10 @@ fun ImageWithTextHome(modifier: Modifier, imageIcon: Int, text: String) {
                         fontWeight = FontWeight.Medium,
                         fontSize = 16.sp,
                         color = colorResource(id = R.color.Beige), modifier = Modifier
-                            .align(Alignment.Top), text = "$1000"
+                            .align(Alignment.Top), text = balanceTransfer
                     )
                 }
             }
         }
     }
 
-
-}

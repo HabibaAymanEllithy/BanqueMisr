@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,6 +27,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ElevatedCard
@@ -51,10 +53,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.booleanResource
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -231,11 +235,21 @@ fun ScrollContent(
             ) {
                 Column(modifier = Modifier.padding(start = 8.dp, top = 10.dp)) {
                     Spacer(modifier = Modifier.height(10.dp))
+                    Row {
                     Text(
                         color = Color.Black,
                         fontSize = 24.sp,
-                        text = "1 USD = 48.4220 EGP"
+                        text = "1 USD ="
                     )
+
+                    Text(
+                        color = Color.Black,
+                        fontSize = 24.sp,
+                        text = ""
+                    )
+                }
+
+
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         modifier = Modifier.padding(top = 8.dp),
@@ -252,7 +266,8 @@ fun ScrollContent(
                         text = "You Send"
                     )
 
-                    Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(20.dp)
+                    , modifier = Modifier.padding(end = 5.dp)) {
                         ExposedDropdownMenuBox()
                         OutlinedTextField(
                             value = amountState,
@@ -278,16 +293,32 @@ fun ScrollContent(
                         text = "Recipient Gets"
                     )
 
-                    Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(20.dp)
+                    , modifier = Modifier.padding(end = 15.dp)) {
                         ExposedDropdownMenuBox()
-                        OutlinedTextField(
-                            value = amountState,
-                            onValueChange = { amountState = it },
-                            modifier = Modifier
-                                .height(60.dp)
-                                .width(200.dp)
-                                .padding(top = 0.dp, end = 12.dp)
-                        )
+                        Box (modifier = Modifier
+                            .height(60.dp)
+                            .width(200.dp)
+                            .border(
+                                0.5.dp,
+                                color = colorResource(id = R.color.col_Text_gray),
+                                RoundedCornerShape(10.dp)
+                            )
+                            .padding(top = 0.dp, end = 0.dp)
+                        ){
+
+                                    Text(text = ""
+                                        ,fontSize = 16.sp
+                                        , textAlign = TextAlign.Center
+                                        ,modifier = Modifier
+                                            .padding(top = 20.dp, bottom = 16.dp, start = 20.dp)
+                                    )
+
+
+
+
+                        }
+
                     }
                 }
             }

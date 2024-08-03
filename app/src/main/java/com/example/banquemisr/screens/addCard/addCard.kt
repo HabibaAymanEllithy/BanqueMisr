@@ -100,7 +100,7 @@ fun addCardScreen(navController: NavController, modifier: Modifier = Modifier) {
                 }
             )
         }
-<<<<<<< HEAD
+
     ) { _ ->
 //        addCard(
 //            navController,cardHolderName.value,cardNO.value,CVV.value,expiryDate.value, innerPadding
@@ -114,13 +114,12 @@ fun addCardScreen(navController: NavController, modifier: Modifier = Modifier) {
 //
 //
 //}
-=======
-    ) { innerPadding ->
-        addCard(
-            navController,cardHolderName,cardNO,CVV,expiryDate, innerPadding
-        )
-    }
-}
+//    ) { innerPadding ->
+//        addCard(
+//            navController,cardHolderName,cardNO,CVV,expiryDate, innerPadding
+//        )
+//    }
+//}
 
 @Composable
 fun addCard(navController: NavController, cardHolder:MutableState<String>, CardNo: MutableState<String>, CVV:MutableState<String>, expiryDate:MutableState<String>, innerPadding: PaddingValues,modifier: Modifier=Modifier){
@@ -169,7 +168,7 @@ fun addCard(navController: NavController, cardHolder:MutableState<String>, CardN
 
 
 }
->>>>>>> master
+
 
 @Preview
 @Composable

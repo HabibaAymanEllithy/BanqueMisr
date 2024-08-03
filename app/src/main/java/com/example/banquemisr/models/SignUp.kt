@@ -10,7 +10,6 @@ data class SignUpRequest (
     val gender:String,
     val country:String,
     val birthDate:String
-
 )
 
 data class SignUpResponse(
@@ -22,3 +21,4 @@ data class SignUpResponse(
     val birthDate:String,
     val username: String
 )
+

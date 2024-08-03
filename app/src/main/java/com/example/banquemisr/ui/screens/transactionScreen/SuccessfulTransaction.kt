@@ -219,8 +219,6 @@ Spacer(modifier = Modifier.padding(4.dp))
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium
                         )
-
-
                     }
 Spacer(modifier = Modifier.padding(8.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(175.dp))
