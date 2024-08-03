@@ -21,8 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.example.banquemisr.screens.navigation.AppRoutes.AppNavHost
+import com.example.banquemisr.screens.navigation.AppRoutes.AppNavigation
 
 @Composable
 fun BottomNavigationComponent() {
@@ -88,8 +89,8 @@ fun BottomNavigationComponent() {
                     }
                 }
             }
-        ) { innerPadding ->
-            AppNavHost(modifier = Modifier.padding(innerPadding))
+        ) { _ ->
+            AppNavigation()
         }
     }
 }

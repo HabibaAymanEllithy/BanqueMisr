@@ -89,19 +89,19 @@ fun addCardScreen(navController: NavController, modifier: Modifier = Modifier) {
                 }
             )
         }
-    ) { innerPadding ->
-        addCard(
-            navController,cardHolderName.value,cardNO.value,CVV.value,expiryDate.value, innerPadding
-        )
+    ) { _ ->
+//        addCard(
+//            navController,cardHolderName.value,cardNO.value,CVV.value,expiryDate.value, innerPadding
+//        )
     }
 }
 
-@Composable
-fun addCard(navController: NavController,cardHolder:String,CardNo:String,CVV:String,expiryDate:String,paddingValues: PaddingValues){
-TextFields(string1 = "cardHolder Name", string2 = "Enter cardHolder Name", icon =R.drawable.transparent_icon , state =cardHolder, keyboard = , isPassword = )
-
-
-}
+//@Composable
+//fun addCard(navController: NavController,cardHolder:String,CardNo:String,CVV:String,expiryDate:String,paddingValues: PaddingValues){
+//TextFields(string1 = "cardHolder Name", string2 = "Enter cardHolder Name", icon =R.drawable.transparent_icon , state =cardHolder, keyboard = , isPassword = )
+//
+//
+//}
 
 @Preview
 @Composable
