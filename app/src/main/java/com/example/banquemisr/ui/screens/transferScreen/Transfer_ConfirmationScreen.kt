@@ -1,5 +1,7 @@
 package com.example.banquemisr.ui.screens.transferScreen
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -39,6 +41,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -46,6 +49,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
@@ -109,7 +113,7 @@ fun TransferConfirmationScreen(navController: NavController) {
 
 @Composable
 fun ConfirmationScreen(navController: NavController) {
-
+val context= LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -258,7 +262,7 @@ Spacer(modifier = Modifier.padding(16.dp))
                         color = colorResource(id = R.color.Beige),
                         shape = RoundedCornerShape(10.dp)
                     )
-                ,onClick = { }) {
+                ,onClick = {}) {
                 Text(color = colorResource(id = R.color.Beige)
                     ,fontSize = 16.sp
                     , text = "Previous")

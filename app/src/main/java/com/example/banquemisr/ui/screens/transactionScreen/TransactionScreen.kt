@@ -1,15 +1,20 @@
 package com.example.banquemisr.ui.screens.transactionScreen
 
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
@@ -32,16 +37,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.screens.functionsusable.TextFormaterUSA
 import com.example.banquemisr.ui.screens.transferScreen.ScrollContent
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransActionScreen(navController: NavController) {
 
@@ -93,12 +101,12 @@ fun TransActionScreen(navController: NavController) {
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ) {
-
+            TransActionScreenScrol()
         }
 
 
     }
-
+}
 
     @Composable
     fun TransActionScreenScrol() {
@@ -112,61 +120,165 @@ fun TransActionScreen(navController: NavController) {
                         .align(Alignment.CenterVertically), text = "Your Last Transactions"
                 )
 
-                @Composable
-                fun ScrollContent(navController: NavController) {
 
-                    var background = Brush.verticalGradient(
-                        listOf(
-                            colorResource(id = R.color.Greadient2),
-                            colorResource(id = R.color.Gredient)
-                        ),
-                        startY = 2000f,
-                        endY = 0f
-                    )
+            }
 
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(background)
-                            .verticalScroll(rememberScrollState())
-                    ) {
-                        Row() {
+            ListTransactionSuccessful()
+            ListTransactionFaild()
+        }
+    }
 
 
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(1.dp)
-                                    .background(color = Color.Red)
+        @Composable
+        fun ListTransactionSuccessful() {
+            Card(modifier = Modifier
+                .fillMaxWidth()
+                .padding(end = 16.dp, start = 16.dp, top = 16.dp, bottom = 10.dp)
+                .background(Color.White)) {
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(end = 16.dp, start = 16.dp, top = 16.dp))
+                {
+
+    Image(
+        modifier = Modifier
+            .padding(top = 10.dp)
+            .size(56.dp),
+        alignment = Alignment.Center,
+        painter = painterResource(id = R.drawable.image_visa_card),
+        contentDescription = null
+    )
+
+                        Column(
+                            modifier = Modifier.padding(
+                                start = 32.dp,
+                                top = 10.dp,
+                                bottom = 5.dp
                             )
+                        ) {
+
+                            Text(
+                                color = colorResource(id = R.color.Gray_G900),
+                                fontWeight = FontWeight.Medium,
+                                fontSize = 20.sp,
+                                text = "hossam Shaban"
+                            )
+                            Text(
+                                color = colorResource(id = R.color.Gray_G700),
+                                fontWeight = FontWeight.Normal,
+                                fontSize = 12.sp,
+                                text = "Visa . Mater Card . 1234"
+                            )
+                            Text(
+                                fontSize = 16.sp,
+                                color = colorResource(id = R.color.Gray_G100),
+                                text = "Today 11:00 - Received"
+                            )
+Spacer(modifier = Modifier.padding(8.dp))
+                            TextFormaterUSA(balance = 100.0,
+                                fontSize = 16, color = colorResource(id = R.color.Beige),
+                                fontWeight = FontWeight.Medium)
                         }
 
+                    Column(modifier = Modifier
+                        .padding(start = 25.dp, top = 8.dp)) {
 
+                        Image(modifier = Modifier
+                            .clickable {  }
+                            .padding(start = 50.dp)
+                            .size(24.dp)
+                            ,painter = painterResource(id = R.drawable.next)
+                            , contentDescription = null)
+
+Spacer(modifier = Modifier.padding(8.dp))
+
+                        Image(modifier = Modifier
+                            .height(19.dp)
+                            .width(71.dp)
+                            ,painter = painterResource(id = R.drawable.successful_transaction)
+                            , contentDescription = null)
                     }
-                }
-
-
-                @Composable
-                fun ListTransaction() {
-                    Card() {
-                        Row {
-
-                            Column {
-
-                            }
-
-                            Column {
-
-                            }
-                        }
                     }
-                }
+            }
+        }
+
+
+@Composable
+fun ListTransactionFaild() {
+    Card(modifier = Modifier
+        .fillMaxWidth()
+        .padding(end = 16.dp, start = 16.dp, top = 16.dp, bottom = 10.dp)
+        .background(Color.White)) {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(end = 16.dp, start = 16.dp, top = 16.dp))
+        {
+
+            Image(
+                modifier = Modifier
+                    .padding(top = 10.dp)
+                    .size(56.dp),
+                alignment = Alignment.Center,
+                painter = painterResource(id = R.drawable.image_banque_card),
+                contentDescription = null
+            )
+
+            Column(
+                modifier = Modifier.padding(
+                    start = 32.dp,
+                    top = 10.dp,
+                    bottom = 5.dp
+                )
+            ) {
+
+                Text(
+                    color = colorResource(id = R.color.Gray_G900),
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 20.sp,
+                    text = "hossam Shaban"
+                )
+                Text(
+                    color = colorResource(id = R.color.Gray_G700),
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 12.sp,
+                    text = "Visa . Mater Card . 1234"
+                )
+                Text(
+                    fontSize = 16.sp,
+                    color = colorResource(id = R.color.Gray_G100),
+                    text = "Today 11:00 - Received"
+                )
+                Spacer(modifier = Modifier.padding(8.dp))
+                TextFormaterUSA(balance = 100.0,
+                    fontSize = 16, color = colorResource(id = R.color.Beige),
+                    fontWeight = FontWeight.Medium)
+            }
+
+            Column(modifier = Modifier
+                .padding(start = 40.dp, top = 8.dp)) {
+
+                Image(modifier = Modifier
+                    .padding(start = 30.dp)
+                    .size(24.dp)
+                    ,painter = painterResource(id = R.drawable.next)
+                    , contentDescription = null)
+
+                Spacer(modifier = Modifier.padding(8.dp))
+
+                Image(modifier = Modifier
+                    .height(19.dp)
+                    .width(80.dp)
+                    ,painter = painterResource(id = R.drawable.field_transaction)
+                    , contentDescription = null)
             }
         }
     }
 }
-@Preview(showBackground = true)
+
+
+
+@Preview(showBackground = true, device = "id:pixel_6a")
 @Composable
-fun TransferScreenPreview() {
-    TransActionScreen(navController = NavController(LocalContext.current))
+fun TransActionScreenPreview() {
+   TransActionScreen(navController = rememberNavController())
 }
