@@ -159,9 +159,11 @@ fun SignUp(innerPadding: PaddingValues, navController: NavController, email: Mut
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
+
             Button(
                 onClick = { if (isPasswordValid) {
-                    navController.navigate("$SIGN_UP_COMPLETE_ROUTE")
+                    val route = "$SIGN_UP_COMPLETE_ROUTE/${name.value}/${email.value}/${password.value}"
+                    navController.navigate(route)
                 } else {
                     showDialog = true
                 }},
