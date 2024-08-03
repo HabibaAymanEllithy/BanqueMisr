@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,22 +22,19 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
-
+import com.example.banquemisr.screens.navigation.AppRoutes.AppNavHost
 
 @Composable
 fun BottomNavigationComponent() {
-
-
-
     val navController = rememberNavController()
-
     val items = listOf(
         Screen.Home,
         Screen.Transfer,
+        Screen.Transaction,
         Screen.Card,
-        Screen.Account,
         Screen.More
     )
+
     // A surface container using the 'background' color from the theme
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -46,33 +44,38 @@ fun BottomNavigationComponent() {
             modifier = Modifier.background(Color.White),
             bottomBar = {
                 Card(modifier = Modifier.height(70.dp)) {
-                    BottomNavigation (modifier = Modifier.height(70.dp),
+                    BottomNavigation(
+                        modifier = Modifier.height(70.dp),
                         backgroundColor = Color.White
-                    ){
-
+                    ) {
                         val navBackStackEntry by navController.currentBackStackEntryAsState()
                         val currentDestination = navBackStackEntry?.destination
 
                         items.forEach { screen ->
+                            val isSelected =
+                                currentDestination?.hierarchy?.any { it.route == screen.route } == true
                             BottomNavigationItem(
                                 icon = {
                                     Icon(
                                         modifier = Modifier.size(20.dp),
-                                        painter = painterResource( id = if (screen.route == currentDestination.toString())
-                                            screen.selected_icon
-                                        else
-                                            screen.unselected_icon),
-                                        tint = if (screen.route == currentDestination.toString()) Color.Blue else Color.Gray,
-
+                                        painter = painterResource(
+                                            id = if (isSelected) screen.selected_icon else screen.unselected_icon
+                                        ),
+                                        tint = if (isSelected) Color.Blue else Color.Gray,
                                         contentDescription = null
                                     )
                                 },
-                                label = { Text(modifier = Modifier.align(Alignment.CenterVertically)
-                                    , fontSize = 12.sp ,text = screen.title) },
-                                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                                label = {
+                                    Text(
+                                        modifier = Modifier.align(Alignment.CenterVertically),
+                                        fontSize = 12.sp,
+                                        text = screen.title,
+                                        color = if (isSelected) Color.Black else Color.Gray
+                                    )
+                                },
+                                selected = isSelected,
                                 onClick = {
                                     navController.navigate(screen.route) {
-
                                         popUpTo(navController.graph.findStartDestination().id) {
                                             saveState = true
                                         }
@@ -84,55 +87,14 @@ fun BottomNavigationComponent() {
                         }
                     }
                 }
-
             }
         ) { innerPadding ->
-            AppNavHost(navController=navController, modifier = Modifier.padding(innerPadding))
+            AppNavHost(modifier = Modifier.padding(innerPadding))
         }
     }
-
-
-
-
-
-
-
-
-//    BottomAppBar (modifier = Modifier
-//        .background(Color.White)){
-//
-//        var selectedItemIndex by rememberSaveable {
-//            mutableStateOf(0)
-//        }
-//
-//       items.forEachIndexed{ index , item ->
-//            val backStackEntry by navController.currentBackStackEntryAsState()
-//            val currentRoute = backStackEntry?.destination?.route
-//
-//            NavigationBarItem(
-//                icon = {
-//                    Icon(modifier = Modifier.size(30.dp),
-//                        painter = painterResource(id = if (selectedItemIndex == index)
-//                            item.selected_icon else item.unselected_icon),
-//                        contentDescription = null
-//                    )
-//                },
-//                label = { Text(text = item.title) },
-//                selected = selectedItemIndex == index,
-//                onClick = {
-//                    selectedItemIndex = index
-//                    navController.navigate(item.route) {
-//                        launchSingleTop = true
-//                        restoreState = true
-//                    }
-//                }
-//            )
-//
-//        }
-//    }
 }
 
-@Preview (showBackground = true)
+@Preview
 @Composable
 fun BottomNavigationComponentPreview() {
     BottomNavigationComponent()

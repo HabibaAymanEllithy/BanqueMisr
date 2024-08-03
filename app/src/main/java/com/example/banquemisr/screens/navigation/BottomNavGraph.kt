@@ -8,41 +8,8 @@ import androidx.navigation.compose.composable
 import com.example.banquemisr.ui.screens.homeScreen.HomeScreen
 import com.example.banquemisr.ui.screens.transferScreen.TransferAmountScreen
 import com.example.banquemisr.R
-import com.example.banquemisr.ui.screens.transferScreen.TransActionScreen
+import com.example.banquemisr.ui.screens.transactionScreen.TransActionScreen
 
-
-@Composable
-fun AppNavHost(navController: NavHostController,modifier: Modifier=Modifier) {
-
-    NavHost(navController = navController, startDestination = Screen.Home.route)
-    {
-        composable(route = Screen.Home.route) {
-            HomeScreen()
-        }
-
-        composable(route = Screen.Transfer.route) {
-            TransferAmountScreen(navController = navController)
-        }
-
-        composable(route = Screen.Card.route) {
-            TransActionScreen(navController = navController)
-        }
-
-        composable(route = Screen.Account.route) {
-            CardsScreen(navController = navController)
-        }
-
-        composable(route = Screen.More.route) {
-            //MenueScreen(navController = navController)
-        }
-
-    }
-}
-
-@Composable
-fun CardsScreen(navController: NavHostController) {
-    TODO("Not yet implemented")
-}
 
 sealed class Screen (
         val route:String
@@ -64,16 +31,16 @@ sealed class Screen (
             selected_icon = R.drawable.bar_s_transfare
         )
 
-        object Card : Screen(
-            route = "card",
-            title = "Card",
+        object Transaction : Screen(
+            route = "transaction",
+            title = "Transaction",
             unselected_icon = R.drawable.bar_transactions,
             selected_icon = R.drawable.bar_s_transactions
         )
 
-        object Account : Screen(
-            route = "account",
-            title = "Account",
+        object Card : Screen(
+            route = "card",
+            title = "Card",
             unselected_icon = R.drawable.bar_cards,
             selected_icon = R.drawable.bar_s_cards
         )
