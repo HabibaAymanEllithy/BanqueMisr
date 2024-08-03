@@ -30,6 +30,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 import com.example.banquemisr.screens.signIn.TextFields
+import com.example.banquemisr.ui.screens.profileScreen.color
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -97,7 +98,7 @@ fun addCardScreen(navController: NavController, modifier: Modifier = Modifier) {
 
 @Composable
 fun addCard(navController: NavController,cardHolder:String,CardNo:String,CVV:String,expiryDate:String,paddingValues: PaddingValues){
-TextFields(string1 = "cardHolder Name", string2 = "Enter cardHolder Name", icon =R.drawable.transparent_icon , state =cardHolder. , keyboard = , isPassword = )
+TextFields(string1 = "cardHolder Name", string2 = "Enter cardHolder Name", icon =R.drawable.transparent_icon , state =cardHolder, keyboard = , isPassword = )
 
 
 }
