@@ -34,6 +34,8 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -47,9 +49,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.models.SignUpViewModel
 import com.example.banquemisr.screens.navigation.AppRoutes.SIGNIN_ROUTE
 
 import java.util.Calendar
@@ -58,9 +62,16 @@ import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
+fun SignUpScreen2(
+    navController: NavController,
+    fullName: String,
+    email: String,
+    password: String,
+    modifier: Modifier = Modifier
+) {
     var country = remember { mutableStateOf<String>("") }
     var mDate = remember { mutableStateOf<String>("") }
+    val viewModel: SignUpViewModel = viewModel()
 
     Scaffold(
 
@@ -88,7 +99,7 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            "",
+                            text = "",
                             fontSize = 20.sp,
                             textAlign = TextAlign.Center,
                             fontWeight = FontWeight.W500
@@ -100,7 +111,7 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
             )
         },
     ) { innerPadding ->
-        SignUp2(innerPadding, navController, country, mDate)
+        SignUp2(innerPadding, navController, country, mDate, viewModel, fullName, email, password)
     }
 }
 
@@ -112,10 +123,15 @@ fun SignUp2(
     navController: NavController,
     country: MutableState<String>,
     mDate: MutableState<String>,
+    viewModel: SignUpViewModel,
+    fullName: String,
+    email: String,
+    password: String,
     modifier: Modifier = Modifier
 ) {
 
     val scrollState = rememberScrollState()
+    val signUpSuccess by viewModel.signUpSuccess.collectAsState()
     var background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
         startY = 2000f,
@@ -167,7 +183,22 @@ fun SignUp2(
             DatePickerButton(mDate)
             Spacer(modifier = Modifier.height(40.dp))
             Button(
-                onClick = {navController.navigate("$SIGNIN_ROUTE")  },
+                onClick = {
+                    viewModel.signUp(
+                        fullName,
+                        email,
+                        "",
+                        "",
+                        password,
+                        "",
+                        "",
+                        country.value,
+                        mDate.value
+                    )
+                    if(signUpSuccess == true)
+                    navController.navigate("$SIGNIN_ROUTE")
+
+                },
                 modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),
@@ -273,10 +304,8 @@ fun DatePickerButton(mDate: MutableState<String>) {
 }
 
 
-
-
 @Preview(device = "id:pixel_6a")
 @Composable
 fun OverAll5() {
-    SignUpScreen2(rememberNavController())
+    SignUpScreen2(rememberNavController(), "malak", ".com", "12345")
 }
