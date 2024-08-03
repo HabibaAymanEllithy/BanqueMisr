@@ -100,16 +100,6 @@ fun addCard(navController: NavController,cardHolder:String,CardNo:String,CVV:Str
 TextFields(string1 = "cardHolder Name", string2 = "Enter cardHolder Name", icon =R.drawable.transparent_icon , state =cardHolder. , keyboard = , isPassword = )
 
 
-
-
-
-
-
-
-
-
-
-
 }
 
 @Preview

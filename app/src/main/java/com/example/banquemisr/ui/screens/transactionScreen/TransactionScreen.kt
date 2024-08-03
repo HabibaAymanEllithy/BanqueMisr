@@ -49,7 +49,7 @@ import com.example.banquemisr.R
 import com.example.banquemisr.screens.functionsusable.TextFormaterUSA
 import com.example.banquemisr.ui.screens.transferScreen.ScrollContent
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransActionScreen(navController: NavController) {
 
