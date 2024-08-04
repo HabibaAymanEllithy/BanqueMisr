@@ -196,10 +196,10 @@ Spacer(modifier = Modifier.padding(12.dp))
 
             Spacer(modifier = Modifier.padding(5.dp))
 
-            TransferInfo(fromName = "hossam"
+            TransferInfo(fullName = "hossam"
                 , fromAccount = "123456"
-                , toName ="mohamed"
-                , toAccount ="123456"
+                , recipientName ="mohamed"
+                , recipientAccount ="123456"
                 , iconResId = R.drawable.icon_banque
                 , iconTransA = R.drawable.icon_correct)
 

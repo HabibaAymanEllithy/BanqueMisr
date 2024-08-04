@@ -1,7 +1,5 @@
 package com.example.banquemisr.ui.screens.transferScreen
 
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -49,7 +47,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
@@ -59,7 +56,12 @@ import com.example.banquemisr.screens.functionsusable.TextFormaterUSA
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransferConfirmationScreen(navController: NavController) {
+fun TransferConfirmationScreen(
+    navController: NavController,
+    amount: Comparable<*>,
+    recipientName: String,
+    recipientAccount: String
+) {
     val background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
         startY = 2000f,
@@ -104,7 +106,9 @@ fun TransferConfirmationScreen(navController: NavController) {
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ) {
-          ConfirmationScreen(navController = navController)
+          ConfirmationScreen(
+              navController = navController,
+              amount = amount, recipientName = recipientName, recipientAccount = recipientAccount)
         }
     }
 }
@@ -112,7 +116,8 @@ fun TransferConfirmationScreen(navController: NavController) {
 
 
 @Composable
-fun ConfirmationScreen(navController: NavController) {
+fun ConfirmationScreen(
+    navController: NavController, amount: Comparable<*>, recipientName: String, recipientAccount: String) {
 val context= LocalContext.current
     Column(
         modifier = Modifier
@@ -188,13 +193,10 @@ Spacer(modifier = Modifier.padding(10.dp))
                 .padding(start = 16.dp, top = 20.dp, end = 8.dp))
         {
 
-//            fontSize = 20.sp
-//            , fontWeight = FontWeight.Bold
-//            ,modifier = Modifier.align(Alignment.CenterHorizontally)
 Row (modifier = Modifier.align(Alignment.CenterHorizontally)){
-    TextFormaterUSA(1000.0 , modifier = Modifier
-        ,fontSize= 20 ,color= colorResource(id =R.color.Total_amount)
-        , fontWeight= FontWeight.Bold )
+    TextFormaterUSA( amount , modifier = Modifier
+        , fontSize = 20 , color = colorResource(id =R.color.Total_amount)
+        , fontWeight = FontWeight.Bold )
 
 }
 
@@ -222,10 +224,10 @@ Spacer(modifier = Modifier.padding(12.dp))
             Divider()
             Spacer(modifier = Modifier.padding(12.dp))
 
-            TransferInfo(fromName = "hossam"
+            TransferInfo(fullName = "hossam"
                 , fromAccount = "123456"
-                , toName ="mohamed"
-                , toAccount ="123456"
+                , recipientName = recipientName
+                , recipientAccount = recipientAccount
                 , iconResId = R.drawable.icon_banque
                 , iconTransA = R.drawable.icon_transfer)
 
@@ -274,17 +276,22 @@ Spacer(modifier = Modifier.padding(16.dp))
 @Preview(showBackground = true)
 @Composable
 fun TransferConfirmationScreenPreview() {
-    TransferConfirmationScreen(navController = rememberNavController())
+    TransferConfirmationScreen(
+        navController = rememberNavController(),
+        amount = 100.0,
+        recipientName = "John Doe",
+        recipientAccount = "123456789"
+    )
 }
 
 
 
 @Composable
 fun TransferInfo(
-    fromName: String,
+    fullName: String,
     fromAccount: String,
-    toName: String,
-    toAccount: String,
+    recipientName: String,
+    recipientAccount: String,
     iconResId: Int,
     iconTransA:Int
 
@@ -341,7 +348,7 @@ fun TransferInfo(
                             color = colorResource(id = R.color.Gray_G900),
                             fontWeight = FontWeight.Bold,
                             fontSize = 20.sp,
-                            text = fromName
+                            text = fullName
                         )
                         Spacer(modifier = Modifier.height(15.dp))
                         Text(
@@ -394,13 +401,13 @@ fun TransferInfo(
                             color = colorResource(id = R.color.Gray_G900),
                             fontWeight = FontWeight.Bold,
                             fontSize = 20.sp,
-                            text = toName
+                            text = recipientName
                         )
                         Spacer(modifier = Modifier.height(15.dp))
                         Text(
                             fontSize = 16.sp,
                             color = colorResource(id = R.color.Gray_G100),
-                            text = "Account $toAccount"
+                            text = "Account $recipientAccount"
                         )
                     }
                 }

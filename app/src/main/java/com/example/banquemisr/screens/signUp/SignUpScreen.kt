@@ -96,8 +96,12 @@ fun SignUpScreen(navController: NavController,modifier: Modifier=Modifier) {
 
 @Composable
 
-fun SignUp(innerPadding: PaddingValues, navController: NavController, email: MutableState<String>,
-           password: MutableState<String>,name: MutableState<String> ,modifier: Modifier = Modifier) {
+fun SignUp(innerPadding: PaddingValues,
+           navController: NavController,
+           email: MutableState<String>,
+           password: MutableState<String>,
+           name: MutableState<String> ,modifier: Modifier = Modifier)
+{
     val scrollState = rememberScrollState()
     var showDialog by remember { mutableStateOf(false) }
     var background = Brush.verticalGradient(
@@ -248,7 +252,6 @@ fun TextFields(string1: String, string2: String, icon: Int, state: MutableState<
                 .padding(horizontal = 32.dp, vertical = 10.dp)
                 .background(color = Color.White, shape = RoundedCornerShape(9.dp)),
             shape = RoundedCornerShape(9.dp)
-
 
         )
     }

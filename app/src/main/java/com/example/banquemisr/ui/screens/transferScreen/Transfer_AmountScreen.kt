@@ -1,6 +1,7 @@
 package com.example.banquemisr.ui.screens.transferScreen
 
 import FavouriteListModalBottomSheetContent
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -8,6 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +18,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,7 +28,6 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ElevatedCard
@@ -43,6 +43,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,7 +54,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.booleanResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -67,11 +68,16 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 import com.example.banquemisr.screens.functionsusable.ExposedDropdownMenuBox
+import com.example.banquemisr.screens.navigation.AppRoutes.SIGN_UP_COMPLETE_ROUTE
+import com.example.banquemisr.screens.navigation.AppRoutes.TRANSFERAMOUNT_ROUTE
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun TransferAmountScreen(navController: NavController) {
 
+    var amount = remember { mutableStateOf("") }
+    var recipientName = remember { mutableStateOf("") }
+    var recipientAccount = remember { mutableStateOf("") }
 
     val background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
@@ -120,19 +126,25 @@ fun TransferAmountScreen(navController: NavController) {
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ) {
-            ScrollContent(navController)
+            ScrollContent(innerPadding,navController,amount,recipientName,recipientAccount)
         }
     }
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun ScrollContent(
+    innerPadding: PaddingValues,
     navController: NavController,
-) {
-    val sheetstate = rememberModalBottomSheetState()
+    amount: MutableState<String>,
+    recipientName: MutableState<String>,
+    recipientAccount: MutableState<String>) {
+
+    var amountEgp by remember { mutableStateOf("") }
+    val context = LocalContext.current
+    var sheetstate = rememberModalBottomSheetState()
     var isSheetOpen by remember { mutableStateOf(false) }
-    var amountState by remember { mutableStateOf("") }
 
     if (isSheetOpen) {
 
@@ -141,7 +153,7 @@ fun ScrollContent(
             sheetState = sheetstate,
             dragHandle = { },
         ) {
-            FavouriteListModalBottomSheetContent(onDismiss = { isSheetOpen = !isSheetOpen })
+            FavouriteListModalBottomSheetContent(token = "token", onDismiss = { isSheetOpen = !isSheetOpen })   ////
         }
     }
     Column(
@@ -236,18 +248,18 @@ fun ScrollContent(
                 Column(modifier = Modifier.padding(start = 8.dp, top = 10.dp)) {
                     Spacer(modifier = Modifier.height(10.dp))
                     Row {
-                    Text(
-                        color = Color.Black,
-                        fontSize = 24.sp,
-                        text = "1 USD ="
-                    )
+                        Text(
+                            color = Color.Black,
+                            fontSize = 24.sp,
+                            text = "1 USD ="
+                        )
 
-                    Text(
-                        color = Color.Black,
-                        fontSize = 24.sp,
-                        text = ""
-                    )
-                }
+                        Text(
+                            color = Color.Black,
+                            fontSize = 24.sp,
+                            text = ""
+                        )
+                    }
 
 
                     Spacer(modifier = Modifier.height(10.dp))
@@ -267,11 +279,11 @@ fun ScrollContent(
                     )
 
                     Row(horizontalArrangement = Arrangement.spacedBy(20.dp)
-                    , modifier = Modifier.padding(end = 5.dp)) {
+                        , modifier = Modifier.padding(end = 5.dp)) {
                         ExposedDropdownMenuBox()
                         OutlinedTextField(
-                            value = amountState,
-                            onValueChange = { amountState = it },
+                            value = amount.value ,
+                            onValueChange = { amount.value = it },
                             modifier = Modifier
                                 .height(60.dp)
                                 .width(200.dp)
@@ -294,7 +306,7 @@ fun ScrollContent(
                     )
 
                     Row(horizontalArrangement = Arrangement.spacedBy(20.dp)
-                    , modifier = Modifier.padding(end = 15.dp)) {
+                        , modifier = Modifier.padding(end = 15.dp)) {
                         ExposedDropdownMenuBox()
                         Box (modifier = Modifier
                             .height(60.dp)
@@ -307,12 +319,12 @@ fun ScrollContent(
                             .padding(top = 0.dp, end = 0.dp)
                         ){
 
-                                    Text(text = ""
-                                        ,fontSize = 16.sp
-                                        , textAlign = TextAlign.Center
-                                        ,modifier = Modifier
-                                            .padding(top = 20.dp, bottom = 16.dp, start = 20.dp)
-                                    )
+                            Text(text = amountEgp
+                                ,fontSize = 16.sp
+                                , textAlign = TextAlign.Center
+                                ,modifier = Modifier
+                                    .padding(top = 20.dp, bottom = 16.dp, start = 20.dp)
+                            )
 
 
 
@@ -362,17 +374,24 @@ fun ScrollContent(
             Spacer(modifier = Modifier.padding(8.dp))
 
 
-            TextFields(string1 = "Recipient Name", string2 = "Enter recipient name")
+            TextFields(string1 = "Recipient Name", string2 = "Enter recipient name",recipientName)
 
 
             Spacer(modifier = Modifier.padding(8.dp))
 
-            TextFields(string1 = "Recipient Account ", string2 = "Enter Recipient Account Number ")
+            TextFields(string1 = "Recipient Account ", string2 = "Enter Recipient Account Number ",recipientAccount)
 
             Spacer(modifier = Modifier.padding(20.dp))
 
             FilledTonalButton(
-                onClick = { },
+                onClick = {
+                if (recipientName.value.isNotEmpty() && recipientAccount.value.isNotEmpty() && amount.value.isNotEmpty()) {
+                    val route =
+                        "$TRANSFERAMOUNT_ROUTE/${amount.value}/${recipientName.value}/${recipientAccount.value}"
+                    navController.navigate(route)
+                }else{
+                    Toast.makeText(context, "Please enter all fields", Toast.LENGTH_SHORT).show()} },
+
                 shape = RoundedCornerShape(10.dp), colors = ButtonDefaults.filledTonalButtonColors(
                     containerColor = colorResource(id = R.color.Beige)
                 ), modifier = Modifier
@@ -423,8 +442,8 @@ fun CircleWithNumWithText(
 
 
 @Composable
-fun TextFields(string1: String, string2: String, modifier: Modifier = Modifier) {
-    var state by remember { mutableStateOf("") }
+fun TextFields(string1: String, string2: String, state: MutableState<String>, modifier: Modifier = Modifier) {
+
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -440,8 +459,8 @@ fun TextFields(string1: String, string2: String, modifier: Modifier = Modifier) 
 
             )
         OutlinedTextField(
-            value = state,
-            onValueChange = { state = it },
+            value = state.value,
+            onValueChange = { state.value = it },
             placeholder = { Text(text = string2, color = Color.Gray) },
 
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),

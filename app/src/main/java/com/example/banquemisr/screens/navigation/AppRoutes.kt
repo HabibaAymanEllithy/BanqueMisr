@@ -79,10 +79,29 @@ object AppRoutes {
             composable(route = TRANSFERAMOUNT_ROUTE) {
                 TransferAmountScreen(navController)
             }
-            composable(route = TRANSFERCONFIRMATION_ROUTE) {
-                 TransferConfirmationScreen(navController = navController)
+
+            composable(route = "$TRANSFERCONFIRMATION_ROUTE  /{amount}/{recipientName}/{recipientAccount}"
+            , arguments =
+                listOf(navArgument("amount"){type = NavType.FloatType}
+                        , navArgument("recipientName"){type=NavType.StringType}
+                        , navArgument("recipientAccount"){type=NavType.StringType})
+            ) {
+                val amount = it.arguments?.getDouble("amount") ?: ""
+                val recipientName = it.arguments?.getString("recipientName") ?: ""
+                val recipientAccount = it.arguments?.getString("recipientAccount") ?: ""
+
+                 TransferConfirmationScreen(navController, amount =amount , recipientName =recipientName, recipientAccount =recipientAccount)
             }
-            composable(route = TRASFERPAYMENT_ROUTE) {
+
+            composable(route = "$TRASFERPAYMENT_ROUTE  /{amount}/{recipientName}/{recipientAccount}"
+            , arguments = listOf(navArgument("amount"){type = NavType.FloatType}
+                    , navArgument("recipientName"){type=NavType.StringType}
+            , navArgument("recipientAccount"){type=NavType.StringType})) {
+
+                val amount = it.arguments?.getDouble("amount") ?: ""
+                val recipientName = it.arguments?.getString("recipientName") ?: ""
+                val recipientAccount = it.arguments?.getString("recipientAccount") ?: ""
+
                  TransferPaymentScreen(navController = navController)
             }
             composable(route = TRANSACTION_ROUTE) {

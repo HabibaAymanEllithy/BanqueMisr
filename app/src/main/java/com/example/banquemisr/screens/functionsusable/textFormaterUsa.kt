@@ -14,7 +14,10 @@ import java.text.NumberFormat
 import java.util.*
 
 @Composable
-fun TextFormaterUSA(balance: Double? , modifier: Modifier= Modifier ,fontSize: Int,color: Color , fontWeight: FontWeight ) {
+fun TextFormaterUSA(
+    balance: Comparable<*>, modifier: Modifier= Modifier,
+    fontSize: Int,
+    color: Color, fontWeight: FontWeight ) {
     val currencyFormatter = NumberFormat.getCurrencyInstance(Locale("en", "US"))
     val formattedBalance = balance.let { currencyFormatter.format(it) } ?: "$ "
 
