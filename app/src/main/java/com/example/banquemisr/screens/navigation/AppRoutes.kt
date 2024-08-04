@@ -13,9 +13,12 @@ import com.example.banquemisr.screens.signUp.SignUpScreen
 import com.example.banquemisr.screens.signUp.SignUpScreen2
 import com.example.banquemisr.screens.splash.SplashScreen
 import com.example.banquemisr.ui.screens.homeScreen.HomeScreen
+import com.example.banquemisr.ui.screens.notification.NotificationScreen
 import com.example.banquemisr.ui.screens.transactionScreen.SuccessfulTransactionScreen
 import com.example.banquemisr.ui.screens.transactionScreen.TransActionScreen
 import com.example.banquemisr.ui.screens.transferScreen.TransferAmountScreen
+import com.example.banquemisr.ui.screens.transferScreen.TransferConfirmationScreen
+import com.example.banquemisr.ui.screens.transferScreen.TransferPaymentScreen
 
 object AppRoutes {
     const val SIGN_UP_ROUTE = "signUp"
@@ -23,12 +26,16 @@ object AppRoutes {
     const val SIGNIN_ROUTE = "signIn"
     const val SPLASH_ROUTE = "splash"
     const val HOME_ROUTE = "home"
-    const val TRANSFER_ROUTE = "transfer"
+    const val TRANSFERAMOUNT_ROUTE = "transferAmount"
+    const val TRANSFERCONFIRMATION_ROUTE = "transferConfirmation"
+    const val TRASFERPAYMENT_ROUTE = "transferPayment"
     const val TRANSACTION_ROUTE = "transaction"
     const val CARD_ROUTE = "card"
     const val MORE_ROUTE = "more"
     const val SUCCESSFUL_TRANSACTION_ROUTE = "successfulTransaction"
-   // const val FIELD_TRANSACTION_ROUTE = "fieldTransaction"
+    const val NOTIFICATION_ROUTE = "notification"
+    const val SUCCESFUL_TRANSACTION_ROUTE = "successfulTransaction"
+
 
     @Composable
 
@@ -69,11 +76,23 @@ object AppRoutes {
             composable(route = HOME_ROUTE) {
                 HomeScreen()
             }
-            composable(route = TRANSFER_ROUTE) {
+            composable(route = TRANSFERAMOUNT_ROUTE) {
                 TransferAmountScreen(navController)
+            }
+            composable(route = TRANSFERCONFIRMATION_ROUTE) {
+                 TransferConfirmationScreen(navController = navController)
+            }
+            composable(route = TRASFERPAYMENT_ROUTE) {
+                 TransferPaymentScreen(navController = navController)
             }
             composable(route = TRANSACTION_ROUTE) {
                 TransActionScreen(navController = navController)
+            }
+            composable(route = NOTIFICATION_ROUTE) {
+                 NotificationScreen(navController = navController)
+            }
+            composable(route = SUCCESFUL_TRANSACTION_ROUTE) {
+                 SuccessfulTransactionScreen(navController = navController)
             }
             composable(route = CARD_ROUTE) {
                 // CardsScreen(navController = navController)

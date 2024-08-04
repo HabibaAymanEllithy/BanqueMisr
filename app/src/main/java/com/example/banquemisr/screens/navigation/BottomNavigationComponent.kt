@@ -28,6 +28,7 @@ import com.example.banquemisr.screens.navigation.AppRoutes.AppNavigation
 @Composable
 fun BottomNavigationComponent() {
     val navController = rememberNavController()
+
     val items = listOf(
         Screen.Home,
         Screen.Transfer,
@@ -50,10 +51,10 @@ fun BottomNavigationComponent() {
                         backgroundColor = Color.White
                     ) {
                         val navBackStackEntry by navController.currentBackStackEntryAsState()
-                        val currentDestination = navBackStackEntry?.destination
+                        var currentDestination = navBackStackEntry?.destination
 
                         items.forEach { screen ->
-                            val isSelected =
+                            var isSelected =
                                 currentDestination?.hierarchy?.any { it.route == screen.route } == true
                             BottomNavigationItem(
                                 icon = {
@@ -62,7 +63,7 @@ fun BottomNavigationComponent() {
                                         painter = painterResource(
                                             id = if (isSelected) screen.selected_icon else screen.unselected_icon
                                         ),
-                                        tint = if (isSelected) Color.Blue else Color.Gray,
+                                        tint = if (isSelected) {Color.Red} else{ Color.Gray} ,
                                         contentDescription = null
                                     )
                                 },
