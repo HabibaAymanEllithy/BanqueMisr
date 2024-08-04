@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 interface SignUpAPICallable {
 
-    @POST("register")
+    @POST("/api/auth/register")
     fun signUp(@Body request: SignUpRequest): Call<SignUpResponse>
 
 }

@@ -154,7 +154,7 @@ fun SignIn(
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
-                onClick = { preferencesHelper.saveCredentials(email.value, password.value) },
+                onClick = { preferencesHelper.saveCredentialsSignIn(email.value, password.value) },
                 modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),

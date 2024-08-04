@@ -55,6 +55,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 import com.example.banquemisr.models.SignUpViewModel
 import com.example.banquemisr.screens.navigation.AppRoutes.SIGNIN_ROUTE
+import com.example.banquemisr.screens.signIn.PreferencesHelper
 
 import java.util.Calendar
 import java.util.Date
@@ -72,6 +73,9 @@ fun SignUpScreen2(
     var country = remember { mutableStateOf<String>("") }
     var mDate = remember { mutableStateOf<String>("") }
     val viewModel: SignUpViewModel = viewModel()
+
+
+
 
     Scaffold(
 
@@ -129,6 +133,12 @@ fun SignUp2(
     password: String,
     modifier: Modifier = Modifier
 ) {
+
+
+
+    val context= LocalContext.current
+    val preferencesHelper = PreferencesHelper(context)
+
 
     val scrollState = rememberScrollState()
     val signUpSuccess by viewModel.signUpSuccess.collectAsState()
@@ -195,6 +205,7 @@ fun SignUp2(
                         country.value,
                         mDate.value
                     )
+                    preferencesHelper.saveCredentialsSignUp(email,password,fullName,country.value,mDate.value)
                     if(signUpSuccess == true)
                     navController.navigate("$SIGNIN_ROUTE")
 
