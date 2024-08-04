@@ -78,5 +78,9 @@ dependencies {
     implementation ("androidx.compose.material:material:1.1.0-beta03")
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
+
+    implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
+
 }
 

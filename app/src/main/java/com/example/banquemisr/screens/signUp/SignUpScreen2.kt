@@ -195,8 +195,8 @@ fun SignUp2(
                         country.value,
                         mDate.value
                     )
-                    if(signUpSuccess == true)
-                    navController.navigate("$SIGNIN_ROUTE")
+                    if (signUpSuccess == true)
+                        navController.navigate("$SIGNIN_ROUTE")
 
                 },
                 modifier
