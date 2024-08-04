@@ -6,6 +6,6 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface BalanceAPICallable {
-    @GET("/api/transaction/balance")
+    @GET("/api/user/cards")
     fun getBalance(@Header("Authorization") token: Int): CurrentBalance
 }

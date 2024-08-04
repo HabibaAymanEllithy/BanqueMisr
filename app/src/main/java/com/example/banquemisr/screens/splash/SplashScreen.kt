@@ -19,7 +19,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.screens.navigation.AppRoutes.HOME_ROUTE
 import com.example.banquemisr.screens.navigation.AppRoutes.SIGN_UP_ROUTE
+import com.example.banquemisr.screens.navigation.Screen
 import kotlinx.coroutines.delay
 
 @Composable
@@ -47,7 +49,7 @@ fun SplashScreen(navController: NavHostController) {
 
     // Navigate to the home screen after a delay
     LaunchedEffect(Unit) {
-        delay(2000) // 3 seconds delay
+       delay(2000) // 3 seconds delay
         navController.navigate("$SIGN_UP_ROUTE")
     }
 }

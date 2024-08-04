@@ -1,5 +1,6 @@
 package com.example.banquemisr.screens.navigation
 
+import HomeScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
@@ -12,7 +13,6 @@ import com.example.banquemisr.screens.signIn.SignInScreen
 import com.example.banquemisr.screens.signUp.SignUpScreen
 import com.example.banquemisr.screens.signUp.SignUpScreen2
 import com.example.banquemisr.screens.splash.SplashScreen
-import com.example.banquemisr.ui.screens.homeScreen.HomeScreen
 import com.example.banquemisr.ui.screens.notification.NotificationScreen
 import com.example.banquemisr.ui.screens.transactionScreen.SuccessfulTransactionScreen
 import com.example.banquemisr.ui.screens.transactionScreen.TransActionScreen
@@ -46,7 +46,6 @@ object AppRoutes {
         NavHost(
             navController = navController,
             startDestination = SPLASH_ROUTE,
-            modifier = modifier
         ) {
             composable(route = SIGN_UP_ROUTE) {
                 SignUpScreen(navController)
@@ -74,7 +73,7 @@ object AppRoutes {
                 SplashScreen(navController)
             }
             composable(route = HOME_ROUTE) {
-                HomeScreen()
+                HomeScreen(navController)
             }
             composable(route = TRANSFERAMOUNT_ROUTE) {
                 TransferAmountScreen(navController)

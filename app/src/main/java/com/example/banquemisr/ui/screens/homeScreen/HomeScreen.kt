@@ -1,16 +1,7 @@
-package com.example.banquemisr.ui.screens.homeScreen
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -35,13 +26,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 import com.example.banquemisr.models.CurantBalanceViewModel
 import com.example.banquemisr.screens.functionsusable.TextFormaterUSA
 
 @Composable
-fun HomeScreen() {
-    val viewModel = CurantBalanceViewModel()  // Ensure ViewModel is correctly initialized
+fun HomeScreen(navController: NavController) {
+    val viewModel = CurantBalanceViewModel()
     val balance by viewModel.balance.collectAsState()
 
     val background = Brush.verticalGradient(
@@ -84,12 +77,12 @@ fun HomeScreen() {
 
             Column(modifier = Modifier.padding(start = 10.dp)) {
                 Text(
-                    text = "Welcome back , ",
+                    text = "Welcome back,",
                     fontSize = 14.sp,
                     color = colorResource(id = R.color.Beige)
                 )
                 Text(
-                    text = "User name",
+                    text = "User name", // This should be dynamic
                     fontSize = 16.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Medium,
@@ -125,7 +118,7 @@ fun HomeScreen() {
                 .padding(start = 16.dp, end = 16.dp, top = 8.dp)
         ) {
             Text(
-                text = "Current Balance ",
+                text = "Current Balance",
                 fontSize = 20.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Normal,
@@ -133,8 +126,10 @@ fun HomeScreen() {
                     .padding(top = 20.dp, bottom = 10.dp, start = 10.dp)
             )
             TextFormaterUSA(
-                balance= balance.toString(), fontSize = 28,
-                color = Color.White, fontWeight = FontWeight.Bold
+                balance = balance.toString(), // Assuming balance is a String
+                fontSize = 28,
+                color = Color.White,
+                fontWeight = FontWeight.Bold
             )
         }
 
@@ -211,6 +206,7 @@ fun HomeScreen() {
             }
         }
 
+        // CardTransactions should ideally get data from ViewModel
         CardTransactions()
     }
 }
@@ -218,7 +214,7 @@ fun HomeScreen() {
 @Preview(showBackground = true, device = "id:pixel_6a")
 @Composable
 fun GreetingPreview() {
-    HomeScreen()
+    HomeScreen(navController = rememberNavController())
 }
 
 @Composable
@@ -249,7 +245,7 @@ fun ImageWithTextHome(modifier: Modifier = Modifier, imageIcon: Int, text: Strin
 
 @Composable
 fun CardTransactions() {
-    var recipintName by remember { mutableStateOf("Name") }
+    var recipientName by remember { mutableStateOf("Name") }
     var balanceTransfer by remember { mutableStateOf("1000") }
 
     Card(
@@ -273,7 +269,7 @@ fun CardTransactions() {
 
             Column(modifier = Modifier.align(Alignment.CenterVertically)) {
                 Text(
-                    text = recipintName,
+                    text = recipientName,
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,
                     color = colorResource(id = R.color.Gray_G900)
@@ -298,10 +294,11 @@ fun CardTransactions() {
                 horizontalArrangement = Arrangement.End
             ) {
                 Text(
+                    text = "+$balanceTransfer",
+                    fontSize = 20.sp,
+                    color = Color.Green,
                     fontWeight = FontWeight.Medium,
-                    fontSize = 16.sp,
-                    color = colorResource(id = R.color.Beige),
-                    text = balanceTransfer
+                    modifier = Modifier.align(Alignment.CenterVertically)
                 )
             }
         }
