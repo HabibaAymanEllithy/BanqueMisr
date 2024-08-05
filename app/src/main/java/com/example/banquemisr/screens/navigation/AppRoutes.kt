@@ -3,7 +3,11 @@
 
 package com.example.bm_app.approutes
 
+
+import DynamicLoadingScreen
+
 import androidx.compose.material3.ExperimentalMaterial3Api
+
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -11,8 +15,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+<<<<<<< HEAD
 import com.example.banquemisr.models.SignUpViewModel
 import com.example.banquemisr.screens.HomeScreen
+=======
+import com.example.banquemisr.screens.addCard.AccountConnectedScreen
+import com.example.banquemisr.screens.addCard.OTPScreen
+import com.example.banquemisr.screens.addCard.SelectCurrencyScreen
+import com.example.banquemisr.screens.addCard.addCardScreen
+
+>>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
 import com.example.banquemisr.screens.signIn.SignInScreen
 import com.example.banquemisr.screens.signUp.SignUpScreen
 import com.example.banquemisr.screens.signUp.SignUpScreen2
@@ -47,12 +59,25 @@ object AppRoutes {
     const val CARD_ROUTE = "card"
     const val MORE_ROUTE = "more"
     const val SUCCESSFUL_TRANSACTION_ROUTE = "successfulTransaction"
+
+    const val ADD_CARD_ROUTE = "addCard"
+    const val ACCOUNT_CONNECTED_ROUTE = "accountConnected"
+    const val CONNECTING_SCREEN_ROUTE = "connectingScreen"
+    const val OTP_ROUTE = "otp"
+    const val SELECT_CURRENCY_ROUTE = "selectCurrency"
+
     const val Profile_Rute = "profile"
     const val Setting_Route = "Setting"
    // const val FIELD_TRANSACTION_ROUTE = "fieldTransaction"
 
+<<<<<<< HEAD
     const val NOTIFICATION_ROUTE = "notification"
     const val SUCCESFUL_TRANSACTION_ROUTE = "successfulTransaction"
+=======
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+>>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
 
 }
 
@@ -82,8 +107,20 @@ fun AppNavHost() {
                 SignUpScreen2(navController,fullName, email, password)
             }
 
-            composable(route = SIGNIN_ROUTE) {
-                SignInScreen(navController)
+            composable(route = ADD_CARD_ROUTE) {
+                addCardScreen(navController =navController )
+            }
+            composable(route = ACCOUNT_CONNECTED_ROUTE) {
+                AccountConnectedScreen(navController)
+            }
+            composable(route = OTP_ROUTE) {
+                OTPScreen(navController)
+            }
+            composable(route = CONNECTING_SCREEN_ROUTE) {
+                DynamicLoadingScreen(navController)
+            }
+            composable(route = SELECT_CURRENCY_ROUTE) {
+               SelectCurrencyScreen(navController)
             }
             composable(route = SPLASH_ROUTE) {
                 SplashScreen(navController)
@@ -91,7 +128,14 @@ fun AppNavHost() {
             composable(route = HOME_ROUTE) {
                 HomeScreen(navController, viewModel = viewModel())
             }
+<<<<<<< HEAD
             composable(route = TRANSFERAMOUNT_ROUTE) {
+=======
+            composable(route = SIGNIN_ROUTE) {
+                SignInScreen(navController = navController)
+            }
+            composable(route = TRANSFER_ROUTE) {
+>>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
                 TransferAmountScreen(navController)
             }
             composable(route = TRANSACTION_ROUTE) {

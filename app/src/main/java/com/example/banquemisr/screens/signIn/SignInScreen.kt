@@ -154,8 +154,12 @@ fun SignIn(
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
+<<<<<<< HEAD
                 onClick = { preferencesHelper.saveCredentials(email.value, password.value)
                           navController.navigate("home")},
+=======
+                onClick = { preferencesHelper.saveCredentialsSignIn(email.value, password.value) },
+>>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
                 modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),
@@ -182,7 +186,7 @@ fun SignIn(
                     fontSize = 16.sp,
                     color = colorResource(id = R.color.Gray_G70)
                 )
-                TextButton(onClick = { preferencesHelper.clearCredentials()
+                TextButton(onClick = { preferencesHelper.clearCredentialsSignIn()
                     navController.navigate("$SIGN_UP_ROUTE") }) {
                     Text(
                         text = "Sign Up",

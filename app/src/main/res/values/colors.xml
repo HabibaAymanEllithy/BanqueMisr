@@ -25,4 +25,6 @@
     <color name="primary_color">#F3E9EB</color>
     <color name="Gray_G700">#3C3A37</color>
     <color name="Gray_G70">#B0AFAE</color>
+    <color name="transRed">#CEA3AC</color>
+
 </resources>
