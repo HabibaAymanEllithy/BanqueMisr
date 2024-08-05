@@ -78,10 +78,12 @@ dependencies {
     implementation ("androidx.compose.material:material:1.1.0-beta03")
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
-<<<<<<< HEAD
-=======
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
->>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
+
+    // OkHttp dependencies
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 }
 

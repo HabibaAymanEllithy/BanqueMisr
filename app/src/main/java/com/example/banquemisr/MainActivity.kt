@@ -10,6 +10,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.banquemisr.ui.theme.BanqueMisrTheme
+import com.example.bm_app.approutes.AppNavHost
 
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BanqueMisrTheme {
 
-                AppNavigation()
+                AppNavHost()
 
             }
         }

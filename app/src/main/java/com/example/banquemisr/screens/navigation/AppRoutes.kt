@@ -15,16 +15,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-<<<<<<< HEAD
 import com.example.banquemisr.models.SignUpViewModel
 import com.example.banquemisr.screens.HomeScreen
-=======
 import com.example.banquemisr.screens.addCard.AccountConnectedScreen
 import com.example.banquemisr.screens.addCard.OTPScreen
 import com.example.banquemisr.screens.addCard.SelectCurrencyScreen
 import com.example.banquemisr.screens.addCard.addCardScreen
-
->>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
 import com.example.banquemisr.screens.signIn.SignInScreen
 import com.example.banquemisr.screens.signUp.SignUpScreen
 import com.example.banquemisr.screens.signUp.SignUpScreen2
@@ -38,10 +34,20 @@ import com.example.banquemisr.ui.screens.transactionScreen.TransActionScreen
 import com.example.banquemisr.ui.screens.transferScreen.TransferAmountScreen
 import com.example.banquemisr.ui.screens.transferScreen.TransferConfirmationScreen
 import com.example.banquemisr.ui.screens.transferScreen.TransferPaymentScreen
+import com.example.bm_app.approutes.AppRoutes.ACCOUNT_CONNECTED_ROUTE
+import com.example.bm_app.approutes.AppRoutes.ADD_CARD_ROUTE
+import com.example.bm_app.approutes.AppRoutes.CARD_ROUTE
+import com.example.bm_app.approutes.AppRoutes.CONNECTING_SCREEN_ROUTE
 import com.example.bm_app.approutes.AppRoutes.HOME_ROUTE
+import com.example.bm_app.approutes.AppRoutes.MORE_ROUTE
+import com.example.bm_app.approutes.AppRoutes.OTP_ROUTE
+import com.example.bm_app.approutes.AppRoutes.Profile_Rute
+import com.example.bm_app.approutes.AppRoutes.SELECT_CURRENCY_ROUTE
 import com.example.bm_app.approutes.AppRoutes.SIGNIN_ROUTE
 import com.example.bm_app.approutes.AppRoutes.SIGN_UP_COMPLETE_ROUTE
 import com.example.bm_app.approutes.AppRoutes.SPLASH_ROUTE
+import com.example.bm_app.approutes.AppRoutes.SUCCESSFUL_TRANSACTION_ROUTE
+import com.example.bm_app.approutes.AppRoutes.Setting_Route
 import com.example.bm_app.approutes.AppRoutes.TRANSACTION_ROUTE
 import com.example.bm_app.approutes.AppRoutes.TRANSFERAMOUNT_ROUTE
 
@@ -70,14 +76,8 @@ object AppRoutes {
     const val Setting_Route = "Setting"
    // const val FIELD_TRANSACTION_ROUTE = "fieldTransaction"
 
-<<<<<<< HEAD
     const val NOTIFICATION_ROUTE = "notification"
     const val SUCCESFUL_TRANSACTION_ROUTE = "successfulTransaction"
-=======
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
->>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
 
 }
 
@@ -128,16 +128,7 @@ fun AppNavHost() {
             composable(route = HOME_ROUTE) {
                 HomeScreen(navController, viewModel = viewModel())
             }
-<<<<<<< HEAD
-            composable(route = TRANSFERAMOUNT_ROUTE) {
-=======
-            composable(route = SIGNIN_ROUTE) {
-                SignInScreen(navController = navController)
-            }
-            composable(route = TRANSFER_ROUTE) {
->>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
-                TransferAmountScreen(navController)
-            }
+            composable(route = TRANSFERAMOUNT_ROUTE) {}
             composable(route = TRANSACTION_ROUTE) {
                 TransActionScreen(navController = navController)
             }
@@ -156,11 +147,6 @@ fun AppNavHost() {
             composable(route = Setting_Route){
                 SettingScreen(navController = navController)
             }
-
-//            composable(route = FIELD_TRANSACTION_ROUTE) {
-//                // FieldTransactionScreen(navController = navController)
-//
-//            }
 
         composable(route = AppRoutes.SIGNIN_ROUTE) { SignInScreen(navController) }
 
@@ -213,143 +199,3 @@ fun AppNavHost() {
 
 
 
-
-
-
-
-
-
-
-
-
-//package com.example.banquemisr.screens.navigation
-//
-//
-//import androidx.compose.runtime.Composable
-//import androidx.compose.ui.Modifier
-//import androidx.navigation.NavType
-//import androidx.navigation.compose.NavHost
-//import androidx.navigation.compose.composable
-//import androidx.navigation.compose.rememberNavController
-//import androidx.navigation.navArgument
-//import com.example.banquemisr.screens.HomeScreen
-//
-//import com.example.banquemisr.screens.signIn.SignInScreen
-//import com.example.banquemisr.screens.signUp.SignUpScreen
-//import com.example.banquemisr.screens.signUp.SignUpScreen2
-//import com.example.banquemisr.screens.splash.SplashScreen
-//import com.example.banquemisr.ui.screens.notification.NotificationScreen
-//import com.example.banquemisr.ui.screens.transactionScreen.SuccessfulTransactionScreen
-//import com.example.banquemisr.ui.screens.transactionScreen.TransActionScreen
-//import com.example.banquemisr.ui.screens.transferScreen.TransferAmountScreen
-//import com.example.banquemisr.ui.screens.transferScreen.TransferConfirmationScreen
-//import com.example.banquemisr.ui.screens.transferScreen.TransferPaymentScreen
-//
-//object AppRoutes {
-//    const val SIGN_UP_ROUTE = "signUp"
-//    const val SIGN_UP_COMPLETE_ROUTE = "SignUpComplete"
-//    const val SIGNIN_ROUTE = "signIn"
-//    const val SPLASH_ROUTE = "splash"
-//    const val HOME_ROUTE = "home"
-//    const val TRANSFERAMOUNT_ROUTE = "transferAmount"
-//    const val TRANSFERCONFIRMATION_ROUTE = "transferConfirmation"
-//    const val TRASFERPAYMENT_ROUTE = "transferPayment"
-//    const val TRANSACTION_ROUTE = "transaction"
-//    const val CARD_ROUTE = "card"
-//    const val MORE_ROUTE = "more"
-//    const val SUCCESSFUL_TRANSACTION_ROUTE = "successfulTransaction"
-//    const val NOTIFICATION_ROUTE = "notification"
-//    const val SUCCESFUL_TRANSACTION_ROUTE = "successfulTransaction"
-//
-//
-//    @Composable
-//
-//    fun AppNavigation(modifier: Modifier = Modifier) {
-//
-//        val navController = rememberNavController()
-//
-//        NavHost(
-//            navController = navController,
-//            startDestination = HOME_ROUTE,
-//        ) {
-//            composable(route = SIGN_UP_ROUTE) {
-//                SignUpScreen(navController)
-//            }
-//
-//            composable(
-//                route = "$SIGN_UP_COMPLETE_ROUTE/{fullName}/{email}/{password}",
-//                arguments = listOf(
-//                    navArgument("fullName") { type = NavType.StringType },
-//                    navArgument("email") { type = NavType.StringType },
-//                    navArgument("password") { type = NavType.StringType }
-//                )
-//            ) {
-//                val fullName = it.arguments?.getString("fullName") ?: ""
-//                val email = it.arguments?.getString("email") ?: ""
-//                val password = it.arguments?.getString("password") ?: ""
-//
-//                SignUpScreen2(navController,fullName, email, password)
-//            }
-//
-//            composable(route = SIGNIN_ROUTE) {
-//                SignInScreen(navController)
-//            }
-//            composable(route = SPLASH_ROUTE) {
-//                SplashScreen(navController)
-//            }
-//            composable(route = HOME_ROUTE) {
-//                HomeScreen(navController)
-//            }
-//            composable(route = TRANSFERAMOUNT_ROUTE) {
-//                TransferAmountScreen(navController)
-//            }
-//
-//            composable(route = "$TRANSFERCONFIRMATION_ROUTE  /{amount}/{recipientName}/{recipientAccount}"
-//            , arguments =
-//                listOf(navArgument("amount"){type = NavType.FloatType}
-//                        , navArgument("recipientName"){type=NavType.StringType}
-//                        , navArgument("recipientAccount"){type=NavType.StringType})
-//            ) {
-//                val amount = it.arguments?.getDouble("amount") ?: ""
-//                val recipientName = it.arguments?.getString("recipientName") ?: ""
-//                val recipientAccount = it.arguments?.getString("recipientAccount") ?: ""
-//
-//                 TransferConfirmationScreen(navController, amount =amount , recipientName =recipientName, recipientAccount =recipientAccount)
-//            }
-//
-//            composable(route = "$TRASFERPAYMENT_ROUTE  /{amount}/{recipientName}/{recipientAccount}"
-//            , arguments = listOf(navArgument("amount"){type = NavType.FloatType}
-//                    , navArgument("recipientName"){type=NavType.StringType}
-//            , navArgument("recipientAccount"){type=NavType.StringType})) {
-//
-//                val amount = it.arguments?.getDouble("amount") ?: ""
-//                val recipientName = it.arguments?.getString("recipientName") ?: ""
-//                val recipientAccount = it.arguments?.getString("recipientAccount") ?: ""
-//
-//                 TransferPaymentScreen(navController = navController)
-//            }
-//            composable(route = TRANSACTION_ROUTE) {
-//                TransActionScreen(navController = navController)
-//            }
-//            composable(route = NOTIFICATION_ROUTE) {
-//                 NotificationScreen(navController = navController)
-//            }
-//            composable(route = SUCCESFUL_TRANSACTION_ROUTE) {
-//                 SuccessfulTransactionScreen(navController = navController)
-//            }
-//            composable(route = CARD_ROUTE) {
-//                // CardsScreen(navController = navController)
-//            }
-//            composable(route = MORE_ROUTE) {
-//                // MenueScreen(navController = navController)
-//            }
-//            composable(route = SUCCESSFUL_TRANSACTION_ROUTE) {
-//                SuccessfulTransactionScreen(navController = navController)
-//            }
-////            composable(route = FIELD_TRANSACTION_ROUTE) {
-////                // FieldTransactionScreen(navController = navController)
-////
-////            }
-//        }
-//    }
-//}
