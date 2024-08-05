@@ -1,5 +1,7 @@
 package com.example.banquemisr.ui.screens.transferScreen
 
+import android.media.session.MediaSession.Token
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -32,6 +34,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -47,6 +53,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.banquemisr.R
+import com.example.banquemisr.models.FavoriteViewModel
 import com.example.banquemisr.screens.functionsusable.TextFormaterEGP
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -100,7 +107,8 @@ fun TransferPaymentScreen(navController: NavController,
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ) {
-            PaymentScreen(navController = navController, amount = amount, recipientName = recipientName, recipientAccount = recipientAccount,amountEgp = amountEgp)
+            PaymentScreen(navController = navController, amount = amount
+                , recipientName = recipientName, recipientAccount = recipientAccount,amountEgp = amountEgp, token = "token")
         }
     }
 }
@@ -108,11 +116,16 @@ fun TransferPaymentScreen(navController: NavController,
 
 
 @Composable
-fun PaymentScreen(navController: NavController,
+fun PaymentScreen(viewModel: FavoriteViewModel
+                  = androidx.lifecycle.viewmodel.compose.viewModel(),token: String
+    ,navController: NavController,
                   amount: Double,
                   recipientName: String,
                   recipientAccount: String
                   ,amountEgp:Double) {
+
+    val context= LocalContext.current
+
 
     Column(
         modifier = Modifier
@@ -263,7 +276,16 @@ Spacer(modifier = Modifier.padding(12.dp))
                         color = colorResource(id = R.color.Beige),
                         shape = RoundedCornerShape(10.dp)
                     )
-                ,onClick = { }) {
+                ,onClick = {
+                    try {
+                        viewModel.addFavorite(token,recipientName,recipientAccount)
+                        Toast.makeText(context, "the added successful", Toast.LENGTH_SHORT).show()
+                        navController.navigate("transferAmount")
+                    }catch (e :Exception){
+                        Toast.makeText(context, "added faild", Toast.LENGTH_SHORT).show()
+                }
+                }
+            ) {
                 Text(color = colorResource(id = R.color.Beige)
                     ,fontSize = 16.sp
                     , text = "Add to Favourite")

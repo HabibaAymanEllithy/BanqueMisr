@@ -25,7 +25,10 @@ import com.example.banquemisr.models.FavoriteViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavouriteListModalBottomSheetContent(viewModel: FavoriteViewModel = viewModel(), token: String, onDismiss: () -> Unit) {
+LaunchedEffect(Unit) {
     viewModel.getFavorites(token)
+}
+
 
     Column(
         modifier = Modifier
@@ -59,20 +62,21 @@ fun FavouriteListModalBottomSheetContent(viewModel: FavoriteViewModel = viewMode
 
         LazyColumn {
             items(viewModel.favoriteList) { favorite ->
-                FavouriteItem(name = favorite.fullName, account = favorite.accountNumber, onDelete = {
-                    viewModel.deleteFavorite(token, favorite.id)
-                })
+                FavouriteItem(name = favorite.fullName, account = favorite.accountNumber,
+//                    onDelete = {
+//                    viewModel.deleteFavorite(token, favorite.id)
+               // }
+             )
             }
         }
 
-        FavouriteItem(name = "hossam", account = "123456") {
-
-        }
+        FavouriteItem(name = "hossam", account = "123456")
+        FavouriteItem(name = "mohamed", account = "23456")
     }
 }
 
 @Composable
-fun FavouriteItem(name: String, account: String, onDelete: () -> Unit) {
+fun FavouriteItem(name: String, account: String) {
     Card(
         modifier = Modifier
             .height(120.dp)
@@ -113,10 +117,6 @@ fun FavouriteItem(name: String, account: String, onDelete: () -> Unit) {
                 Text(color = colorResource(id = R.color.Gray_G900), fontWeight = FontWeight.Medium, fontSize = 16.sp, text = name)
                 Spacer(modifier = Modifier.padding(8.dp))
                 Text(color = colorResource(id = R.color.Gray_G100), fontWeight = FontWeight.Medium, fontSize = 16.sp, text = account)
-            }
-
-            IconButton(onClick = onDelete) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Delete", tint = Color.Red)
             }
         }
     }

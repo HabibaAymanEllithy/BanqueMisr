@@ -14,7 +14,7 @@ interface FavoriteApiService {
     fun getFavorites(@Header("Authorization") token: String): Call<List<Favorite>>
 
     @POST("/api/favorites")
-    fun addFavorite(@Header("Authorization") token: String, @Body request: AddFavoriteRequest): Call<ResponseBody>
+    fun addFavorite(@Header("Authorization") token: String, @Body request: AddFavoriteRequest): Call<Void>
 
     @DELETE("/api/favorites/{favouriteId}")
     fun deleteFavorite(@Header("Authorization") token: String, @Path("favouriteId") id: Int): Call<Void>
