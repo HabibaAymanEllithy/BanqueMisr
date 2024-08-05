@@ -154,13 +154,11 @@ fun SignIn(
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
-<<<<<<< HEAD
+
                 onClick = { preferencesHelper.saveCredentials(email.value, password.value)
                           navController.navigate("home")},
-=======
-                onClick = { preferencesHelper.saveCredentialsSignIn(email.value, password.value) },
->>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
-                modifier
+           //     onClick = { preferencesHelper.saveCredentialsSignIn(email.value, password.value) },
+                modifier=Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),
                 colors = ButtonDefaults.buttonColors(
