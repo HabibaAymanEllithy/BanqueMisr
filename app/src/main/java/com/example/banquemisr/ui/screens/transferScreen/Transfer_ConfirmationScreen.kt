@@ -1,5 +1,6 @@
 package com.example.banquemisr.ui.screens.transferScreen
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -52,6 +53,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 import com.example.banquemisr.screens.functionsusable.TextFormaterEGP
 import com.example.banquemisr.screens.functionsusable.TextFormaterUSA
+import com.example.bm_app.approutes.AppRoutes.TRANSFERAMOUNT_ROUTE
+import com.example.bm_app.approutes.AppRoutes.TRANSFERCONFIRMATION_ROUTE
+import com.example.bm_app.approutes.AppRoutes.TRANSFERPAYMENT_ROUTE
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,6 +65,7 @@ fun TransferConfirmationScreen(
     amount: Comparable<*>,
     recipientName: String,
     recipientAccount: String
+    ,amountEgp:Double
 ) {
     val background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
@@ -108,7 +113,7 @@ fun TransferConfirmationScreen(
         ) {
           ConfirmationScreen(
               navController = navController,
-              amount = amount, recipientName = recipientName, recipientAccount = recipientAccount)
+              amount = amount, recipientName = recipientName, recipientAccount = recipientAccount,amountEgp = amountEgp)
         }
     }
 }
@@ -117,7 +122,10 @@ fun TransferConfirmationScreen(
 
 @Composable
 fun ConfirmationScreen(
-    navController: NavController, amount: Comparable<*>, recipientName: String, recipientAccount: String) {
+    navController: NavController, amount: Comparable<*>,
+    recipientName: String,
+    recipientAccount: String,
+    amountEgp:Double) {
 val context= LocalContext.current
     Column(
         modifier = Modifier
@@ -216,7 +224,7 @@ Spacer(modifier = Modifier.padding(12.dp))
                     , fontSize =16.sp
                 , fontWeight = FontWeight.Medium)
 
-                TextFormaterEGP(20000.0, fontSize = 16,
+                TextFormaterEGP( amountEgp,fontSize = 16,
                     color = colorResource(id = R.color.Gray_G100), fontWeight = FontWeight.Bold)
             }
 Spacer(modifier = Modifier.padding(12.dp))
@@ -234,7 +242,11 @@ Spacer(modifier = Modifier.padding(12.dp))
 Spacer(modifier = Modifier.padding(10.dp))
 
             FilledTonalButton(
-                onClick = { },
+                onClick = {
+                        val route =
+                            "$TRANSFERPAYMENT_ROUTE/${amount}/${recipientName}/${recipientAccount}/${amountEgp}"
+                        navController.navigate(route)
+                          },
                 shape = RoundedCornerShape(10.dp)
                 ,colors = ButtonDefaults.filledTonalButtonColors(
                     containerColor = colorResource(id = R.color.Beige))
@@ -264,7 +276,7 @@ Spacer(modifier = Modifier.padding(16.dp))
                         color = colorResource(id = R.color.Beige),
                         shape = RoundedCornerShape(10.dp)
                     )
-                ,onClick = {}) {
+                ,onClick = { navController.navigate(TRANSFERAMOUNT_ROUTE) }) {
                 Text(color = colorResource(id = R.color.Beige)
                     ,fontSize = 16.sp
                     , text = "Previous")
@@ -281,6 +293,7 @@ fun TransferConfirmationScreenPreview() {
         amount = 100.0,
         recipientName = "John Doe",
         recipientAccount = "123456789"
+        ,amountEgp = 200000.0
     )
 }
 

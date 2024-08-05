@@ -32,7 +32,7 @@ object AppRoutes {
     const val HOME_ROUTE = "home"
     const val TRANSFERAMOUNT_ROUTE = "transferAmount"
     const val TRANSFERCONFIRMATION_ROUTE = "transferConfirmation"
-    const val TRASFERPAYMENT_ROUTE = "transferPayment"
+    const val TRANSFERPAYMENT_ROUTE = "transferPayment"
     const val TRANSACTION_ROUTE = "transaction"
     const val CARD_ROUTE = "card"
     const val MORE_ROUTE = "more"
@@ -72,20 +72,37 @@ fun AppNavHost() {
         composable(route = AppRoutes.HOME_ROUTE) { HomeScreen(navController = navController, viewModel = viewModel()) }
         composable(route = AppRoutes.TRANSFERAMOUNT_ROUTE) { TransferAmountScreen(navController) }
         composable(
-            route = "${AppRoutes.TRANSFERCONFIRMATION_ROUTE}/{amount}/{recipientName}/{recipientAccount}",
+            route = "${AppRoutes.TRANSFERCONFIRMATION_ROUTE}/{amount}/{recipientName}/{recipientAccount}/{amountEgp}",
             arguments = listOf(
                 navArgument("amount") { type = NavType.StringType },
                 navArgument("recipientName") { type = NavType.StringType },
                 navArgument("recipientAccount") { type = NavType.StringType }
+                , navArgument("amountEgp") { type = NavType.StringType }
+
             )
         ) { backStackEntry ->
             val amount = backStackEntry.arguments?.getString("amount") ?: ""
             val recipientName = backStackEntry.arguments?.getString("recipientName") ?: ""
             val recipientAccount = backStackEntry.arguments?.getString("recipientAccount") ?: ""
-            TransferConfirmationScreen(navController, amount.toDouble(), recipientName, recipientAccount)
+            val amountEgp = backStackEntry.arguments?.getString("amountEgp") ?: ""
+            TransferConfirmationScreen(navController, amount.toDouble(), recipientName, recipientAccount,amountEgp.toDouble())
         }
 
-        composable(route = AppRoutes.TRASFERPAYMENT_ROUTE) { TransferPaymentScreen(navController) }
+        composable(
+            route = "${AppRoutes.TRANSFERPAYMENT_ROUTE}/{amount}/{recipientName}/{recipientAccount}/{amountEgp}",
+            arguments = listOf(
+                navArgument("amount") { type = NavType.StringType },
+                navArgument("recipientName") { type = NavType.StringType },
+                navArgument("recipientAccount") { type = NavType.StringType }
+                , navArgument("amountEgp") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val amount = backStackEntry.arguments?.getString("amount") ?: ""
+            val recipientName = backStackEntry.arguments?.getString("recipientName") ?: ""
+            val recipientAccount = backStackEntry.arguments?.getString("recipientAccount") ?: ""
+            val amountEgp = backStackEntry.arguments?.getString("amountEgp") ?: ""
+            TransferPaymentScreen(navController, amount.toDouble(), recipientName, recipientAccount,amountEgp.toDouble())
+        }
         composable(route = AppRoutes.TRANSACTION_ROUTE) { TransActionScreen(navController) }
         composable(route = AppRoutes.NOTIFICATION_ROUTE) { NotificationScreen(navController)
         }

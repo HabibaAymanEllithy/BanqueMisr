@@ -51,7 +51,11 @@ import com.example.banquemisr.screens.functionsusable.TextFormaterEGP
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransferPaymentScreen(navController: NavController) {
+fun TransferPaymentScreen(navController: NavController,
+                          amount: Double,
+                          recipientName: String,
+                          recipientAccount: String
+                              ,amountEgp:Double) {
     val background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
         startY = 2000f,
@@ -96,7 +100,7 @@ fun TransferPaymentScreen(navController: NavController) {
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ) {
-            PaymentScreen(navController = navController)
+            PaymentScreen(navController = navController, amount = amount, recipientName = recipientName, recipientAccount = recipientAccount,amountEgp = amountEgp)
         }
     }
 }
@@ -104,7 +108,11 @@ fun TransferPaymentScreen(navController: NavController) {
 
 
 @Composable
-fun PaymentScreen(navController: NavController) {
+fun PaymentScreen(navController: NavController,
+                  amount: Double,
+                  recipientName: String,
+                  recipientAccount: String
+                  ,amountEgp:Double) {
 
     Column(
         modifier = Modifier
@@ -198,8 +206,8 @@ Spacer(modifier = Modifier.padding(12.dp))
 
             TransferInfo(fullName = "hossam"
                 , fromAccount = "123456"
-                , recipientName ="mohamed"
-                , recipientAccount ="123456"
+                , recipientName = recipientName
+                , recipientAccount = recipientAccount
                 , iconResId = R.drawable.icon_banque
                 , iconTransA = R.drawable.icon_correct)
 
@@ -217,7 +225,7 @@ Spacer(modifier = Modifier.padding(12.dp))
                     , fontSize =16.sp
                     , fontWeight = FontWeight.Medium)
 
-                TextFormaterEGP(20000.0, fontSize = 16,
+                TextFormaterEGP( amountEgp,fontSize = 16,
                     color = colorResource(id = R.color.text_light_Gray)
                     , fontWeight = FontWeight.Bold)
             }
@@ -225,7 +233,7 @@ Spacer(modifier = Modifier.padding(12.dp))
             Spacer(modifier = Modifier.padding(18.dp))
 
             FilledTonalButton(
-                onClick = { },
+                onClick = { navController.navigate("home") },
                 shape = RoundedCornerShape(10.dp)
                 ,colors = ButtonDefaults.filledTonalButtonColors(
                     containerColor = colorResource(id = R.color.Beige))
@@ -268,5 +276,5 @@ Spacer(modifier = Modifier.padding(12.dp))
 @Preview
 @Composable
 fun TransferPaymentScreenPreview() {
-    TransferPaymentScreen(navController = NavController(LocalContext.current))
+    TransferPaymentScreen(navController = NavController(LocalContext.current) , amount = 100.0, recipientName = "John Doe", recipientAccount = "123456789",amountEgp = 200000.0)
 }

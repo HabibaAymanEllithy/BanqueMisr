@@ -78,6 +78,7 @@ fun TransferAmountScreen(navController: NavController) {
     var recipientName = remember { mutableStateOf("") }
     var recipientAccount = remember { mutableStateOf("") }
 
+
     val background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
         startY = 2000f,
@@ -140,10 +141,22 @@ fun ScrollContent(
     recipientName: MutableState<String>,
     recipientAccount: MutableState<String>) {
 
-    var amountEgp by remember { mutableStateOf("") }
     val context = LocalContext.current
     var sheetstate = rememberModalBottomSheetState()
     var isSheetOpen by remember { mutableStateOf(false) }
+
+    var selectedCurrency by remember { mutableStateOf("USD") } // Default currency
+    var amountEgp by remember { mutableStateOf("") }
+
+    val conversionRate = 48.4220 // Example rate for USD to EGP
+
+    fun calculateAmountEgp(amount: String, currency: String): String {
+        val amountValue = amount.toDoubleOrNull() ?: 0.0
+        return when (currency) {
+            "EGP" -> (amountValue * conversionRate).toString()
+            else -> ""
+        }
+    }
 
     if (isSheetOpen) {
 
@@ -251,15 +264,16 @@ fun ScrollContent(
                     Spacer(modifier = Modifier.height(10.dp))
                     Row {
                         Text(
+                            modifier = Modifier.padding(start = 5.dp),
                             color = Color.Black,
-                            fontSize = 24.sp,
+                            fontSize = 16.sp,
                             text = "1 USD ="
                         )
 
                         Text(
                             color = Color.Black,
-                            fontSize = 24.sp,
-                            text = ""
+                            fontSize = 16.sp,
+                            text = "48.4220 EGP"
                         )
                     }
 
@@ -268,7 +282,7 @@ fun ScrollContent(
                     Text(
                         modifier = Modifier.padding(top = 8.dp),
                         color = Color.Gray,
-                        fontSize = 16.sp,
+                        fontSize = 14.sp,
                         text = "Rate guaranteed (2h)"
                     )
                     Spacer(modifier = Modifier.height(10.dp))
@@ -282,10 +296,15 @@ fun ScrollContent(
 
                     Row(horizontalArrangement = Arrangement.spacedBy(20.dp)
                         , modifier = Modifier.padding(end = 5.dp)) {
-                        ExposedDropdownMenuBox()
+
+                        ExposedDropdownMenuBox(onCurrencySelected = { currency ->
+                            selectedCurrency = currency
+                            amountEgp = calculateAmountEgp(amount.value, selectedCurrency)
+                        })
                         OutlinedTextField(
                             value = amount.value ,
-                            onValueChange = { amount.value = it },
+                            onValueChange = { amount.value = it
+                                amountEgp = calculateAmountEgp(it, selectedCurrency)         },
                             modifier = Modifier
                                 .height(60.dp)
                                 .width(200.dp)
@@ -309,7 +328,10 @@ fun ScrollContent(
 
                     Row(horizontalArrangement = Arrangement.spacedBy(20.dp)
                         , modifier = Modifier.padding(end = 15.dp)) {
-                        ExposedDropdownMenuBox()
+                        ExposedDropdownMenuBox(onCurrencySelected = { currency ->
+                            selectedCurrency = currency
+                            amountEgp = calculateAmountEgp(amount.value, selectedCurrency)
+                        })
                         Box (modifier = Modifier
                             .height(60.dp)
                             .width(200.dp)
@@ -325,12 +347,8 @@ fun ScrollContent(
                                 ,fontSize = 16.sp
                                 , textAlign = TextAlign.Center
                                 ,modifier = Modifier
-                                    .padding(top = 20.dp, bottom = 16.dp, start = 20.dp)
+                                    .padding(top = 20.dp, bottom = 16.dp, start = 10.dp)
                             )
-
-
-
-
                         }
 
                     }
@@ -389,7 +407,7 @@ fun ScrollContent(
                 onClick = {
                 if (recipientName.value.isNotEmpty() && recipientAccount.value.isNotEmpty() && amount.value.isNotEmpty()) {
                     val route =
-                        "$TRANSFERCONFIRMATION_ROUTE/${amount.value}/${recipientName.value}/${recipientAccount.value}"
+                        "$TRANSFERCONFIRMATION_ROUTE/${amount.value}/${recipientName.value}/${recipientAccount.value}/${amountEgp}"
                     navController.navigate(route)
                 }else{
                     Toast.makeText(context, "Please enter all fields", Toast.LENGTH_SHORT).show()} },
