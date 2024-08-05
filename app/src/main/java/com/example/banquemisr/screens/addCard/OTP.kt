@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.screens.navigation.AppRoutes.ACCOUNT_CONNECTED_ROUTE
+import com.example.banquemisr.screens.navigation.AppRoutes.ADD_CARD_ROUTE
 import com.example.banquemisr.screens.signIn.PreferencesHelper
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,12 +69,12 @@ fun OTPScreen(navController: NavController, modifier: Modifier = Modifier) {
             )
         }
     ) { innerPadding ->
-        OTPVerificationScreen(innerPadding)
+        OTPVerificationScreen(innerPadding,navController)
     }
 }
 
 @Composable
-fun OTPVerificationScreen(innerPadding: PaddingValues) {
+fun OTPVerificationScreen(innerPadding: PaddingValues,navController: NavController) {
     var otp by remember { mutableStateOf("") }
     val context = LocalContext.current
     val preferencesHelper = PreferencesHelper(context)
@@ -128,7 +130,7 @@ fun OTPVerificationScreen(innerPadding: PaddingValues) {
             }
             Spacer(modifier = Modifier.height(150.dp))
             Button(
-                onClick = { /* Handle OTP verification */ },
+                onClick = { navController.navigate("${ACCOUNT_CONNECTED_ROUTE}")},
                 enabled = otp.length == 6,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(id = R.color.Beige)

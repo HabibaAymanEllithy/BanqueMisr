@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.screens.navigation.AppRoutes.ADD_CARD_ROUTE
+import com.example.banquemisr.screens.navigation.AppRoutes.SIGNIN_ROUTE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -81,7 +83,8 @@ fun SelectCurrencyScreen(navController: NavController, modifier: Modifier = Modi
         TransparentList(
             items = listOf("United States", "United Kingdom", "Egypt"),
             selectedItem = selectedCurrency,
-            innerPadding = innerPadding
+            innerPadding = innerPadding,
+            navController=navController
         )
     }
 }
@@ -91,7 +94,10 @@ fun TransparentList(
     items: List<String>,
     selectedItem: MutableState<String>,
     innerPadding: PaddingValues,
+    navController: NavController,
     modifier: Modifier = Modifier
+
+
 ) {
     var background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
@@ -118,10 +124,12 @@ fun TransparentList(
             }
 
         }
-        Spacer(modifier = Modifier.height(500.dp))
+        Spacer(modifier = Modifier.height(400.dp))
         Button(
-            onClick = {
-            },
+            onClick = {navController.navigate("${ADD_CARD_ROUTE}")}
+
+
+            ,
             modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp)

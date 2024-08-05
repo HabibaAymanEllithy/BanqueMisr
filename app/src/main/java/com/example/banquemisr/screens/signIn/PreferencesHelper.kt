@@ -58,12 +58,12 @@ class PreferencesHelper(context: Context) {
         return sharedPreferencesSignUp.getString("birthDate", null)
     }
 
-    fun clearCredentials() {
+    fun clearCredentialsSignIn() {
         with(sharedPreferencesSignIn.edit()) {
             clear()
             apply()
         }
-        fun clearCredentials() {
+        fun clearCredentialsSignUp() {
             with(sharedPreferencesSignUp.edit()) {
                 clear()
                 apply()

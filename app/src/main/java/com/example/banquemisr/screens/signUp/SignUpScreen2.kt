@@ -38,6 +38,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -56,6 +57,7 @@ import com.example.banquemisr.R
 import com.example.banquemisr.models.SignUpViewModel
 import com.example.banquemisr.screens.navigation.AppRoutes.SIGNIN_ROUTE
 import com.example.banquemisr.screens.signIn.PreferencesHelper
+import kotlinx.coroutines.launch
 
 import java.util.Calendar
 import java.util.Date
@@ -135,8 +137,7 @@ fun SignUp2(
 ) {
 
 
-
-    val context= LocalContext.current
+    val context = LocalContext.current
     val preferencesHelper = PreferencesHelper(context)
 
 
@@ -193,21 +194,31 @@ fun SignUp2(
             DatePickerButton(mDate)
             Spacer(modifier = Modifier.height(40.dp))
             Button(
+
                 onClick = {
                     viewModel.signUp(
                         fullName,
                         email,
-                        "",
-                        "",
+                        "", // Fill in other required fields
+                        "", // Fill in other required fields
                         password,
-                        "",
-                        "",
+                        "", // Fill in other required fields
+                        "", // Fill in other required fields
                         country.value,
                         mDate.value
                     )
-                    preferencesHelper.saveCredentialsSignUp(email,password,fullName,country.value,mDate.value)
-                    if(signUpSuccess == true)
-                    navController.navigate("$SIGNIN_ROUTE")
+
+                    if (signUpSuccess == true) {
+                        preferencesHelper.saveCredentialsSignUp(
+                            email,
+                            password,
+                            fullName,
+                            country.value,
+                            mDate.value
+                        )
+                        preferencesHelper.clearCredentialsSignIn()
+                        navController.navigate("$SIGNIN_ROUTE")
+                    }
 
                 },
                 modifier

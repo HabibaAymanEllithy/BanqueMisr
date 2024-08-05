@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.screens.navigation.AppRoutes.HOME_ROUTE
+import com.example.banquemisr.screens.navigation.AppRoutes.SELECT_CURRENCY_ROUTE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,12 +65,12 @@ fun AccountConnectedScreen(navController: NavController) {
             )
         }
     ) { innerPadding ->
-        AccountConnectedContent(innerPadding)
+        AccountConnectedContent(innerPadding,navController)
     }
 }
 
 @Composable
-fun AccountConnectedContent(innerPadding: PaddingValues) {
+fun AccountConnectedContent(innerPadding: PaddingValues,navController: NavController) {
     var background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
         startY = 2000f,
@@ -109,7 +111,7 @@ fun AccountConnectedContent(innerPadding: PaddingValues) {
         )
         Spacer(modifier = Modifier.height(100.dp))
         Button(
-            onClick = { /* Handle connect another account */ },
+            onClick = { navController.navigate("$SELECT_CURRENCY_ROUTE") },
             colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(id = R.color.Beige) // replace with your color
             ),
@@ -123,7 +125,7 @@ fun AccountConnectedContent(innerPadding: PaddingValues) {
         }
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedButton(
-            onClick = { /* Handle back to home */ },
+            onClick = { navController.navigate("$HOME_ROUTE")},
             border = BorderStroke(1.dp, colorResource(id = R.color.Beige)), // replace with your color
             modifier = Modifier
                 .fillMaxWidth()

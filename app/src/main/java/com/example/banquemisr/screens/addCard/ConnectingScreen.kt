@@ -22,12 +22,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-
+import com.example.banquemisr.screens.navigation.AppRoutes.ADD_CARD_ROUTE
+import com.example.banquemisr.screens.navigation.AppRoutes.OTP_ROUTE
 
 
 @Composable
-fun DynamicLoadingScreen() {
+fun DynamicLoadingScreen(navController: NavController) {
     val progress = remember { mutableStateOf(0f) }
 
     // Simulate loading progress
@@ -36,6 +39,9 @@ fun DynamicLoadingScreen() {
             kotlinx.coroutines.delay(100)
             progress.value += 0.05f
         }
+        else {
+            navController.navigate(OTP_ROUTE) }
+     
     }
 
     var background = Brush.verticalGradient(
@@ -70,7 +76,8 @@ fun DynamicLoadingScreen() {
                     color = Color.Black,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+
 
                 )
             }
@@ -83,11 +90,13 @@ fun DynamicLoadingScreen() {
                 fontWeight = FontWeight.W600
             )
         }
+
     }
+
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewDynamicLoadingScreen() {
-    DynamicLoadingScreen()
+    DynamicLoadingScreen(rememberNavController())
 }

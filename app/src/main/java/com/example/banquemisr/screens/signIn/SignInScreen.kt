@@ -181,7 +181,7 @@ fun SignIn(
                     fontSize = 16.sp,
                     color = colorResource(id = R.color.Gray_G70)
                 )
-                TextButton(onClick = { preferencesHelper.clearCredentials()
+                TextButton(onClick = { preferencesHelper.clearCredentialsSignIn()
                     navController.navigate("$SIGN_UP_ROUTE") }) {
                     Text(
                         text = "Sign Up",
