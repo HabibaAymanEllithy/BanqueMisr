@@ -5,6 +5,7 @@ package com.example.banquemisr.screens.signUp
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -38,6 +39,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -54,7 +56,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 import com.example.banquemisr.models.SignUpViewModel
+<<<<<<< HEAD
+import com.example.bm_app.approutes.AppRoutes.SIGNIN_ROUTE
+=======
 import com.example.banquemisr.screens.navigation.AppRoutes.SIGNIN_ROUTE
+import com.example.banquemisr.screens.signIn.PreferencesHelper
+import kotlinx.coroutines.launch
+>>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
 
 import java.util.Calendar
 import java.util.Date
@@ -72,6 +80,9 @@ fun SignUpScreen2(
     var country = remember { mutableStateOf<String>("") }
     var mDate = remember { mutableStateOf<String>("") }
     val viewModel: SignUpViewModel = viewModel()
+
+
+
 
     Scaffold(
 
@@ -130,6 +141,15 @@ fun SignUp2(
     modifier: Modifier = Modifier
 ) {
 
+<<<<<<< HEAD
+    val context = LocalContext.current
+=======
+
+    val context = LocalContext.current
+    val preferencesHelper = PreferencesHelper(context)
+
+
+>>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
     val scrollState = rememberScrollState()
     val signUpSuccess by viewModel.signUpSuccess.collectAsState()
     var background = Brush.verticalGradient(
@@ -137,6 +157,7 @@ fun SignUp2(
         startY = 2000f,
         endY = 0f
     )
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -183,21 +204,37 @@ fun SignUp2(
             DatePickerButton(mDate)
             Spacer(modifier = Modifier.height(40.dp))
             Button(
+
                 onClick = {
                     viewModel.signUp(
                         fullName,
                         email,
-                        "",
-                        "",
+                        "", // Fill in other required fields
+                        "", // Fill in other required fields
                         password,
-                        "",
-                        "",
+                        "", // Fill in other required fields
+                        "", // Fill in other required fields
                         country.value,
                         mDate.value
                     )
-                    if (signUpSuccess == true)
-                        navController.navigate("$SIGNIN_ROUTE")
 
+
+                    if (signUpSuccess == true) {
+                        preferencesHelper.saveCredentialsSignUp(
+                            email,
+                            password,
+                            fullName,
+                            country.value,
+                            mDate.value
+                        )
+                        preferencesHelper.clearCredentialsSignIn()
+                        navController.navigate("$SIGNIN_ROUTE")
+                    }           
+
+
+                    if(signUpSuccess == true)
+                    navController.navigate("$SIGNIN_ROUTE")
+                    else Toast.makeText(context, "faild", Toast.LENGTH_SHORT).show()
                 },
                 modifier
                     .fillMaxWidth()

@@ -1,12 +1,6 @@
 package com.example.banquemisr.screens.navigation
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import com.example.banquemisr.ui.screens.homeScreen.HomeScreen
-import com.example.banquemisr.ui.screens.transferScreen.TransferAmountScreen
+
 import com.example.banquemisr.R
 import com.example.banquemisr.ui.screens.transactionScreen.TransActionScreen
 

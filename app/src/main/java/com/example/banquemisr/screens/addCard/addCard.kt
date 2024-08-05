@@ -52,6 +52,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.screens.navigation.AppRoutes.ADD_CARD_ROUTE
+import com.example.banquemisr.screens.navigation.AppRoutes.CONNECTING_SCREEN_ROUTE
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -169,8 +171,8 @@ fun addCard(navController: NavController, cardHolder:MutableState<String>, CardN
             TextFieldsNoIconSmall(
                 string1 = "MM/YY",
                 string2 = "MM/YY",
-                state = CardNo,
-                keyboard = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                state = expiryDate,
+                keyboard = KeyboardOptions(keyboardType = KeyboardType.Text),
                 isPassword = false,
                 horizontalPadding = 32,
                 padding = 5
@@ -179,7 +181,7 @@ fun addCard(navController: NavController, cardHolder:MutableState<String>, CardN
                 string1 = "CVV",
                 string2 = "CVV",
                 state = CVV,
-                keyboard = KeyboardOptions(keyboardType = KeyboardType.Text),
+                keyboard = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                 isPassword = false,
                 horizontalPadding = 5,
                 padding = 32
@@ -188,7 +190,7 @@ fun addCard(navController: NavController, cardHolder:MutableState<String>, CardN
         }
         Spacer(modifier = Modifier.height(40.dp))
         Button(
-            onClick = {  },
+            onClick = { navController.navigate("${CONNECTING_SCREEN_ROUTE}") },
             modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp),
@@ -239,7 +241,7 @@ fun TextFieldsNoIcon(string1: String, string2: String, state: MutableState<Strin
             value = state.value,
             onValueChange = { state.value = it },
             placeholder = { Text(text = string2, color = colorResource(id = R.color.Gray_G70)) },
-             visualTransformation = if (isPassword&&!eyeClicked) PasswordVisualTransformation() else VisualTransformation.None,
+            visualTransformation = if (isPassword&&!eyeClicked) PasswordVisualTransformation() else VisualTransformation.None,
 
             keyboardOptions = keyboard,
             modifier = modifier
