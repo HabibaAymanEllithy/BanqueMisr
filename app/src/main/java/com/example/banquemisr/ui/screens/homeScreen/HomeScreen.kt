@@ -1,24 +1,31 @@
+package com.example.banquemisr.screens
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -27,18 +34,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.models.CurantBalanceViewModel
 import com.example.banquemisr.screens.functionsusable.TextFormaterUSA
+import com.example.bm_app.approutes.AppRoutes
+import com.example.bm_app.approutes.AppRoutes.CARD_ROUTE
+import com.example.bm_app.approutes.AppRoutes.TRANSACTION_ROUTE
+import com.example.bm_app.approutes.AppRoutes.TRANSFERAMOUNT_ROUTE
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    val viewModel = CurantBalanceViewModel()
-    val balance by viewModel.balance.collectAsState()
 
-    val background = Brush.verticalGradient(
-        colors = listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
+    var background = Brush.verticalGradient(
+        listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
         startY = 2000f,
         endY = 0f
     )
@@ -48,9 +55,10 @@ fun HomeScreen(navController: NavController) {
             .fillMaxSize()
             .background(background)
     ) {
+        Spacer(modifier = Modifier.padding(top = 30.dp))
         Row(
             modifier = Modifier
-                .padding(top = 40.dp, start = 11.dp, end = 11.dp, bottom = 10.dp)
+                .padding(all = 8.dp)
                 .fillMaxWidth()
         ) {
             Box(
@@ -58,34 +66,36 @@ fun HomeScreen(navController: NavController) {
                     .size(50.dp)
                     .clip(CircleShape)
                     .border(
-                        width = 0.dp,
-                        color = colorResource(id = R.color.Gray_G40),
+                        width = 2.dp,
+                        color = Color.LightGray,
                         shape = CircleShape
                     )
-                    .background(colorResource(id = R.color.Gray_G40)),
+                    .background(Color.LightGray),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.defult_user),
-                    contentDescription = null,
+                    painter = painterResource(id = R.drawable.defult_user), //image user
+                    contentDescription = "",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .size(30.dp)
-                        .align(Alignment.Center)
+                        .clip(CircleShape)
+                        .background(Color.LightGray, CircleShape)
                 )
             }
 
+
             Column(modifier = Modifier.padding(start = 10.dp)) {
                 Text(
-                    text = "Welcome back,",
-                    fontSize = 14.sp,
+                    text = "Welcome back , ",
+                    fontSize = 20.sp,
                     color = colorResource(id = R.color.Beige)
                 )
                 Text(
-                    text = "User name", // This should be dynamic
-                    fontSize = 16.sp,
+                    text = "User name",
+                    fontSize = 25.sp,
                     color = Color.Black,
-                    fontWeight = FontWeight.Medium,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 5.dp)
                 )
             }
@@ -96,11 +106,12 @@ fun HomeScreen(navController: NavController) {
                     .align(Alignment.CenterVertically)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.notifications),
+                    painter = painterResource(id = R.drawable.notifications), // notification image
                     contentDescription = "notifications",
                     modifier = Modifier
-                        .size(45.dp)
-                        .align(Alignment.CenterEnd),
+                        .size(50.dp)
+                        .align(Alignment.CenterEnd)
+                        .clickable { navController.navigate("notification") },
                     contentScale = ContentScale.Crop
                 )
             }
@@ -109,38 +120,33 @@ fun HomeScreen(navController: NavController) {
         ElevatedCard(
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 6.dp
-            ),
-            colors = CardDefaults.elevatedCardColors(
+            ), colors = CardDefaults.elevatedCardColors(
                 containerColor = colorResource(id = R.color.Beige)
-            ),
-            modifier = Modifier
+            ), modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
+                .padding(start = 20.dp, end = 20.dp, top = 8.dp)
         ) {
             Text(
-                text = "Current Balance",
+                text = "Current Balance ",
                 fontSize = 20.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Normal,
                 modifier = Modifier
-                    .padding(top = 20.dp, bottom = 10.dp, start = 10.dp)
+                    .padding(top = 20.dp, bottom = 10.dp, start = 10.dp),
             )
-            TextFormaterUSA(
-                balance = balance.toString(), // Assuming balance is a String
-                fontSize = 28,
-                color = Color.White,
-                fontWeight = FontWeight.Bold
-            )
+            // adding format to the text
+            TextFormaterUSA(balance = 200000000, fontSize = 28
+                , color = Color.White , fontWeight = FontWeight.Bold)
         }
 
-        Card(
-            colors = CardDefaults.elevatedCardColors(
+        ElevatedCard(
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 6.dp
+            ), colors = CardDefaults.elevatedCardColors(
                 containerColor = Color.White
-            ),
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
+            ), modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                .padding(start = 20.dp, end = 20.dp, top = 15.dp)
         ) {
             Text(
                 text = " Services ",
@@ -148,32 +154,47 @@ fun HomeScreen(navController: NavController) {
                 color = Color.Black,
                 fontWeight = FontWeight.Normal,
                 modifier = Modifier
-                    .padding(top = 20.dp, bottom = 10.dp, start = 10.dp)
+                    .padding(top = 20.dp, bottom = 10.dp, start = 10.dp),
             )
 
             Row(
                 modifier = Modifier
                     .padding(start = 30.dp, end = 20.dp, top = 20.dp, bottom = 25.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalArrangement = Arrangement.spacedBy(20.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+
                 ImageWithTextHome(
-                    imageIcon = R.drawable.icon_transfare,
+                    modifier = Modifier
+                        .clickable { navController.navigate("transferAmount") },
+                    imageIcon = R.drawable.icon_transfare,  // image of transfer
                     text = stringResource(id = R.string.str_transfer)
                 )
+
                 ImageWithTextHome(
-                    imageIcon = R.drawable.icon_transactions,
+                    modifier = Modifier
+                        .clickable { navController.navigate("transaction") },
+                    imageIcon = R.drawable.icon_transactions, // image of transaction
                     text = stringResource(id = R.string.str_transaction)
                 )
+
                 ImageWithTextHome(
-                    imageIcon = R.drawable.icon_cards,
+                    modifier = Modifier
+                        .clickable { navController.navigate(AppRoutes.MORE_ROUTE) },
+                    imageIcon = R.drawable.icon_cards, // image of cards
                     text = stringResource(id = R.string.str_cards)
+
                 )
+
                 ImageWithTextHome(
-                    imageIcon = R.drawable.icon_acount,
+                    modifier = Modifier
+                        .clickable { navController.navigate(AppRoutes.CARD_ROUTE) },
+                    imageIcon = R.drawable.icon_acount, // image of account
                     text = stringResource(id = R.string.str_account)
                 )
             }
+
+
         }
 
         Row(
@@ -181,13 +202,12 @@ fun HomeScreen(navController: NavController) {
                 .padding(all = 8.dp)
                 .fillMaxWidth()
         ) {
+
             Text(
                 modifier = Modifier
                     .padding(start = 20.dp)
                     .align(Alignment.CenterVertically),
-                text = "Recent transactions",
-                fontSize = 20.sp,
-                color = Color.Black
+                text = "Recent transactions", fontSize = 20.sp, color = Color.Black
             )
             Row(
                 modifier = Modifier
@@ -206,84 +226,90 @@ fun HomeScreen(navController: NavController) {
             }
         }
 
-        // CardTransactions should ideally get data from ViewModel
         CardTransactions()
+
+
+
     }
 }
 
 @Preview(showBackground = true, device = "id:pixel_6a")
 @Composable
 fun GreetingPreview() {
-    HomeScreen(navController = rememberNavController())
+    HomeScreen(navController = NavController(LocalContext.current))
 }
 
 @Composable
-fun ImageWithTextHome(modifier: Modifier = Modifier, imageIcon: Int, text: String) {
-    Column {
+fun ImageWithTextHome(modifier: Modifier,  imageIcon: Int, text: String) {
+
+    Column() {
         Card(
-            modifier = modifier.size(60.dp),
-            colors = CardDefaults.cardColors(colorResource(id = R.color.Gray_G10))
-        ) {
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .size(60.dp),
+            colors = CardDefaults.cardColors(colorResource(id = R.color.light_gray))
+        )
+        {
             Image(
-                alignment = Alignment.Center,
-                painter = painterResource(id = imageIcon),
+                alignment = Alignment.Center, painter = painterResource(id = imageIcon),
                 contentDescription = "",
                 modifier = Modifier
                     .size(50.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .padding(8.dp)
+                    .padding(top = 10.dp, start = 10.dp)
+
             )
         }
+
+        Spacer(modifier = Modifier.padding(5.dp))
+
         Text(
-            modifier = Modifier
-                .padding(top = 10.dp)
-                .align(Alignment.CenterHorizontally),
-            text = text
-        )
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            text = text)
     }
 }
 
 @Composable
 fun CardTransactions() {
-    var recipientName by remember { mutableStateOf("Name") }
-    var balanceTransfer by remember { mutableStateOf("1000") }
-
     Card(
         colors = CardDefaults.elevatedCardColors(
             containerColor = Color.White
-        ),
-        modifier = Modifier
+        ), modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp)
+            .padding(start = 20.dp, end = 20.dp)
     ) {
         Row {
-            Box(modifier = Modifier.size(100.dp)) {
+            Box(modifier = Modifier.size(80.dp))
+            {
                 Image(
                     modifier = Modifier
-                        .size(180.dp)
-                        .padding(top = 0.dp, bottom = 0.dp),
-                    painter = painterResource(id = R.drawable.icon_vesa),
+                        .fillMaxSize()
+                        .padding(top = 0f.dp, bottom = 0f.dp),
+                    painter = painterResource(id = R.drawable.icon_vesa), // image vesa
                     contentDescription = null
                 )
+
             }
 
             Column(modifier = Modifier.align(Alignment.CenterVertically)) {
                 Text(
-                    text = recipientName,
+                    text = "Name",
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,
-                    color = colorResource(id = R.color.Gray_G900)
+                    color = Color.Black
                 )
                 Text(
                     text = "Visa . Master Card . 12344",
                     fontSize = 12.sp,
                     color = Color.Black,
-                    fontWeight = FontWeight.Normal
+                    fontWeight = FontWeight.Normal,
+                    modifier = Modifier
                 )
+
                 Text(
                     text = "Today 11:00 - Received",
                     fontSize = 12.sp,
-                    color = Color.Gray
+                    color = Color.Gray,
+                    modifier = Modifier
                 )
             }
             Row(
@@ -294,11 +320,8 @@ fun CardTransactions() {
                 horizontalArrangement = Arrangement.End
             ) {
                 Text(
-                    text = "+$balanceTransfer",
-                    fontSize = 20.sp,
-                    color = Color.Green,
-                    fontWeight = FontWeight.Medium,
-                    modifier = Modifier.align(Alignment.CenterVertically)
+                    color = colorResource(id = R.color.Beige), modifier = Modifier
+                        .align(Alignment.Top), text = "$1000"
                 )
             }
         }

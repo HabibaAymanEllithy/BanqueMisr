@@ -68,8 +68,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 import com.example.banquemisr.screens.functionsusable.ExposedDropdownMenuBox
-import com.example.banquemisr.screens.navigation.AppRoutes.SIGN_UP_COMPLETE_ROUTE
-import com.example.banquemisr.screens.navigation.AppRoutes.TRANSFERAMOUNT_ROUTE
+import com.example.bm_app.approutes.AppRoutes.TRANSFERCONFIRMATION_ROUTE
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
@@ -387,7 +386,7 @@ fun ScrollContent(
                 onClick = {
                 if (recipientName.value.isNotEmpty() && recipientAccount.value.isNotEmpty() && amount.value.isNotEmpty()) {
                     val route =
-                        "$TRANSFERAMOUNT_ROUTE/${amount.value}/${recipientName.value}/${recipientAccount.value}"
+                        "$TRANSFERCONFIRMATION_ROUTE/${amount.value}/${recipientName.value}/${recipientAccount.value}"
                     navController.navigate(route)
                 }else{
                     Toast.makeText(context, "Please enter all fields", Toast.LENGTH_SHORT).show()} },

@@ -52,9 +52,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.screens.navigation.AppRoutes.SIGNIN_ROUTE
-
-import com.example.banquemisr.screens.navigation.AppRoutes.SIGN_UP_COMPLETE_ROUTE
+import com.example.bm_app.approutes.AppRoutes.SIGNIN_ROUTE
+import com.example.bm_app.approutes.AppRoutes.SIGN_UP_COMPLETE_ROUTE
 
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -19,9 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.screens.navigation.AppRoutes.HOME_ROUTE
-import com.example.banquemisr.screens.navigation.AppRoutes.SIGN_UP_ROUTE
-import com.example.banquemisr.screens.navigation.Screen
+import com.example.bm_app.approutes.AppRoutes.SIGN_UP_ROUTE
 import kotlinx.coroutines.delay
 
 @Composable

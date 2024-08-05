@@ -55,7 +55,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 import com.example.banquemisr.models.SignUpViewModel
-import com.example.banquemisr.screens.navigation.AppRoutes.SIGNIN_ROUTE
+import com.example.bm_app.approutes.AppRoutes.SIGNIN_ROUTE
 
 import java.util.Calendar
 import java.util.Date
