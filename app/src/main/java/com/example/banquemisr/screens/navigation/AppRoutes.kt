@@ -1,6 +1,10 @@
 package com.example.banquemisr.screens.navigation
 
+
+import DynamicLoadingScreen
+
 import androidx.compose.material3.ExperimentalMaterial3Api
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
@@ -8,6 +12,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.banquemisr.screens.addCard.AccountConnectedScreen
+import com.example.banquemisr.screens.addCard.OTPScreen
+import com.example.banquemisr.screens.addCard.SelectCurrencyScreen
+import com.example.banquemisr.screens.addCard.addCardScreen
 
 import com.example.banquemisr.screens.signIn.SignInScreen
 import com.example.banquemisr.screens.signUp.SignUpScreen
@@ -32,9 +40,17 @@ object AppRoutes {
     const val CARD_ROUTE = "card"
     const val MORE_ROUTE = "more"
     const val SUCCESSFUL_TRANSACTION_ROUTE = "successfulTransaction"
+
+    const val ADD_CARD_ROUTE = "addCard"
+    const val ACCOUNT_CONNECTED_ROUTE = "accountConnected"
+    const val CONNECTING_SCREEN_ROUTE = "connectingScreen"
+    const val OTP_ROUTE = "otp"
+    const val SELECT_CURRENCY_ROUTE = "selectCurrency"
+
     const val Profile_Rute = "profile"
     const val Setting_Route = "Setting"
    // const val FIELD_TRANSACTION_ROUTE = "fieldTransaction"
+
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -67,14 +83,29 @@ object AppRoutes {
                 SignUpScreen2(navController,fullName, email, password)
             }
 
-            composable(route = SIGNIN_ROUTE) {
-                SignInScreen(navController)
+            composable(route = ADD_CARD_ROUTE) {
+                addCardScreen(navController =navController )
+            }
+            composable(route = ACCOUNT_CONNECTED_ROUTE) {
+                AccountConnectedScreen(navController)
+            }
+            composable(route = OTP_ROUTE) {
+                OTPScreen(navController)
+            }
+            composable(route = CONNECTING_SCREEN_ROUTE) {
+                DynamicLoadingScreen(navController)
+            }
+            composable(route = SELECT_CURRENCY_ROUTE) {
+               SelectCurrencyScreen(navController)
             }
             composable(route = SPLASH_ROUTE) {
                 SplashScreen(navController)
             }
             composable(route = HOME_ROUTE) {
                 HomeScreen()
+            }
+            composable(route = SIGNIN_ROUTE) {
+                SignInScreen(navController = navController)
             }
             composable(route = TRANSFER_ROUTE) {
                 TransferAmountScreen(navController)
