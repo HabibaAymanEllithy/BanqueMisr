@@ -145,16 +145,21 @@ fun HomeScreen(navController: NavController ,viewModel: CurantBalanceViewModel) 
             // adding format to the text
             if (balance != null) {
                 TextFormaterUSA(
-                    balance =balance  , fontSize = 28, color = Color.White, fontWeight = FontWeight.Bold
+                    balance = balance,
+                    fontSize = 28,
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold
                 )
-            }else{Text(
-                text = "Loading...",
-                fontSize = 28.sp,
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 20.dp, bottom = 10.dp, start = 10.dp)
-            )}
+            } else {
+                Text(
+                    text = "Loading...",
+                    fontSize = 28.sp,
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 20.dp, bottom = 10.dp, start = 10.dp)
+                )
             }
+        }
 
         ElevatedCard(
             elevation = CardDefaults.cardElevation(
@@ -165,54 +170,149 @@ fun HomeScreen(navController: NavController ,viewModel: CurantBalanceViewModel) 
                 .fillMaxWidth()
                 .padding(start = 20.dp, end = 20.dp, top = 15.dp)
         ) {
+            Column(modifier = Modifier.fillMaxWidth()
+            , horizontalAlignment = Alignment.CenterHorizontally
+            , verticalArrangement = Arrangement.Center) {
+
             Text(
                 text = " Services ",
                 fontSize = 20.sp,
                 color = Color.Black,
                 fontWeight = FontWeight.Normal,
                 modifier = Modifier
+                    .align(Alignment.Start)
                     .padding(top = 20.dp, bottom = 10.dp, start = 10.dp),
             )
 
             Row(
                 modifier = Modifier
-                    .padding(start = 30.dp, end = 20.dp, top = 20.dp, bottom = 25.dp),
-                horizontalArrangement = Arrangement.spacedBy(20.dp),
+                    .padding(start = 15.dp, end = 8.dp, top = 20.dp, bottom = 25.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
-                ImageWithTextHome(
-                    modifier = Modifier
-                        .clickable { navController.navigate("transferAmount") },
-                    imageIcon = R.drawable.icon_transfare,  // image of transfer
-                    text = stringResource(id = R.string.str_transfer)
-                )
+                Column()
+                {
+                    Card(
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .size(60.dp)
+                            .clickable { navController.navigate("transferAmount") },
+                        colors = CardDefaults.cardColors(colorResource(id = R.color.light_gray))
+                    )
+                    {
+                        Image(
+                            alignment = Alignment.Center,
+                            painter = painterResource(id = R.drawable.icon_transfare),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(50.dp)
+                                .padding(top = 10.dp, start = 10.dp)
 
-                ImageWithTextHome(
-                    modifier = Modifier
-                        .clickable { navController.navigate("transaction") },
-                    imageIcon = R.drawable.icon_transactions, // image of transaction
-                    text = stringResource(id = R.string.str_transaction)
-                )
+                        )
+                    }
 
-                ImageWithTextHome(
-                    modifier = Modifier
-                        .clickable { navController.navigate(AppRoutes.MORE_ROUTE) },
-                    imageIcon = R.drawable.icon_cards, // image of cards
-                    text = stringResource(id = R.string.str_cards)
+                    Spacer(modifier = Modifier.padding(5.dp))
 
-                )
+                    Text(
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
+                        text = "Transfer"
+                    )
+                }
 
-                ImageWithTextHome(
-                    modifier = Modifier
-                        .clickable { navController.navigate(AppRoutes.CARD_ROUTE) },
-                    imageIcon = R.drawable.icon_acount, // image of account
-                    text = stringResource(id = R.string.str_account)
-                )
+                Column()
+                {
+                    Card(
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .size(60.dp)
+                            .clickable { navController.navigate("transaction") },
+                        colors = CardDefaults.cardColors(colorResource(id = R.color.light_gray))
+                    )
+                    {
+                        Image(
+                            alignment = Alignment.Center,
+                            painter = painterResource(id = R.drawable.icon_transactions),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(50.dp)
+                                .padding(top = 10.dp, start = 10.dp)
+
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.padding(5.dp))
+
+                    Text(
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
+                        text = "TransActions"
+                    )
+                }
+
+                Column()
+                {
+                    Card(
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .size(60.dp)
+                            .clickable { navController.navigate("card") },
+                        colors = CardDefaults.cardColors(colorResource(id = R.color.light_gray))
+                    )
+                    {
+                        Image(
+                            alignment = Alignment.Center,
+                            painter = painterResource(id = R.drawable.icon_cards),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(50.dp)
+                                .padding(top = 10.dp, start = 10.dp)
+
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.padding(5.dp))
+
+                    Text(
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
+                        text = "Cards"
+                    )
+                }
+
+                Column()
+                {
+                    Card(
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .size(60.dp)
+                            .padding(start = 1.dp)
+                            .clickable { navController.navigate("more") },
+                        colors = CardDefaults.cardColors(colorResource(id = R.color.light_gray))
+                    )
+                    {
+                        Image(
+                            alignment = Alignment.Center,
+                            painter = painterResource(id = R.drawable.icon_acount),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .size(50.dp)
+                                .padding(top = 10.dp, start = 8.dp)
+
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.padding(5.dp))
+
+                    Text(
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
+                        text = "Account"
+                    )
+                }
             }
 
+            }
 
         }
+
 
         Row(
             modifier = Modifier
@@ -245,10 +345,9 @@ fun HomeScreen(navController: NavController ,viewModel: CurantBalanceViewModel) 
 
         CardTransactions()
 
-
-
     }
-}
+    }
+
 
 @Preview(showBackground = true, device = "id:pixel_6a")
 @Composable
@@ -257,13 +356,14 @@ fun GreetingPreview() {
 }
 
 @Composable
-fun ImageWithTextHome(modifier: Modifier,  imageIcon: Int, text: String) {
+fun ImageWithTextHome(modifier: Modifier, clickable: () -> Unit, imageIcon: Int, text: String) {
 
     Column() {
         Card(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .size(60.dp),
+                .size(60.dp)
+                .clickable { clickable },
             colors = CardDefaults.cardColors(colorResource(id = R.color.light_gray))
         )
         {

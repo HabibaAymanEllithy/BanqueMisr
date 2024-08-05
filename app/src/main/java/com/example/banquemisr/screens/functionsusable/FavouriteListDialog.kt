@@ -64,6 +64,10 @@ fun FavouriteListModalBottomSheetContent(viewModel: FavoriteViewModel = viewMode
                 })
             }
         }
+
+        FavouriteItem(name = "hossam", account = "123456") {
+
+        }
     }
 }
 
