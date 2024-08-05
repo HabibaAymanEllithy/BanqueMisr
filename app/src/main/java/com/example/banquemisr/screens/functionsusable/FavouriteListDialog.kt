@@ -1,6 +1,8 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -16,12 +18,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.banquemisr.R
-import kotlinx.coroutines.launch
+import com.example.banquemisr.models.FavoriteViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavouriteListModalBottomSheetContent(onDismiss: () -> Unit) {
+fun FavouriteListModalBottomSheetContent(viewModel: FavoriteViewModel = viewModel(), token: String, onDismiss: () -> Unit) {
+LaunchedEffect(Unit) {
+    viewModel.getFavorites(token)
+}
+
+
     Column(
         modifier = Modifier
             .background(Color.White)
@@ -51,9 +59,19 @@ fun FavouriteListModalBottomSheetContent(onDismiss: () -> Unit) {
                 color = colorResource(id = R.color.Beige)
             )
         }
-        FavouriteItem(name = "Asmaa Dosuky", account = "Account xxxx7890")
-        FavouriteItem(name = "Asmaa Dosuky", account = "Account xxxx7890")
-        FavouriteItem(name = "Asmaa Dosuky", account = "Account xxxx7890")
+
+        LazyColumn {
+            items(viewModel.favoriteList) { favorite ->
+                FavouriteItem(name = favorite.fullName, account = favorite.accountNumber,
+//                    onDelete = {
+//                    viewModel.deleteFavorite(token, favorite.id)
+               // }
+             )
+            }
+        }
+
+        FavouriteItem(name = "hossam", account = "123456")
+        FavouriteItem(name = "mohamed", account = "23456")
     }
 }
 
@@ -66,9 +84,10 @@ fun FavouriteItem(name: String, account: String) {
             .fillMaxWidth()
             .padding(8.dp)
     ) {
-        Row(modifier = Modifier
-            .padding(bottom = 8.dp)
-            .fillMaxSize(),
+        Row(
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+                .fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
@@ -95,14 +114,9 @@ fun FavouriteItem(name: String, account: String) {
                     .wrapContentSize()
                     .padding(top = 18.dp)
             ) {
-                Text(  color = colorResource(id = R.color.Gray_G900)
-                    , fontWeight = FontWeight.Medium
-                    , fontSize = 16.sp
-                    , text =  name)
+                Text(color = colorResource(id = R.color.Gray_G900), fontWeight = FontWeight.Medium, fontSize = 16.sp, text = name)
                 Spacer(modifier = Modifier.padding(8.dp))
-                Text(modifier = Modifier,color = colorResource(id = R.color.Gray_G100)
-                    , fontWeight = FontWeight.Medium
-                    , fontSize = 16.sp, text = account)
+                Text(color = colorResource(id = R.color.Gray_G100), fontWeight = FontWeight.Medium, fontSize = 16.sp, text = account)
             }
         }
     }
@@ -111,5 +125,5 @@ fun FavouriteItem(name: String, account: String) {
 @Preview
 @Composable
 fun MainScreenPreview() {
-    FavouriteListModalBottomSheetContent(onDismiss = {})
+    FavouriteListModalBottomSheetContent(onDismiss = {}, token = "sample_token")
 }

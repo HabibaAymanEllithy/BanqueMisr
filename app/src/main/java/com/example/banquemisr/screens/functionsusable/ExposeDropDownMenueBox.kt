@@ -32,15 +32,15 @@ import androidx.compose.ui.unit.sp
 import com.example.banquemisr.R
 
 
-data class ImageWithText(val painter: Painter, val text: String)
+data class ImageWithText(var painter: Painter, var text: String)
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExposedDropdownMenuBox() {
+fun ExposedDropdownMenuBox(onCurrencySelected: (String) -> Unit) {
 
 
-    val country = listOf(
+    var country = listOf(
         ImageWithText(painter = painterResource(id = R.drawable.unitedstates_image), text = "USD"),
         ImageWithText(painter = painterResource(id = R.drawable.egypt_image), text = "EGP")
     )
@@ -101,6 +101,7 @@ fun ExposedDropdownMenuBox() {
                         onClick = {
                             selectedItem = item
                             expanded = false
+                            onCurrencySelected(item.text)
                         }
                     )
                 }
@@ -112,7 +113,7 @@ fun ExposedDropdownMenuBox() {
 @Preview
 @Composable
 fun PreviewExposedDropdownMenuBox() {
-    ExposedDropdownMenuBox()
+    ExposedDropdownMenuBox(onCurrencySelected = {})
 }
 
 @Composable

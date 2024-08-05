@@ -5,6 +5,7 @@ package com.example.banquemisr.screens.signUp
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -54,7 +55,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 import com.example.banquemisr.models.SignUpViewModel
-import com.example.banquemisr.screens.navigation.AppRoutes.SIGNIN_ROUTE
+import com.example.bm_app.approutes.AppRoutes.SIGNIN_ROUTE
 
 import java.util.Calendar
 import java.util.Date
@@ -130,6 +131,7 @@ fun SignUp2(
     modifier: Modifier = Modifier
 ) {
 
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
     val signUpSuccess by viewModel.signUpSuccess.collectAsState()
     var background = Brush.verticalGradient(
@@ -137,6 +139,7 @@ fun SignUp2(
         startY = 2000f,
         endY = 0f
     )
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -198,6 +201,9 @@ fun SignUp2(
                     if (signUpSuccess == true)
                         navController.navigate("$SIGNIN_ROUTE")
 
+                    if(signUpSuccess == true)
+                    navController.navigate("$SIGNIN_ROUTE")
+                    else Toast.makeText(context, "faild", Toast.LENGTH_SHORT).show()
                 },
                 modifier
                     .fillMaxWidth()

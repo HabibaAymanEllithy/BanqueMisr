@@ -1,13 +1,13 @@
 package com.example.banquemisr.ui.screens.transferScreen
 
+import com.example.banquemisr.constants.Constants.AMOUNT_EGP
 import java.net.URL
 
 data class TransferAmount(
-    val amountUSD: String,
-    val usdURL: URL,
-    val amountEGP: String,
-    val egpURL: URL,
-    val recipientName: String,
-    val recipientAccount: String,
-    val currency: String = "USD" // Default currency
+    val usdBalance: Double,
+    val transferAmountUSD: Double,
+    val transferAmountEGP: Double,
+    val toName: String,
+    val toAccount: Int,
+    val currency: String
 )

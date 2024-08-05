@@ -3,7 +3,6 @@ package com.example.banquemisr.screens.navigation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -23,11 +22,11 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.example.banquemisr.screens.navigation.AppRoutes.AppNavigation
 
 @Composable
 fun BottomNavigationComponent() {
     val navController = rememberNavController()
+
     val items = listOf(
         Screen.Home,
         Screen.Transfer,
@@ -38,11 +37,9 @@ fun BottomNavigationComponent() {
 
     // A surface container using the 'background' color from the theme
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color.White
+
     ) {
         Scaffold(
-            modifier = Modifier.background(Color.White),
             bottomBar = {
                 Card(modifier = Modifier.height(70.dp)) {
                     BottomNavigation(
@@ -50,10 +47,10 @@ fun BottomNavigationComponent() {
                         backgroundColor = Color.White
                     ) {
                         val navBackStackEntry by navController.currentBackStackEntryAsState()
-                        val currentDestination = navBackStackEntry?.destination
+                        var currentDestination = navBackStackEntry?.destination
 
                         items.forEach { screen ->
-                            val isSelected =
+                            var isSelected =
                                 currentDestination?.hierarchy?.any { it.route == screen.route } == true
                             BottomNavigationItem(
                                 icon = {
@@ -62,18 +59,19 @@ fun BottomNavigationComponent() {
                                         painter = painterResource(
                                             id = if (isSelected) screen.selected_icon else screen.unselected_icon
                                         ),
-                                        tint = if (isSelected) Color.Blue else Color.Gray,
+                                        tint = if (isSelected) {Color.Red} else{ Color.Gray} ,
                                         contentDescription = null
                                     )
                                 },
                                 label = {
                                     Text(
                                         modifier = Modifier.align(Alignment.CenterVertically),
-                                        fontSize = 12.sp,
+                                        fontSize = 10.sp,
                                         text = screen.title,
                                         color = if (isSelected) Color.Black else Color.Gray
                                     )
                                 },
+
                                 selected = isSelected,
                                 onClick = {
                                     navController.navigate(screen.route) {
@@ -90,7 +88,7 @@ fun BottomNavigationComponent() {
                 }
             }
         ) { _ ->
-            AppNavigation()
+
         }
     }
 }

@@ -3,7 +3,6 @@ package com.example.banquemisr.screens.signIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.banquemisr.screens.navigation.AppRoutes.SIGN_UP_ROUTE
 
 
 import androidx.compose.foundation.background
@@ -59,6 +58,7 @@ import androidx.compose.ui.unit.sp
 
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.bm_app.approutes.AppRoutes.SIGN_UP_ROUTE
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -154,7 +154,8 @@ fun SignIn(
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
-                onClick = { preferencesHelper.saveCredentials(email.value, password.value) },
+                onClick = { preferencesHelper.saveCredentials(email.value, password.value)
+                          navController.navigate("home")},
                 modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),

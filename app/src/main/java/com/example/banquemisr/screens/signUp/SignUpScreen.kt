@@ -52,9 +52,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.screens.navigation.AppRoutes.SIGNIN_ROUTE
-
-import com.example.banquemisr.screens.navigation.AppRoutes.SIGN_UP_COMPLETE_ROUTE
+import com.example.bm_app.approutes.AppRoutes.SIGNIN_ROUTE
+import com.example.bm_app.approutes.AppRoutes.SIGN_UP_COMPLETE_ROUTE
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -96,8 +95,12 @@ fun SignUpScreen(navController: NavController,modifier: Modifier=Modifier) {
 
 @Composable
 
-fun SignUp(innerPadding: PaddingValues, navController: NavController, email: MutableState<String>,
-           password: MutableState<String>,name: MutableState<String> ,modifier: Modifier = Modifier) {
+fun SignUp(innerPadding: PaddingValues,
+           navController: NavController,
+           email: MutableState<String>,
+           password: MutableState<String>,
+           name: MutableState<String> ,modifier: Modifier = Modifier)
+{
     val scrollState = rememberScrollState()
     var showDialog by remember { mutableStateOf(false) }
     var background = Brush.verticalGradient(
@@ -248,7 +251,6 @@ fun TextFields(string1: String, string2: String, icon: Int, state: MutableState<
                 .padding(horizontal = 32.dp, vertical = 10.dp)
                 .background(color = Color.White, shape = RoundedCornerShape(9.dp)),
             shape = RoundedCornerShape(9.dp)
-
 
         )
     }
