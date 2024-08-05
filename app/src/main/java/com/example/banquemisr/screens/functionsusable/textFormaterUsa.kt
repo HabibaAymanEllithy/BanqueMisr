@@ -15,7 +15,8 @@ import java.util.*
 
 @Composable
 fun TextFormaterUSA(
-    balance: Comparable<*>, modifier: Modifier= Modifier,
+    balance: Comparable<*>
+    , modifier: Modifier= Modifier,
     fontSize: Int,
     color: Color, fontWeight: FontWeight ) {
     val currencyFormatter = NumberFormat.getCurrencyInstance(Locale("en", "US"))

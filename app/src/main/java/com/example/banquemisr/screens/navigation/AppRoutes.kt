@@ -69,7 +69,7 @@ fun AppNavHost() {
 
         composable(route = AppRoutes.SIGNIN_ROUTE) { SignInScreen(navController) }
 
-        composable(route = AppRoutes.HOME_ROUTE) { HomeScreen(navController = navController) }
+        composable(route = AppRoutes.HOME_ROUTE) { HomeScreen(navController = navController, viewModel = viewModel()) }
         composable(route = AppRoutes.TRANSFERAMOUNT_ROUTE) { TransferAmountScreen(navController) }
         composable(
             route = "${AppRoutes.TRANSFERCONFIRMATION_ROUTE}/{amount}/{recipientName}/{recipientAccount}",

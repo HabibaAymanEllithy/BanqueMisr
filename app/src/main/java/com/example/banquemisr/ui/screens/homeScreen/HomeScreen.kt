@@ -19,6 +19,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,14 +37,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.banquemisr.R
+import com.example.banquemisr.models.CurantBalanceViewModel
 import com.example.banquemisr.screens.functionsusable.TextFormaterUSA
 import com.example.bm_app.approutes.AppRoutes
-import com.example.bm_app.approutes.AppRoutes.CARD_ROUTE
-import com.example.bm_app.approutes.AppRoutes.TRANSACTION_ROUTE
-import com.example.bm_app.approutes.AppRoutes.TRANSFERAMOUNT_ROUTE
+
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController ,viewModel: CurantBalanceViewModel) {
+
+    val balance = viewModel.balance.collectAsState().value
+    LaunchedEffect(Unit) {
+        viewModel.getBalance(1)
+    }
+
+    val viewModel: CurantBalanceViewModel = viewModel
 
     var background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
@@ -135,9 +143,18 @@ fun HomeScreen(navController: NavController) {
                     .padding(top = 20.dp, bottom = 10.dp, start = 10.dp),
             )
             // adding format to the text
-            TextFormaterUSA(balance = 200000000, fontSize = 28
-                , color = Color.White , fontWeight = FontWeight.Bold)
-        }
+            if (balance != null) {
+                TextFormaterUSA(
+                    balance =balance  , fontSize = 28, color = Color.White, fontWeight = FontWeight.Bold
+                )
+            }else{Text(
+                text = "Loading...",
+                fontSize = 28.sp,
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 20.dp, bottom = 10.dp, start = 10.dp)
+            )}
+            }
 
         ElevatedCard(
             elevation = CardDefaults.cardElevation(
@@ -236,7 +253,7 @@ fun HomeScreen(navController: NavController) {
 @Preview(showBackground = true, device = "id:pixel_6a")
 @Composable
 fun GreetingPreview() {
-    HomeScreen(navController = NavController(LocalContext.current))
+    HomeScreen(navController = NavController(LocalContext.current), viewModel = CurantBalanceViewModel())
 }
 
 @Composable
