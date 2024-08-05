@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,14 +24,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.screens.navigation.AppRoutes.MORE_ROUTE
+import com.example.banquemisr.screens.navigation.AppRoutes.Setting_Route
 import com.example.banquemisr.ui.screens.reusableUI.ScreenField
 import com.example.banquemisr.ui.screens.reusableUI.ScreenHeader
 
-@Preview
 @ExperimentalMaterial3Api
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -40,9 +42,19 @@ fun ProfileScreen() {
                 brush = Brush.verticalGradient(colors = listOf("#fef8e0".color, "#ffb6c1".color))
             )
     ) {
-        ProfileScreenHeader()
+        ScreenHeader("Profile", onClick = { navController.navigate("$MORE_ROUTE") })
+
+        //ProfileScreenHeader()
         ProfileName()
-        ProfileOptions()
+        ScreenField("Personal information", "Your information", R.drawable.user)
+        ScreenField(
+            "Setting",
+            "Change your settings",
+            R.drawable.setting,
+            onClick = { navController.navigate("$Setting_Route") })
+        ScreenField("Payment history", "View your transactions", R.drawable.bank_account)
+        ScreenField("My favourite list", "View your favourites", R.drawable.star)
+
     }
 
 }
@@ -50,36 +62,8 @@ fun ProfileScreen() {
 @Composable
 fun ProfileOptions() {
     Column(modifier = Modifier.padding(top = 8.dp)) {
-        ScreenField("Personal information", "Your information", R.drawable.user)
-        HorizontalDivider(
-            thickness = 1.dp,
-            color = Color.Gray,
-            modifier = Modifier.padding(horizontal = 10.dp)
-        )
-        ScreenField("Setting", "Change your settings", R.drawable.setting)
-        HorizontalDivider(
-            thickness = 1.dp,
-            color = Color.Gray,
-            modifier = Modifier.padding(horizontal = 10.dp)
-        )
-        ScreenField("Payment history", "View your transactions", R.drawable.bank_account)
-        HorizontalDivider(
-            thickness = 1.dp,
-            color = Color.Gray,
-            modifier = Modifier.padding(horizontal = 10.dp)
-        )
-        ScreenField("My favourite list", "View your favourites", R.drawable.star)
-        HorizontalDivider(
-            thickness = 1.dp,
-            color = Color.Gray,
-            modifier = Modifier.padding(horizontal = 10.dp)
-        )
-    }
-}
 
-@Composable
-fun ProfileScreenHeader() {
-    ScreenHeader("Profile", onClick = {})
+    }
 }
 
 @Composable
@@ -101,9 +85,22 @@ fun ProfileName() {
             Text(text = "AD", fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Color.Gray)
         }
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = "Asmaa Dosuky",fontWeight = FontWeight.Bold, fontSize = 24.sp, color = Color.Black)
+        Text(
+            text = "Asmaa Dosuky",
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            color = Color.Black
+        )
     }
 }
 
 val String.color
     get() = Color(parseColor(this))
+
+@Preview
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MyComposablePreview() {
+    val navController = rememberNavController()
+    ProfileScreen(navController = navController)
+}

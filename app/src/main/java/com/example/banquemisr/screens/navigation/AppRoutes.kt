@@ -1,6 +1,10 @@
 package com.example.banquemisr.screens.navigation
 
+
 import DynamicLoadingScreen
+
+import androidx.compose.material3.ExperimentalMaterial3Api
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
@@ -17,7 +21,10 @@ import com.example.banquemisr.screens.signIn.SignInScreen
 import com.example.banquemisr.screens.signUp.SignUpScreen
 import com.example.banquemisr.screens.signUp.SignUpScreen2
 import com.example.banquemisr.screens.splash.SplashScreen
+import com.example.banquemisr.ui.screens.SettingScreen
 import com.example.banquemisr.ui.screens.homeScreen.HomeScreen
+import com.example.banquemisr.ui.screens.moreScreen.MoreScreen
+import com.example.banquemisr.ui.screens.profileScreen.ProfileScreen
 import com.example.banquemisr.ui.screens.transactionScreen.SuccessfulTransactionScreen
 import com.example.banquemisr.ui.screens.transactionScreen.TransActionScreen
 import com.example.banquemisr.ui.screens.transferScreen.TransferAmountScreen
@@ -33,12 +40,19 @@ object AppRoutes {
     const val CARD_ROUTE = "card"
     const val MORE_ROUTE = "more"
     const val SUCCESSFUL_TRANSACTION_ROUTE = "successfulTransaction"
+
     const val ADD_CARD_ROUTE = "addCard"
     const val ACCOUNT_CONNECTED_ROUTE = "accountConnected"
     const val CONNECTING_SCREEN_ROUTE = "connectingScreen"
     const val OTP_ROUTE = "otp"
     const val SELECT_CURRENCY_ROUTE = "selectCurrency"
 
+    const val Profile_Rute = "profile"
+    const val Setting_Route = "Setting"
+   // const val FIELD_TRANSACTION_ROUTE = "fieldTransaction"
+
+
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
 
     fun AppNavigation(modifier: Modifier = Modifier) {
@@ -103,11 +117,18 @@ object AppRoutes {
                 // CardsScreen(navController = navController)
             }
             composable(route = MORE_ROUTE) {
-                // MenueScreen(navController = navController)
+                MoreScreen(navController)
             }
             composable(route = SUCCESSFUL_TRANSACTION_ROUTE) {
                 SuccessfulTransactionScreen(navController = navController)
             }
+            composable(route = Profile_Rute){
+                ProfileScreen(navController = navController)
+            }
+            composable(route = Setting_Route){
+                SettingScreen(navController = navController)
+            }
+
 //            composable(route = FIELD_TRANSACTION_ROUTE) {
 //                // FieldTransactionScreen(navController = navController)
 //

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="295a5e2e-ed2d-4754-9742-9814e6aa5b87" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/cardsScreen/CardsScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/menuScreen/MenueScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/profileInformationScreen/profileInformationScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/profileScreen/profileScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/reusableUI/profileData.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/reusableUI/screenField.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/reusableUI/screenHeader.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/transactionScreen/TransactionScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/bank_account.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/next.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/setting.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/star.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/user.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/deploymentTargetSelector.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/screens/CardsScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/screens/CardsScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/screens/HomeScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/screens/HomeScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/screens/MenueScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/screens/MenueScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/screens/TransferScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/screens/TransferScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/homeScreen/HomeScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/homeScreen/HomeScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/transferScreen/TransferScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/screens/transferScreen/TransferScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/theme/Color.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/ui/theme/Color.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/uiview/homeScreen/HomeScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/uiview/homeScreen/HomeScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/uiview/transactionscreen/TransActionScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/banquemisr/uiview/transactionscreen/TransActionScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/bar_cards.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/bar_home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/bar_more.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/bar_s_cards.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/bar_s_home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/bar_s_more.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/bar_s_transactions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/bar_s_transfare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/bar_transactions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/bar_transfare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/baseline_arrow_back_ios_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/defult_user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/icon_acount.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/icon_cards.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/icon_transactions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/icon_transfare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/icon_vesa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/homeImage/notifications.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle/libs.versions.toml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2k79vWJIVDSAN5Tt5uMsM3bhcIy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "android.gradle.sync.needed": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "Merging recovery",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="295a5e2e-ed2d-4754-9742-9814e6aa5b87" name="Changes" comment="" />
+      <created>1722623982449</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1722623982449</updated>
+    </task>
+    <servers />
+  </component>
+</project>

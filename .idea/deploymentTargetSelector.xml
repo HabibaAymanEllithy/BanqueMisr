@@ -13,12 +13,9 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-<<<<<<< HEAD
-=======
       <SelectionState runConfigName="TransferScreenPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
->>>>>>> recovery
     </selectionStates>
   </component>
 </project>

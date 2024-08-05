@@ -15,22 +15,26 @@ import androidx.compose.ui.unit.sp
 
 @Preview
 @Composable
-fun ProfileData(headLine: String = "rsbnmsgb", supportingText: String = "gsjbnsb") {
+fun ProfileData(headLine: String? = null, supportingText: String? = null) {
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp)) {
+
+        // Handle null values with default text
         Text(
-            text = headLine,
+            text = headLine ?: "Default Headline",
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier.padding(5.dp)
         )
+
         Text(
-            text = supportingText,
+            text = supportingText ?: "Default Supporting Text",
             color = Color.Gray,
             fontSize = 17.sp,
             modifier = Modifier.padding(5.dp)
         )
+
         HorizontalDivider(
             thickness = 1.dp,
             color = Color.Gray,

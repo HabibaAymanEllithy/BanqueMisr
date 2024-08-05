@@ -208,6 +208,7 @@ fun SignUp2(
                         mDate.value
                     )
 
+
                     if (signUpSuccess == true) {
                         preferencesHelper.saveCredentialsSignUp(
                             email,
@@ -218,7 +219,8 @@ fun SignUp2(
                         )
                         preferencesHelper.clearCredentialsSignIn()
                         navController.navigate("$SIGNIN_ROUTE")
-                    }
+                    }           
+
 
                 },
                 modifier
