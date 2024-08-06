@@ -22,14 +22,14 @@ fun ProfileData(headLine: String? = null, supportingText: String? = null) {
 
         // Handle null values with default text
         Text(
-            text = headLine ?: "Default Headline",
+            text = headLine ?: "",
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier.padding(5.dp)
         )
 
         Text(
-            text = supportingText ?: "Default Supporting Text",
+            text = supportingText ?: "",
             color = Color.Gray,
             fontSize = 17.sp,
             modifier = Modifier.padding(5.dp)

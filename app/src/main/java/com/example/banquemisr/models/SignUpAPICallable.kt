@@ -1,8 +1,7 @@
 package com.example.banquemisr.models
 
 
-
-import retrofit2.Call
+import android.util.Log
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -10,6 +9,6 @@ import retrofit2.http.POST
 interface SignUpAPICallable {
 
     @POST("/api/auth/register")
-    suspend fun signUp(@Body request: SignUpRequest): Response<Unit>
-
+    suspend fun signUp(@Body request: SignUpRequest): Response<SignUpResponse>
 }
+

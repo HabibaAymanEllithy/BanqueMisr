@@ -25,7 +25,7 @@ fun MoreScreen(navController: NavController) {
                 brush = Brush.verticalGradient(colors = listOf("#fef8e0".color, "#ffb6c1".color))
             )
     ) {
-        MoreScreenHeader()
+        ScreenHeader("More", onClick = {navController.popBackStack()})
         MoreField(
             "Transfer from website",
             leadingIcon = R.drawable.web_site,
@@ -53,7 +53,6 @@ fun MoreScreen(navController: NavController) {
 
 @Composable
 fun MoreScreenHeader() {
-    ScreenHeader("More")
 }
 
 @Preview

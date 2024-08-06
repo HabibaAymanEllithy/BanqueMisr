@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -216,7 +217,7 @@ fun SignUp(innerPadding: PaddingValues,
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TextFields(string1: String, string2: String, icon: Int, state: MutableState<String>,keyboard:KeyboardOptions,isPassword:Boolean,modifier: Modifier = Modifier) {
+fun TextFields(string1: String, string2: String, icon: Int, state: MutableState<String>,keyboard:KeyboardOptions,isPassword:Boolean,modifier: Modifier = Modifier,size:Int=25) {
 
     Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.Start) {
         Text(
@@ -241,6 +242,7 @@ fun TextFields(string1: String, string2: String, icon: Int, state: MutableState<
                     modifier
                         .align(Alignment.End)
                         .clickable { eyeClicked = !eyeClicked }
+                        .size(size.dp)
 
                 )
             }, visualTransformation = if (isPassword&&!eyeClicked) PasswordVisualTransformation() else VisualTransformation.None,

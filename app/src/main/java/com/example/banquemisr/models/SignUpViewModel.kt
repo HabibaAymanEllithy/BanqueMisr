@@ -46,18 +46,37 @@ class SignUpViewModel : ViewModel() {
 
 }
 
+//class Repository {
+//    suspend fun signUp(signUpRequest: SignUpRequest): Boolean {
+//        return try {
+//            val response = SignUpAPIService.callable.signUp(signUpRequest)
+//            response.isSuccessful
+//        } catch (e: Exception) {
+//            println(e)
+//            Log.d("trace", "error: ${e.message}")
+//            Log.e("TAG", "Error occurred: ${e.message}", e)
+//            false
+//        }
+//    }
+//}
+
+
+
+
 class Repository {
     suspend fun signUp(signUpRequest: SignUpRequest): Boolean {
         return try {
             val response = SignUpAPIService.callable.signUp(signUpRequest)
-            response.isSuccessful
+            if (response.isSuccessful) {
+                Log.d("Repository", "SignUp successful: ${response.body()}")
+                true
+            } else {
+                Log.e("Repository", "SignUp failed: ${response.code()} - ${response.message()}")
+                false
+            }
         } catch (e: Exception) {
-            println(e)
-            Log.d("trace", "error: ${e.message}")
-            Log.e("TAG", "Error occurred: ${e.message}", e)
+            Log.e("Repository", "Error occurred: ${e.message}", e)
             false
         }
     }
 }
-
-

@@ -30,6 +30,7 @@ import com.example.banquemisr.R
 import com.example.banquemisr.ui.screens.reusableUI.ScreenField
 import com.example.banquemisr.ui.screens.reusableUI.ScreenHeader
 import com.example.bm_app.approutes.AppRoutes.MORE_ROUTE
+import com.example.bm_app.approutes.AppRoutes.Profile_Information_Route
 import com.example.bm_app.approutes.AppRoutes.Setting_Route
 
 @ExperimentalMaterial3Api
@@ -42,11 +43,15 @@ fun ProfileScreen(navController: NavController) {
                 brush = Brush.verticalGradient(colors = listOf("#fef8e0".color, "#ffb6c1".color))
             )
     ) {
-        ScreenHeader("Profile", onClick = { navController.navigate("$MORE_ROUTE") })
+        ScreenHeader("Profile", onClick = { navController.popBackStack() })
 
-        //ProfileScreenHeader()
         ProfileName()
-        ScreenField("Personal information", "Your information", R.drawable.user)
+        ScreenField(
+            "Personal information",
+            "Your information",
+            R.drawable.user,
+            onClick = {navController.navigate("$Profile_Information_Route")}
+        )
         ScreenField(
             "Setting",
             "Change your settings",
