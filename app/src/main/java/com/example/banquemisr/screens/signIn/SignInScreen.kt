@@ -34,6 +34,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -59,6 +60,8 @@ import androidx.compose.ui.unit.sp
 
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
+import com.example.banquemisr.models.SignInViewModel
+import com.example.banquemisr.screens.navigation.AppRoutes.HOME_ROUTE
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -112,6 +115,8 @@ fun SignIn(
     preferencesHelper: PreferencesHelper,
     modifier: Modifier = Modifier
 ) {
+    val viewModel=SignInViewModel()
+    val signUpSuccess by viewModel.signUpSuccess.collectAsState()
     val scrollState = rememberScrollState()
     var background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
@@ -154,7 +159,20 @@ fun SignIn(
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
-                onClick = { preferencesHelper.saveCredentialsSignIn(email.value, password.value) },
+                onClick = {
+                    viewModel.signIn(
+                        email.value,
+                        password.value
+                    )
+                    if (signUpSuccess == true) {
+                        preferencesHelper.saveCredentialsSignIn(
+                            email.value,
+                            password.value,
+                        )
+                        navController.navigate("$HOME_ROUTE")
+                    }
+                },
+
                 modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),

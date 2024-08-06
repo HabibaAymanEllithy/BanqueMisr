@@ -1,5 +1,6 @@
 package com.example.banquemisr.models
 
+
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,37 +9,25 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class SignUpViewModel : ViewModel() {
+class SignInViewModel : ViewModel() {
 
-    private val repository = Repository()
+    private val SignInRepository = SignInRepository()
 
     private val _signUpSuccess = MutableStateFlow<Boolean?>(null)
     val signUpSuccess = _signUpSuccess.asStateFlow()
 
-     fun signUp(
-        fullName: String,
+    fun signIn(
+
         email: String,
-        phoneNumber: String,
-        username: String,
         password: String,
-        confirmPassword: String,
-        gender: String,
-        country: String,
-        birthDate: String
-    ) {
+
+        ) {
         viewModelScope.launch(Dispatchers.IO) {
-            val signUpRequest = SignUpRequest(
-                fullName,
+            val signInRequest = SignIn.SignInRequest(
                 email,
-                phoneNumber,
-                username,
-                password,
-                confirmPassword,
-                gender,
-                country,
-                birthDate
+                password
             )
-            val result = repository.signUp(signUpRequest)
+            val result = SignInRepository.signIn(signInRequest)
             _signUpSuccess.value = result
         }
     }
@@ -46,10 +35,10 @@ class SignUpViewModel : ViewModel() {
 
 }
 
-class Repository {
-    suspend fun signUp(signUpRequest: SignUpRequest): Boolean {
+class SignInRepository {
+    suspend fun signIn(signInRequest: SignIn.SignInRequest): Boolean {
         return try {
-            val response = SignUpAPIService.callable.signUp(signUpRequest)
+            val response = SignInAPIService.callable.signIn(signInRequest)
             response.isSuccessful
         } catch (e: Exception) {
             println(e)
