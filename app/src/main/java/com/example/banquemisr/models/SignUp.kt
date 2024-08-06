@@ -1,5 +1,6 @@
 package com.example.banquemisr.models
 
+
 data class SignUpRequest(
     val fullName: String,
     val email: String,
@@ -10,6 +11,7 @@ data class SignUpRequest(
     val gender: String,
     val country: String,
     val birthDate: String
+
 )
 data class SignUpResponse(
     val userId: String,
@@ -20,3 +22,4 @@ data class SignUpResponse(
     val birthDate:String,
     val username: String
 )
+

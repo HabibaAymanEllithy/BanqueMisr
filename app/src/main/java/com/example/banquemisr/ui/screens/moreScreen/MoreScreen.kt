@@ -11,10 +11,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.screens.navigation.AppRoutes.Profile_Rute
 import com.example.banquemisr.ui.screens.profileScreen.color
 import com.example.banquemisr.ui.screens.reusableUI.MoreField
 import com.example.banquemisr.ui.screens.reusableUI.ScreenHeader
+import com.example.bm_app.approutes.AppRoutes.Profile_Rute
 
 @Composable
 fun MoreScreen(navController: NavController) {

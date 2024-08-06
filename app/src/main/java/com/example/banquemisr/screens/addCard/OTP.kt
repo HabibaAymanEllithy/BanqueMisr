@@ -28,9 +28,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.screens.navigation.AppRoutes.ACCOUNT_CONNECTED_ROUTE
-import com.example.banquemisr.screens.navigation.AppRoutes.ADD_CARD_ROUTE
 import com.example.banquemisr.screens.signIn.PreferencesHelper
+import com.example.bm_app.approutes.AppRoutes.ACCOUNT_CONNECTED_ROUTE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

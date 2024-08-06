@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.screens.navigation.AppRoutes.HOME_ROUTE
-import com.example.banquemisr.screens.navigation.AppRoutes.SELECT_CURRENCY_ROUTE
+import com.example.bm_app.approutes.AppRoutes.HOME_ROUTE
+import com.example.bm_app.approutes.AppRoutes.SELECT_CURRENCY_ROUTE
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

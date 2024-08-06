@@ -52,8 +52,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.screens.navigation.AppRoutes.ADD_CARD_ROUTE
-import com.example.banquemisr.screens.navigation.AppRoutes.CONNECTING_SCREEN_ROUTE
+import com.example.bm_app.approutes.AppRoutes.CONNECTING_SCREEN_ROUTE
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -241,7 +240,7 @@ fun TextFieldsNoIcon(string1: String, string2: String, state: MutableState<Strin
             value = state.value,
             onValueChange = { state.value = it },
             placeholder = { Text(text = string2, color = colorResource(id = R.color.Gray_G70)) },
-             visualTransformation = if (isPassword&&!eyeClicked) PasswordVisualTransformation() else VisualTransformation.None,
+            visualTransformation = if (isPassword&&!eyeClicked) PasswordVisualTransformation() else VisualTransformation.None,
 
             keyboardOptions = keyboard,
             modifier = modifier

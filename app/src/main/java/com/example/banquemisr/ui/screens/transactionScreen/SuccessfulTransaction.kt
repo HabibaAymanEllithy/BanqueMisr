@@ -151,10 +151,10 @@ Spacer(modifier = Modifier.padding(4.dp))
         {
 
             TransferInfo(
-                fromName = "hossam",
+                fullName = "hossam",
                 fromAccount = "123456",
-                toName = "mohamed",
-                toAccount = "123456",
+                recipientName = "mohamed",
+                recipientAccount = "123456",
                 iconResId = R.drawable.icon_banque,
                 iconTransA = R.drawable.icon_correct
             )
@@ -219,8 +219,6 @@ Spacer(modifier = Modifier.padding(4.dp))
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Medium
                         )
-
-
                     }
 Spacer(modifier = Modifier.padding(8.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(175.dp))

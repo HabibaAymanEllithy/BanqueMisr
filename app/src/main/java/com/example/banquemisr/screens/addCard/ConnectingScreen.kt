@@ -25,8 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.screens.navigation.AppRoutes.ADD_CARD_ROUTE
-import com.example.banquemisr.screens.navigation.AppRoutes.OTP_ROUTE
+import com.example.bm_app.approutes.AppRoutes.OTP_ROUTE
 
 
 @Composable
