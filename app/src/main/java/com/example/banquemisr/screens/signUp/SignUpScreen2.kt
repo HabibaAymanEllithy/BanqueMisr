@@ -11,7 +11,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,7 +38,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -56,14 +54,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
 import com.example.banquemisr.models.SignUpViewModel
-<<<<<<< HEAD
-import com.example.bm_app.approutes.AppRoutes.SIGNIN_ROUTE
-=======
-import com.example.banquemisr.screens.navigation.AppRoutes.SIGNIN_ROUTE
 import com.example.banquemisr.screens.signIn.PreferencesHelper
-import kotlinx.coroutines.launch
->>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
-
+import com.example.bm_app.approutes.AppRoutes.SIGNIN_ROUTE
 import java.util.Calendar
 import java.util.Date
 
@@ -141,15 +133,11 @@ fun SignUp2(
     modifier: Modifier = Modifier
 ) {
 
-<<<<<<< HEAD
     val context = LocalContext.current
-=======
 
-    val context = LocalContext.current
     val preferencesHelper = PreferencesHelper(context)
 
 
->>>>>>> 6f39208864dcc7258d4cdc3adf7e0e0f364b1419
     val scrollState = rememberScrollState()
     val signUpSuccess by viewModel.signUpSuccess.collectAsState()
     var background = Brush.verticalGradient(
@@ -229,11 +217,11 @@ fun SignUp2(
                         )
                         preferencesHelper.clearCredentialsSignIn()
                         navController.navigate("$SIGNIN_ROUTE")
-                    }           
+                    }
 
 
-                    if(signUpSuccess == true)
-                    navController.navigate("$SIGNIN_ROUTE")
+                    if (signUpSuccess == true)
+                        navController.navigate("$SIGNIN_ROUTE")
                     else Toast.makeText(context, "faild", Toast.LENGTH_SHORT).show()
                 },
                 modifier

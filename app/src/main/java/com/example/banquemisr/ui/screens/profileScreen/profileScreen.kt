@@ -27,10 +27,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.banquemisr.screens.navigation.AppRoutes.MORE_ROUTE
-import com.example.banquemisr.screens.navigation.AppRoutes.Setting_Route
 import com.example.banquemisr.ui.screens.reusableUI.ScreenField
 import com.example.banquemisr.ui.screens.reusableUI.ScreenHeader
+import com.example.bm_app.approutes.AppRoutes.MORE_ROUTE
+import com.example.bm_app.approutes.AppRoutes.Setting_Route
 
 @ExperimentalMaterial3Api
 @Composable
