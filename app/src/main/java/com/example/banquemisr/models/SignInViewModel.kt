@@ -13,8 +13,8 @@ class SignInViewModel : ViewModel() {
 
     private val SignInRepository = SignInRepository()
 
-    private val _signUpSuccess = MutableStateFlow<Boolean?>(null)
-    val signUpSuccess = _signUpSuccess.asStateFlow()
+    private val _signInSuccess = MutableStateFlow<Boolean?>(null)
+    val signInSuccess = _signInSuccess.asStateFlow()
 
     fun signIn(
 
@@ -28,7 +28,7 @@ class SignInViewModel : ViewModel() {
                 password
             )
             val result = SignInRepository.signIn(signInRequest)
-            _signUpSuccess.value = result
+            _signInSuccess.value = result
         }
     }
 

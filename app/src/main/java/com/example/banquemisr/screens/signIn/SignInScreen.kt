@@ -116,7 +116,7 @@ fun SignIn(
     modifier: Modifier = Modifier
 ) {
     val viewModel=SignInViewModel()
-    val signUpSuccess by viewModel.signUpSuccess.collectAsState()
+    val signInSuccess by viewModel.signInSuccess.collectAsState()
     val scrollState = rememberScrollState()
     var background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
@@ -164,7 +164,7 @@ fun SignIn(
                         email.value,
                         password.value
                     )
-                    if (signUpSuccess == true) {
+                    if (signInSuccess == true) {
                         preferencesHelper.saveCredentialsSignIn(
                             email.value,
                             password.value,
