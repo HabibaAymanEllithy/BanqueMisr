@@ -33,6 +33,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -197,16 +198,14 @@ fun SignUp2(
                     viewModel.signUp(
                         fullName,
                         email,
-                        "", // Fill in other required fields
-                        "", // Fill in other required fields
+                        "0112193837", // Fill in other required fields
+                        "username", // Fill in other required fields
                         password,
-                        "", // Fill in other required fields
-                        "", // Fill in other required fields
+                        password, // Fill in other required fields
+                        "male", // Fill in other required fields
                         country.value,
                         mDate.value
                     )
-
-
                     if (signUpSuccess == true) {
                         preferencesHelper.saveCredentialsSignUp(
                             email,

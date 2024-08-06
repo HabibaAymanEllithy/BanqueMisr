@@ -3,6 +3,7 @@ package com.example.banquemisr.screens.signIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.example.banquemisr.screens.navigation.AppRoutes.SIGN_UP_ROUTE
 
 
 import androidx.compose.foundation.background
@@ -33,6 +34,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -58,7 +60,8 @@ import androidx.compose.ui.unit.sp
 
 import androidx.navigation.compose.rememberNavController
 import com.example.banquemisr.R
-import com.example.bm_app.approutes.AppRoutes.SIGN_UP_ROUTE
+import com.example.banquemisr.models.SignInViewModel
+import com.example.banquemisr.screens.navigation.AppRoutes.HOME_ROUTE
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -112,6 +115,8 @@ fun SignIn(
     preferencesHelper: PreferencesHelper,
     modifier: Modifier = Modifier
 ) {
+    val viewModel=SignInViewModel()
+    val signInSuccess by viewModel.signInSuccess.collectAsState()
     val scrollState = rememberScrollState()
     var background = Brush.verticalGradient(
         listOf(colorResource(id = R.color.Greadient2), colorResource(id = R.color.Gredient)),
@@ -154,11 +159,21 @@ fun SignIn(
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
+                onClick = {
+                    viewModel.signIn(
+                        email.value,
+                        password.value
+                    )
+                    if (signInSuccess == true) {
+                        preferencesHelper.saveCredentialsSignIn(
+                            email.value,
+                            password.value,
+                        )
+                        navController.navigate("$HOME_ROUTE")
+                    }
+                },
 
-                onClick = { preferencesHelper.saveCredentialsSignIn(email.value, password.value)
-                          navController.navigate("home")},
-           //     onClick = { preferencesHelper.saveCredentialsSignIn(email.value, password.value) },
-                modifier=Modifier
+                modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp),
                 colors = ButtonDefaults.buttonColors(

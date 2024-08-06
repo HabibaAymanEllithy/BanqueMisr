@@ -12,7 +12,7 @@ class SignUpViewModel : ViewModel() {
 
     private val repository = Repository()
 
-    private val _signUpSuccess = MutableStateFlow<Boolean?>(false)
+    private val _signUpSuccess = MutableStateFlow<Boolean?>(null)
     val signUpSuccess = _signUpSuccess.asStateFlow()
 
      fun signUp(
@@ -47,13 +47,17 @@ class SignUpViewModel : ViewModel() {
 }
 
 class Repository {
-   fun signUp(signUpRequest: SignUpRequest): Boolean {
-        try {
+    suspend fun signUp(signUpRequest: SignUpRequest): Boolean {
+        return try {
             val response = SignUpAPIService.callable.signUp(signUpRequest)
-            return response.isSuccessful
+            response.isSuccessful
         } catch (e: Exception) {
-            Log.d("trace", "error:${e.message}")
-            return false
+            println(e)
+            Log.d("trace", "error: ${e.message}")
+            Log.e("TAG", "Error occurred: ${e.message}", e)
+            false
         }
     }
 }
+
+
